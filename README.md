@@ -1,7 +1,7 @@
 # homeschoolr-project3
 Repository for homeschoolr: NU Coding Bootcamp Project 3
 
-# Deployed Link
+# Deployed Application Link
 tbd
 
 # Setup
