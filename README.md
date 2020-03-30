@@ -1,8 +1,10 @@
-# homeschoolr-project3
+# Homeschoolr App: Project3
 Repository for homeschoolr: NU Coding Bootcamp Project 3
 
+
 # Deployed Application Link
-tbd
+https://homeschoolr.herokuapp.com/
+
 
 # Setup
 1. Once logged in with [GitHub account](https://github.login/), clone the repo locally using link:
@@ -17,6 +19,10 @@ tbd
 ```
 
 Also see: [Cloning a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
+
+
+# User Story
+--
 
 # Usage
 --
