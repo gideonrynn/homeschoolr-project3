@@ -22,7 +22,7 @@ const dbConnect = async () => {
 
   // try to connect to the database and log connection
   try {
-    const conn = await mongoose.connect("mongodb://localhost/homeschoolr" || process.env.MONGODB_URI, {
+    const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/homeschoolr", {
             useNewUrlParser: true,
             useCreateIndex: true,
             useUnifiedTopology: true
