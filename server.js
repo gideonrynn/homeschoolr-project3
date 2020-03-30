@@ -2,10 +2,11 @@ const express = require("express");
 const mongoose = require('mongoose');
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-const app = express();
 
 //required dotenv to enable environmental variables such as MONGO_URI
-require('dotenv').config()
+require('dotenv').config({path:'.env'})
+
+const app = express();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +22,7 @@ const dbConnect = async () => {
 
   // try to connect to the database and log connection
   try {
-    const conn = await mongoose.connect("mongodb://localhost/homeschoolr" || process.env.MONGO_URI, {
+    const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/homeschoolr", {
             useNewUrlParser: true,
             useCreateIndex: true,
             useUnifiedTopology: true
@@ -37,6 +38,7 @@ const dbConnect = async () => {
     }
 }
 
+console.log(process.env.MONGODB_URI);
 dbConnect();
 
 // API routes here
