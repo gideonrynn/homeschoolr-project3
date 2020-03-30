@@ -1,7 +1,11 @@
 const express = require("express");
+const mongoose = require('mongoose');
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+//required dotenv to enable environmental variables such as MONGO_URI
+require('dotenv').config()
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -11,6 +15,29 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+// set up connection to MongoDB/mlab
+const dbConnect = async () => {
+
+  // try to connect to the database and log connection
+  try {
+    const conn = await mongoose.connect("mongodb://localhost/homeschoolr" || process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useUnifiedTopology: true
+        });
+        
+        console.log(`MongoDB Connected: ${conn.connection.host}`)
+
+      } catch (err) {
+
+      //if connection fails, log the error message in the terminal and shut down process
+      console.log(`Error: ${err.message}`);
+      process.exit(1);
+    }
+}
+
+dbConnect();
 
 // API routes here
 
