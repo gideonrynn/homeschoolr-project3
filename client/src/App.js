@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 
 import NoMatch from "./pages/NoMatch";
+import Login from "./pages/Login"
 
 // import logo from './logo.svg';
 import './App.css';
@@ -18,7 +19,8 @@ class App extends Component {
           <NavBar />
           <Header />
           <Wrapper>
-            <Route exact path="/" component={NoMatch}/>
+            <Route exact path="/" component={Login}/>
+            <Route exact path="/noMatch" component={NoMatch}/>
           </Wrapper>
         </div>
       </Router>
