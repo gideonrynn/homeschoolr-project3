@@ -9,8 +9,12 @@ function NavBar() {
                 <Link className="navbar-brand" to="/">Homeschoolr</Link>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}
+                        <Link className={window.location.pathname === "/login" ? "nav-link active" : "nav-link"}
                         to="/search">Login</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className={window.location.pathname === "/register" ? "nav-link active" : "nav-link"}
+                        to="/search">Register</Link>
                     </li>
                 </ul>
             </div>

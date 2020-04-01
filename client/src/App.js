@@ -6,12 +6,15 @@ import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 
 import NoMatch from "./pages/NoMatch";
-import Login from "./pages/Login"
+import LoginPage from "./pages/LoginPage"
+// import Teacher from "./pages/Teacher"
+// import Parent from "./pages/Parent"
 
 // import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
   render () {
     return (
       <Router>
@@ -19,7 +22,9 @@ class App extends Component {
           <NavBar />
           <Header />
           <Wrapper>
-            <Route exact path="/" component={Login}/>
+            <Route exact path="/" component={LoginPage}/>
+            {/* <Route exact path="/teacher" component={Teacher}/> */}
+            {/* <Route exact path="/parent" component={Parent}/> */}
             <Route exact path="/noMatch" component={NoMatch}/>
           </Wrapper>
         </div>
