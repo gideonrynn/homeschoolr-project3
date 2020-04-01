@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from '@material-ui/core/styles';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import Login from '../components/Login';
 import Register from '../components/Register';
 
