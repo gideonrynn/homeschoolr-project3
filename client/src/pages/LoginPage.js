@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from '@material-ui/core/styles';
 import Button from 'material-ui/Button';
-import Login from '../../components/Login';
-import Register from '../../components/Register';
+import Login from '../components/Login';
+import Register from '../components/Register';
 
 const margin = {
     margin: 15
