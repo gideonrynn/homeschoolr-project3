@@ -23,7 +23,7 @@ class App extends Component {
           <Header />
           <Wrapper>
             <Route exact path="/" component={LoginPage}/>
-            {/* <Route exact path="/teacher" component={Teacher}/> */}
+            <Route exact path="/teacher" component={TeacherPage}/>
             {/* <Route exact path="/parent" component={Parent}/> */}
             <Route exact path="/noMatch" component={NoMatch}/>
           </Wrapper>
