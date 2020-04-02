@@ -46,6 +46,13 @@ class Register extends Component {
         //     "password":this.state.password
         // }
 
+        
+        // API.postmethod()
+        //     .then(res => {
+        //          console.log();
+        //          this can include if statement below
+        //         })
+        //     .catch(err => console.log(err));
 
         // here i need something to check if response is 200
         if(response.data.code == 200) {

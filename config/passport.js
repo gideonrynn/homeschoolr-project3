@@ -3,26 +3,25 @@ const LocalStrategy = require("passport-local").Strategy;
 
 const db = require("../models");
 
-// indicating strategy to be used with passport
-
+// indicating type of strategy to be used with passport
 passport.use(new LocalStrategy(
-  //LocalStrategy expects to find credentials in parameters named username and password, but you can change the defaults below
+  //LocalStrategy expects to find credentials in parameters named username and password, but you can change the defaults below (to email)
   {
     // passReqToCallback : true,
-    usernameField: 'username',
-    passwordField: 'password'
+    usernameField: 'email',
+    // passwordField: 'password'
   },
-  function(username, password, done) {
+  function(email, password, done) {
     // When a user tries to sign in this code runs
     db.Users.findOne({
       where: {
-        username: username
+        email: email
       }
     }).then(function(user) {
       // If there's no user with the given username return the below message
       if (!user) {
         return done(null, false, {
-          message: "Incorrect username."
+          message: "Incorrect email."
         });
       }
       // If password incorrect, return below message

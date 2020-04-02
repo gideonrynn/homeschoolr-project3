@@ -1,4 +1,4 @@
-//may need to move this to the routes folder
+//may need to move this elsewhere, perhaps routes
 
 //identify where user is routed if not logged in
 module.exports = function(req, res, next) {
