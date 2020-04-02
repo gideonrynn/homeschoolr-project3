@@ -46,6 +46,7 @@ class Register extends Component {
         //     "password":this.state.password
         // }
 
+
         // here i need something to check if response is 200
         if(response.data.code == 200) {
             // basically if Registration was 
