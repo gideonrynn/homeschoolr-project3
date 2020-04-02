@@ -4,7 +4,7 @@
 //list all methods to be used in login and register components
 // export default {
     
-    // post methods for api/login (runs through passport.authenticate, which authenticates the request) and api/register
+    // post methods for api/users/login (runs through passport.authenticate, which authenticates the request) and api/users/register
     // get method for user data?
 
 // };
