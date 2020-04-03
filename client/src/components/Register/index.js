@@ -24,7 +24,7 @@ const margin = {
 class Register extends Component {
 
     constructor(props){
-        // Data(props);
+        super(props);
         console.log("props", props);
 
         this.state={
@@ -84,36 +84,36 @@ class Register extends Component {
                         {/* <Typography>Register</Typography> */}
 
                         <TextField
-                            hintText="Enter your Child's Name"
-                            floatingLabelText="Child Name"
+                            helperText="Enter your Child's Name"
+                            // floatingLabelText="Child Name"
                             onChange = {(event, newValue) => this.setState({childName: newValue})} />
 
                         <br/>
 
                         <TextField
-                            hintText="Enter your Name"
-                            floatingLabelText="Parent Name"
+                            helperText="Enter your Name"
+                            // floatingLabelText="Parent Name"
                             onChange = {(event, newValue) => this.setState({parentName: newValue})} />
 
                         <br/>
 
                         <TextField
-                            hintText="Enter your Email"
+                            helperText="Enter your Email"
                             type="email"
-                            floatingLabelText="Email"
+                            // floatingLabelText="Email"
                             onChange = {(event, newValue) => this.setState({email: newValue})} />
 
                         <br/>
 
                         <TextField
                             type = "password"
-                            hintText="Enter your Password"
-                            floatingLabelText="Password"
+                            helperText="Enter your Password"
+                            // floatingLabelText="Password"
                             onChange = {(event, newValue) => this.setState({password: newValue})} />
 
                         <br/>
 
-                        <Button label="Submit" primary={true} style={margin} onClick={(event) => this.handleClick(event)}/>
+                        <Button label="Submit" primary={true} style={margin} onClick={(event) => this.handleClick(event)}>Submit</Button>
 
                     </div>
                 </MuiThemeProvider>
