@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import axios from 'axios';
+// import API from "./utils/userAuthAPI"
+
 
 const theme = createMuiTheme();
     theme.typography.h3 = {
@@ -34,14 +35,20 @@ class Login extends Component {
         console.log("event", event);
 
         // Backend stuff might look like this to start off?
-        // let apiBaseUrl = "http://localhost:3001/api/"; ???
         // let user = this;
         // let userInfo = {
         //     "email":this.state.email,
         //     "password":this.state.password
         // }
 
-        // axios post here
+        //
+        // API.postmethod()
+        //     .then(res => {
+        //  console.log();
+        //         })
+        //     .catch(err => console.log(err));
+
+
     }
 
     render() {
