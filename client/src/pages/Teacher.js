@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 // import Table from "../components/Table";
 
-class TeacherPage extends Component {
+class Teacher extends Component {
     render() {
-        return ();
+        return;
     }
 }
 
-export default TeacherPage;
+export default Teacher;
