@@ -9,7 +9,7 @@ import Wrapper from "./components/Wrapper";
 
 import NoMatch from "./pages/NoMatch";
 import LoginPage from "./pages/LoginPage"
-// import TeacherPage from "./pages/TeacherPage"
+import TeacherPage from "./pages/TeacherPage"
 // import Parent from "./pages/Parent"
 
 // import logo from './logo.svg';
@@ -26,7 +26,7 @@ class App extends Component {
           <Wrapper>
             <Route exact path="/" component={LoginPage}/>
 
-            {/* <Route exact path="/teacher" component={TeacherPage}/> */}
+            <Route exact path="/teacher" component={TeacherPage}/>
 
 
             {/* <Route exact path="/parent" component={Parent}/> */}
