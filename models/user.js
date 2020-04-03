@@ -3,15 +3,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  firstName: {
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
     type: String,
     required: true,
   },
-  lastName: {
+  studentName: {
     type: String,
     required: true,
   },
-  schedule: [Schema.Types.Mixed]
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
