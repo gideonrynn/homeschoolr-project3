@@ -5,11 +5,11 @@ import Typography from '@material-ui/core/Typography';
 function Table() {
     const [state, setState] = useState({
         columns: [
-            {title:"Details", field:""},
+            {title:"Details", field:"studentSchedule"},
             {title:"Student Name", field:"childName"},
             {title:"Parent Name", field:"parentName"},
             {title:"Email", field:"email"},
-        ],data:[]
+        ],data:[],studentSchedule:[]
     });
     
     useEffect(() => {
@@ -39,14 +39,14 @@ function Table() {
             title="Dashboard"
             columns={state.columns}
             data={state.data}
-            detailPanel={data => {
+            detailPanel={studentSchedule => {
                 return (
                     <div className="studentDetail">
                         <Typography variant="h4" gutterBottom>Student Schedule</Typography>
-                        <Typography variant="h6" gutterBottom>{data.childName}</Typography>
                         <div className="studentSchedule">
 
                             {/* parent selected schedule here */}
+                            {studentSchedule}
 
                         </div>
 
