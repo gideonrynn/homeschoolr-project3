@@ -9,7 +9,7 @@ import Wrapper from "./components/Wrapper";
 
 import NoMatch from "./pages/NoMatch";
 import LoginPage from "./pages/LoginPage"
-import Teacher from "./pages/Teacher"
+// import Teacher from "./pages/Teacher"
 // import Parent from "./pages/Parent"
 
 // import logo from './logo.svg';

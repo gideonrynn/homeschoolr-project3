@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const apiRoutes = require("./routes/apiRoutes");
+const userRoutes = require("./routes/users");
 const passport = require("./config/passport");
 
 //required dotenv to enable environmental variables such as MONGO_URI
@@ -60,6 +61,7 @@ dbConnect();
 
 // API routes here
 app.use("/api", apiRoutes);
+app.use("/api", userRoutes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
