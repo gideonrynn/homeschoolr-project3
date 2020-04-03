@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+
 import 'typeface-roboto';
 
 // import { makeStyles } from '@material-ui/core/styles';
@@ -57,13 +59,17 @@ class TeacherPage extends Component {
                 <TextField
                     type="subject"
                     helperText="Enter the Subject"
-                    onChange = {(event, newValue) => this.setState({subject: newValue})}/>
+                    onChange = {(event, newValue) => this.setState({subject: newValue})}
+                    // labelWidth={100}
+                    />
                 <br />
 
                 <TextField
                     type="text"
                     helperText="Enter email Text"
-                    onChange = {(event, newValue) => this.setState({text: newValue})}/>
+                    onChange = {(event, newValue) => this.setState({text: newValue})} 
+                    // labelWidth={100} 
+                    multiline/>
                 <br />
                 <br />
 
