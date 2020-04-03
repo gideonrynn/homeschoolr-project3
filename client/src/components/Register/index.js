@@ -51,20 +51,24 @@ class Register extends Component {
         // axios post
 
         // here i need something to check if response is 200
-        if(response.data.code == 200) {
-            // basically if Registration was 
-            let loginPage =[];
-            loginPage.push(
-                <Login parentContext={this} />
-            );
-            let loginMessage = "Account does not exist, Register Account";
-            self.props.parentContext.setState({
-                loginPage: loginPage,
-                loginMessage: loginMessage,
-                buttonLabel: "Register",
-                isLogin: true
-            });
-        } 
+        // if(response.data.code == 200) {
+        //     // basically if Registration was 
+        //     let loginPage =[];
+        //     loginPage.push(
+        //         <Login parentContext={this} />
+        //     );
+        //     let loginMessage = "Account does not exist, Register Account";
+        //     self.props.parentContext.setState({
+        //         loginPage: loginPage,
+        //         loginMessage: loginMessage,
+        //         buttonLabel: "Register",
+        //         isLogin: true
+        //     });
+        // } 
+        let loginPage =[];
+        loginPage.push(
+            <Login parentContext = {this} />
+        )
     }
 
     render() {
@@ -72,7 +76,7 @@ class Register extends Component {
             <div>
                 <MuiThemeProvider>
                     <div>
-                        <Typography>Register</Typography>
+                        {/* <Typography>Register</Typography> */}
 
                         <TextField
                             hintText="Enter your Child's Name"

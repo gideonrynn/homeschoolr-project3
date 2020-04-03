@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 // import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 
@@ -19,11 +19,11 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <NavBar />
-          <Header />
+          {/* <NavBar /> */}
+          {/* <Header /> */}
           <Wrapper>
             <Route exact path="/" component={LoginPage}/>
-            <Route exact path="/teacher" component={TeacherPage}/>
+            {/* <Route exact path="/teacher" component={TeacherPage}/> */}
             {/* <Route exact path="/parent" component={Parent}/> */}
             <Route exact path="/noMatch" component={NoMatch}/>
           </Wrapper>
