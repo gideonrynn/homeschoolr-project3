@@ -24,7 +24,7 @@ class Login extends Component {
     
     constructor(props){
         console.log("props", props);
-        // Data(props);
+        super(props);
         this.state={
             email:'',
             password:''
@@ -56,7 +56,7 @@ class Login extends Component {
             <div>
                 <MuiThemeProvider>
                     <div>
-                        <Typography>Login</Typography>
+                        {/* <Typography>Login</Typography> */}
 
                         <TextField
                             hintText="Enter your Email"
@@ -73,7 +73,9 @@ class Login extends Component {
 
                         <br/>
 
-                        <Button label="Submit" primary={true} style={margin} onClick={(event) => this.handleClick(event)}/>
+                        <Button varient="contained" color="primary" label="Submit" 
+                        style={margin} 
+                        onClick={(event) => this.handleClick(event)}/>
                     </div>
                 </MuiThemeProvider>
             </div>

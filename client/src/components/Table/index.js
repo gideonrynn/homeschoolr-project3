@@ -4,10 +4,11 @@ import MaterialTable from "material-table";
 function Table() {
     const [state, setState] = useState({
         columns: [
+            {title:"Detail", field:""},
             {title:"Student Name", field:"childName"},
             {title:"Parent Name", field:"parentName"},
-            {title:"Email", field:"email"}
-        ],data:[],
+            {title:"Email", field:"email"},
+        ],data:[],detailPanel:[],studentSchedule:[]
     });
     
     useEffect(() => {
@@ -34,9 +35,12 @@ function Table() {
 
     return (
         <MaterialTable 
-            title=""
+            title="Dashboard"
             columns={state.columns}
-            data={state.data}/>
+            data={state.data}
+        />
+
+        
     );
 }
 

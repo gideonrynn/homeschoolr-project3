@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Login from '../components/Login';
 import Register from '../components/Register';
@@ -12,7 +12,7 @@ const margin = {
 class LoginPage extends Component {
 
     constructor(props){
-        // Data(props);
+        super(props);
         console.log("props", props);
         
         this.state={
