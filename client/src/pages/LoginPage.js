@@ -87,7 +87,7 @@ class LoginPage extends Component {
                         <div>
                             <Button label={this.state.buttonLabel} primary={true} 
                             // style={margin} 
-                            onClick={(event) => this.handleClick(event)}>Register</Button>
+                            onClick={(event) => this.handleClick(event)}>{this.state.buttonLabel}</Button>
                         </div>
 
                     {/* <MuiThemeProvider>
