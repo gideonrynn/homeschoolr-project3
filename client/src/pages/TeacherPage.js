@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import 'typeface-roboto';
+
+// import { makeStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles({
+//     root: {
+//       width: '100%',
+//       maxWidth: 500,
+//     },
+// });
 
 import Table from "../components/Table";
 
@@ -19,6 +28,7 @@ class TeacherPage extends Component {
 
     constructor(props) {
         console.log("props", props);
+        super(props)
         this.state={
             childName:'',
             parentName:'',
@@ -37,12 +47,24 @@ class TeacherPage extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <Typography>Instructor</Typography>
+                <Typography variant="h1" gutterBottom>Instructor</Typography>
                 <br />
 
                 {/* Node Mailer here */}
                 {/* <TextField></TextField> */}
+                <Typography variant="h4" gutterBottom>nodeMailer here</Typography>
 
+                <TextField
+                    type="subject"
+                    helperText="Enter the Subject"
+                    onChange = {(event, newValue) => this.setState({subject: newValue})}/>
+                <br />
+
+                <TextField
+                    type="text"
+                    helperText="Enter email Text"
+                    onChange = {(event, newValue) => this.setState({text: newValue})}/>
+                <br />
                 <br />
 
                 <Table />
