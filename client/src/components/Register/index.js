@@ -3,8 +3,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Login from '../Login';
+// import API from "./utils/userAuthAPI"
 
-// import axios from 'axios';
 
 const theme = createMuiTheme();
     theme.typography.h3 = {
@@ -39,7 +39,6 @@ class Register extends Component {
         console.log("event", event);
 
         // more backend stuff
-        // let apiBaseUrl = "http://localhost:3001/api/"; ????
         // let user = this;
         // let userInfo = {
         //     "childName": this.state.childName,
@@ -48,7 +47,13 @@ class Register extends Component {
         //     "password":this.state.password
         // }
 
-        // axios post
+        
+        // API.postmethod()
+        //     .then(res => {
+        //          console.log();
+        //          this can include if statement below
+        //         })
+        //     .catch(err => console.log(err));
 
         // here i need something to check if response is 200
         // if(response.data.code == 200) {

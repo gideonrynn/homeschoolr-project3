@@ -48,7 +48,8 @@ class TeacherPage extends Component {
 
             </MuiThemeProvider>
         );
+
     }
 }
 
-export default TeacherPage;
+export default Teacher;
