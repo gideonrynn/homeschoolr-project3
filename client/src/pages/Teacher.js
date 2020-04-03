@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import Typography from '@material-ui/core';
 
-// import Table from "../components/Table";
+import Table from "../components/Table";
 
 const theme = createMuiTheme();
     theme.typography.h3 = {
@@ -52,4 +53,4 @@ class TeacherPage extends Component {
     }
 }
 
-export default Teacher;
+export default TeacherPage;

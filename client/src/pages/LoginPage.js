@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core/';
+// import { MuiThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button'
 import Login from '../components/Login';
 import Register from '../components/Register';
 
 
-const margin = {
-    margin: 15
-};
+// const margin = {
+//     margin: 15
+// };
 
 class LoginPage extends Component {
 
@@ -28,7 +28,7 @@ class LoginPage extends Component {
     componentWillMount(){
         let loginPage=[];
         loginPage.push(
-            <Login parentContext={this} appContext={this.props.parentContext}/>
+            <Login parentContext={this} appContext={this.props.parentContext} key={loginPage.length}/>
         );
 
         let loginMessage = "Account does not exist, Register Account";
@@ -84,11 +84,19 @@ class LoginPage extends Component {
 
                 <div>
                     {this.state.loginMessage}
-                    <MuiThemeProvider>
                         <div>
-                            <Button label={this.state.buttonLabel} primary={true} style={margin} onClick={(event) => this.handleClick(event)} />
+                            <Button label={this.state.buttonLabel} primary={true} 
+                            // style={margin} 
+                            onClick={(event) => this.handleClick(event)}>Register</Button>
                         </div>
-                    </MuiThemeProvider>
+
+                    {/* <MuiThemeProvider>
+                        <div>
+                            <Button label={this.state.buttonLabel} primary={true} 
+                            // style={margin} 
+                            onClick={(event) => this.handleClick(event)} />
+                        </div>
+                    </MuiThemeProvider> */}
                 </div>
             </div>
         );
