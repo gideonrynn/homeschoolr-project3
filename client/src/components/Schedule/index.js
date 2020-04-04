@@ -1,19 +1,14 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import {
   ViewState,
 } from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
-  WeekView,
   DayView,
   Appointments,
-  Toolbar,
   DateNavigator,
-  ViewSwitcher,
   AppointmentForm,
   AppointmentTooltip,
   TodayButton,
@@ -41,7 +36,7 @@ export default class Demo extends React.PureComponent {
     super(props);
 
     this.state = {
-      loading: true,
+      // loading: true,
       currentDate: '2017-05-23',
       currentViewName: 'Day',
     };
@@ -85,7 +80,7 @@ export default class Demo extends React.PureComponent {
 
   render() {
     const {
-      data, loading,
+      data,
       currentDate, currentViewName,
     } = this.state;
 
@@ -98,6 +93,12 @@ export default class Demo extends React.PureComponent {
           data={formattedData}
           height={660}
         >
+            <ViewState
+            currentDate={currentDate}
+            currentViewName={currentViewName}
+            onCurrentViewNameChange={this.currentViewNameChange}
+            onCurrentDateChange={this.currentDateChange}
+          />
           <DayView
             startDayHour={8}
             endDayHour={15}
