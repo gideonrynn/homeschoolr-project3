@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import API from "./utils/userAuthAPI"
+import AuthAPI from "../../utils/userAuthAPI"
 
 
-const theme = createMuiTheme();
-    theme.typography.h3 = {
-        fontSize: '1.2rem',
-        '@media (min-width:600px)': {
-        fontSize: '1.5rem',
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: '2.4rem',
-    }
-};
+// const theme = createMuiTheme();
+//     theme.typography.h3 = {
+//         fontSize: '1.2rem',
+//         '@media (min-width:600px)': {
+//         fontSize: '1.5rem',
+//     },
+//     [theme.breakpoints.up('md')]: {
+//       fontSize: '2.4rem',
+//     }
+// };
 
-const margin = {
-    margin: 15
-};
+// const margin = {
+//     margin: 15
+// };
 
 class Login extends Component {
     
@@ -35,49 +36,61 @@ class Login extends Component {
         console.log("event", event);
 
         // Backend stuff might look like this to start off?
-        // let user = this;
-        // let userInfo = {
-        //     "email":this.state.email,
-        //     "password":this.state.password
-        // }
+        let userInfo = {
+            "email":this.state.email,
+            "password":this.state.password
+        }
 
-        //
-        // API.postmethod()
-        //     .then(res => {
-        //  console.log();
-        //         })
-        //     .catch(err => console.log(err));
-
-
-    }
+        // take credentials entered by user and passes to method that authenticates user 
+        AuthAPI.authUserCred(userInfo)
+            .then(res => {
+                    console.log(res);
+                    
+                    //push to teacher or parent page?
+                })
+            .catch(err => console.log(err));
+        }
 
     render() {
         return (
             <div>
-                <MuiThemeProvider>
+
                     <div>
                         {/* <Typography>Login</Typography> */}
 
                         <TextField
-                            hintText="Enter your Email"
-                            floatingLabelText="Email"
-                            onChange = {(event, newValue) => this.setState({email: newValue})}/>
+                            type="email"
+                            helperText="Enter your Email"
+                            // floatingLabelText="Email"
+
+                            // this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({email: newValue})}
+
+                            // updated to
+                            onChange = {(event) => this.setState({email: event.target.value})}
+                            />
 
                         <br/>
 
                         <TextField
                             type="password"
-                            hintText="Enter your Password"
-                            floatingLabelText="Password"
-                            onChange = {(event, newValue) => this.setState({password: newValue})}/>
+                            helperText="Enter your Password"
+                            // floatingLabelText="Password"
+
+                            // this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({password: newValue})}
+                            
+                            //updated to
+                            onChange = {(event) => this.setState({password: event.target.value})}
+                            />
 
                         <br/>
 
                         <Button varient="contained" color="primary" label="Submit" 
-                        style={margin} 
-                        onClick={(event) => this.handleClick(event)}/>
+                        // style={margin} 
+                        onClick={(event) => this.handleClick(event)}>Submit</Button>
+                    
                     </div>
-                </MuiThemeProvider>
             </div>
         );
     }
