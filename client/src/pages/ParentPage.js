@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Schedule from "../components/Schedule";
@@ -7,7 +7,7 @@ import HelpButton from "../components/HelpButton";
 
 class Parent extends Component {
     constructor(props) {
-        super(props):
+        super(props);
         this.state = {
             subect: " ",
             time: " ",
