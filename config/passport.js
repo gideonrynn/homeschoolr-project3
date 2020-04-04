@@ -12,13 +12,13 @@ passport.use(new LocalStrategy(
     // passwordField: 'password'
   },
   function(email, password, done) {
-    // When a user tries to sign in this code runs
-    db.Users.findOne({
+    // When a user tries to sign in, check the database for a record with this email
+    db.User.findOne({
       where: {
         email: email
       }
     }).then(function(user) {
-      // If there's no user with the given username return the below message
+      // If no user record exists with that email, return the following message
       if (!user) {
         return done(null, false, {
           message: "Incorrect email."
@@ -30,13 +30,13 @@ passport.use(new LocalStrategy(
           message: "Incorrect password."
         });
       }
-      // If none of the above, return the user
+      // If none of the above, return the user data
       return done(null, user);
     });
   }
 ));
 
-//Once user logins in, every other request will use "cookie" that identifies the session
+//Once user logins in, every other request will use a cookie that identifies the session
 //passport will serialize and deserialize user instances to and from the session to support login sessions
 passport.serializeUser(function(user, done) {
   done(null, user);

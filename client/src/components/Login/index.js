@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import API from "./utils/userAuthAPI"
+// import API from "../../utils/userAuthAPI"
 
 
 // const theme = createMuiTheme();
@@ -42,10 +42,11 @@ class Login extends Component {
         //     "password":this.state.password
         // }
 
-        //
-        // API.postmethod()
+        // console.log(userInfo);
+
+        // API.authUserCred(userInfo)
         //     .then(res => {
-        //  console.log();
+        //  console.log(res);
         //         })
         //     .catch(err => console.log(err));
 
@@ -62,7 +63,13 @@ class Login extends Component {
                         <TextField
                             helperText="Enter your Email"
                             // floatingLabelText="Email"
-                            onChange = {(event, newValue) => this.setState({email: newValue})}/>
+
+                            // this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({email: newValue})}
+
+                            // this does
+                            onChange = {(event) => this.setState({email: event.target.value})}
+                            />
 
                         <br/>
 
@@ -70,7 +77,13 @@ class Login extends Component {
                             type="password"
                             helperText="Enter your Password"
                             // floatingLabelText="Password"
-                            onChange = {(event, newValue) => this.setState({password: newValue})}/>
+
+                            // this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({password: newValue})}
+                            
+                            //this does
+                            onChange = {(event) => this.setState({password: event.target.value})}
+                            />
 
                         <br/>
 

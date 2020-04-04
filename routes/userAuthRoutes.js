@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/");
 const passport = require("../config/passport");
 const router = require("express").Router();
 // const userController = require("../controllers/userauthController");
@@ -12,12 +12,15 @@ const router = require("express").Router();
   // sign up user
   // if the user is created successfully, proceed to log the user in, otherwise send back an error
   router.post("/register", function(req, res) {
-    db.User.create(req.body
-    )
-      .then(function() {
-        //if the user object has been created, send back "true"
+    db.User.create(req.body)
+      .then(function(data) {
+        //if the user object has been created, send back affirmative response
         //in react, user should be redirected to login, or passed straight through to the app
-        res.json({success: true});
+        //for now, send back created user object
+        res.json(data);
+
+        // *testing* send back success true
+        // res.json({success: true});
         
         //*testing* sends back created object
         // res.json(data);
@@ -33,17 +36,16 @@ const router = require("express").Router();
   //   res.redirect("/");
   // });
 
-  // still need this particular route?
-  // Route for getting data about user to the client
+  // still need this particular route? will need to be checking this when going from page to page. check against isloggedin 
   router.get("/userinfo", function(req, res) {
     //req user is created once the user logs in and creates a session 
+    //if this has not been created (because it does not exist)
     if (!req.user) {
-
-      // The user is not logged in, send back an empty object/no data
+      // send back an empty object/no data
       res.json({});
     } else {
 
-      // Otherwise send back the user's email and id
+      // otherwise, send back the email and id
       res.json({
         email: req.user.email,
         id: req.user.id
