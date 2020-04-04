@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
 import {
@@ -8,6 +8,7 @@ import {
   Scheduler,
   DayView,
   Appointments,
+  Toolbar,
   DateNavigator,
   AppointmentForm,
   AppointmentTooltip,
@@ -31,7 +32,7 @@ const mapAppointmentData = appointment => ({
   title: appointment.Text,
 });
 
-export default class Demo extends React.PureComponent {
+class Schedule extends Component {
   constructor(props) {
     super(props);
 
@@ -49,9 +50,9 @@ export default class Demo extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
+  /* componentDidMount() {
     this.loadData();
-  }
+  } */
 
   componentDidUpdate() {
     this.loadData();
@@ -103,8 +104,8 @@ export default class Demo extends React.PureComponent {
             startDayHour={8}
             endDayHour={15}
           />
-          
           <Appointments />
+          <Toolbar />
           <DateNavigator />
           <TodayButton />
           <AppointmentTooltip
@@ -117,3 +118,5 @@ export default class Demo extends React.PureComponent {
     );
   }
 }
+
+export default Schedule;
