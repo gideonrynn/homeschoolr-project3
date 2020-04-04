@@ -34,6 +34,7 @@ function SelectSubj() {
               value={subject}
               onChange={handleChange}
             >
+              <MenuItem value={"Default"}>Choose a subject.</MenuItem>
               <MenuItem value={"Math"}>Math</MenuItem>
               <MenuItem value={"Science"}>Science</MenuItem>
               <MenuItem value={"History"}>History</MenuItem>
