@@ -2,6 +2,13 @@ const router = require("express").Router();
 const db = require("../models");
 const nodemailer = require("nodemailer");
 
+//EXAMPLE REQ.BODY:
+// {
+// 	"recipient" : "kevinsuh2018@u.northwestern.edu",
+// 	"title" : "Test",
+// 	"message": "Message"
+// }
+
 //Retreive the model schedule posted by the teacher
 router.get("/schedule", (req, res) => {
     db.Schedule.find({})
@@ -20,7 +27,6 @@ router.post("/schedule", (req, res) => {
 router.post("/email", (req, res) => {
     console.log("/email post")
     //Unpack the req.body object
-    const sender = req.body.sender
     const recipient = req.body.recipient
     const title = req.body.title
     const message = req.body.message
@@ -33,25 +39,21 @@ router.post("/email", (req, res) => {
         let testAccount = await nodemailer.createTestAccount();
       
         // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-          host: "smtp.ethereal.email",
-          port: 587,
-          secure: false, // true for 465, false for other ports
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
           auth: {
-            user: testAccount.user, // generated ethereal user
-            pass: testAccount.pass // generated ethereal password
+            user: 'noreplyhomeschoolr@gmail.com',
+            pass: 'homeschoolr12345'
           }
         });
       
         // send mail with defined transport object
         let info = await transporter.sendMail({
-          from: sender, // sender address
+          from: "noreplyhomeschoolr@gmail.com", // sender address
           to: recipient, // list of receivers
           subject: title, // Subject line
           text: message, // plain text body
         });
-
-        console.log(sender)
       
         console.log("Message sent: %s", info.messageId);
         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
@@ -62,6 +64,8 @@ router.post("/email", (req, res) => {
       }
       
       main().catch(console.error);
+
+      res.send("email sent")
 })
 
 module.exports = router;

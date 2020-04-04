@@ -1,11 +1,22 @@
-// add axios calls here for login, register, etc.
-// import axios from 'axios';
+// add axios calls here for user account creation and authentication
+import axios from 'axios';
 
-//list all methods to be used in login and register components
-// export default {
+
+export default {
     
-    // post methods for api/users/login (runs through passport.authenticate, which authenticates the request) and api/users/register
-    // get method for user data?
+    // passes info and credentials entered by user to route that saves to db
+    regUserCred: function(userInfo) {
+     
+        return axios.post("/api/register", userInfo);
+    },
 
-// };
+    // passes credentials entered by user to route that runs authentication using passport
+    // passport will check db for existing user, and send back 
+    authUserCred: function(userInfo) {
+        
+        return axios.post("/api/login", userInfo);
+    },
+
+    
+};
   

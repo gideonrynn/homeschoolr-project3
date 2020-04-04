@@ -6,7 +6,6 @@ const studentSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    unique: true
   },
   lastName: {
     type: String,

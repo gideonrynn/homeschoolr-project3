@@ -3,8 +3,9 @@ const session = require("express-session");
 const mongoose = require('mongoose');
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-const apiRoutes = require("./routes/apiRoutes");
+const routes = require("./routes");
 const passport = require("./config/passport");
+const bcrypt = require("bcryptjs");
 
 //required dotenv to enable environmental variables such as MONGO_URI
 require('dotenv').config({path:'.env'})
@@ -59,7 +60,7 @@ console.log(process.env.MONGODB_URI);
 dbConnect();
 
 // API routes here
-app.use("/api", apiRoutes);
+app.use(routes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
