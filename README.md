@@ -39,7 +39,7 @@ This project was built using:
   - [If-Env ^1.0.4](https://www.npmjs.com/package/if-env)
   - [Mongoose ^5.9.6](https://www.npmjs.com/package/mongoose)
   - [Passport ^0.4.1](https://www.npmjs.com/package/passport)
-  - - [Passport Local ^1.0.0](https://www.npmjs.com/package/passport-local)
+  - [Passport Local ^1.0.0](https://www.npmjs.com/package/passport-local)
   - [React ^16.13.1](https://www.npmjs.com/package/react)
   - [React-Router-Dom ^5.1.2](https://www.npmjs.com/package/react-router-dom)
 

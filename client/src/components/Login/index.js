@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import API from "./utils/userAuthAPI"
+import AuthAPI from "../../utils/userAuthAPI"
 
 
 // const theme = createMuiTheme();
@@ -36,21 +36,20 @@ class Login extends Component {
         console.log("event", event);
 
         // Backend stuff might look like this to start off?
-        // let user = this;
-        // let userInfo = {
-        //     "email":this.state.email,
-        //     "password":this.state.password
-        // }
+        let userInfo = {
+            "email":this.state.email,
+            "password":this.state.password
+        }
 
-        //
-        // API.postmethod()
-        //     .then(res => {
-        //  console.log();
-        //         })
-        //     .catch(err => console.log(err));
-
-
-    }
+        // take credentials entered by user and passes to method that authenticates user 
+        AuthAPI.authUserCred(userInfo)
+            .then(res => {
+                    console.log(res);
+                    
+                    //push to teacher or parent page?
+                })
+            .catch(err => console.log(err));
+        }
 
     render() {
         return (
@@ -60,9 +59,16 @@ class Login extends Component {
                         {/* <Typography>Login</Typography> */}
 
                         <TextField
+                            type="email"
                             helperText="Enter your Email"
                             // floatingLabelText="Email"
-                            onChange = {(event, newValue) => this.setState({email: newValue})}/>
+
+                            // this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({email: newValue})}
+
+                            // updated to
+                            onChange = {(event) => this.setState({email: event.target.value})}
+                            />
 
                         <br/>
 
@@ -70,7 +76,13 @@ class Login extends Component {
                             type="password"
                             helperText="Enter your Password"
                             // floatingLabelText="Password"
-                            onChange = {(event, newValue) => this.setState({password: newValue})}/>
+
+                            // this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({password: newValue})}
+                            
+                            //updated to
+                            onChange = {(event) => this.setState({password: event.target.value})}
+                            />
 
                         <br/>
 

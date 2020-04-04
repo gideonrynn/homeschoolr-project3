@@ -3,8 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Login from '../Login';
-// import API from "./utils/userAuthAPI"
-
+import AuthAPI from "../../utils/userAuthAPI"
 
 const theme = createMuiTheme();
     theme.typography.h3 = {
@@ -28,32 +27,33 @@ class Register extends Component {
         console.log("props", props);
 
         this.state={
-            childName:'',
+            studentName:'',
             parentName:'',
             email:'',
             password:''
         }
+
     }
 
     handleClick(event){
         console.log("event", event);
+        
 
         // more backend stuff
         // let user = this;
-        // let userInfo = {
-        //     "childName": this.state.childName,
-        //     "parentName":this.state.parentName,
-        //     "email":this.state.email,
-        //     "password":this.state.password
-        // }
-
+        let userInfo = {
+            "studentName": this.state.studentName,
+            "parentName":this.state.parentName,
+            "email":this.state.email,
+            "password":this.state.password
+        }
         
-        // API.postmethod()
-        //     .then(res => {
-        //          console.log();
-        //          this can include if statement below
-        //         })
-        //     .catch(err => console.log(err));
+        AuthAPI.regUserCred(userInfo)
+            .then(res => {
+                //  this can include if statement below
+                console.log(res.data);
+                })
+            .catch(err => console.log(err));
 
         // here i need something to check if response is 200
         // if(response.data.code == 200) {
@@ -86,14 +86,24 @@ class Register extends Component {
                         <TextField
                             helperText="Enter your Child's Name"
                             // floatingLabelText="Child Name"
-                            onChange = {(event, newValue) => this.setState({childName: newValue})} />
+
+                            //this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({childName: newValue})}
+                            
+                            //updated to
+                            onChange = {(event) => this.setState({studentName: event.target.value})}/>
 
                         <br/>
 
                         <TextField
                             helperText="Enter your Name"
                             // floatingLabelText="Parent Name"
-                            onChange = {(event, newValue) => this.setState({parentName: newValue})} />
+
+                            //this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({parentName: newValue})} 
+
+                            //updated to
+                            onChange = {(event) => this.setState({parentName: event.target.value})}/>
 
                         <br/>
 
@@ -101,7 +111,13 @@ class Register extends Component {
                             helperText="Enter your Email"
                             type="email"
                             // floatingLabelText="Email"
-                            onChange = {(event, newValue) => this.setState({email: newValue})} />
+
+                            //this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({email: newValue})} 
+
+                            //updated to
+                            onChange = {(event) => this.setState({email: event.target.value})} 
+                            />
 
                         <br/>
 
@@ -109,7 +125,12 @@ class Register extends Component {
                             type = "password"
                             helperText="Enter your Password"
                             // floatingLabelText="Password"
-                            onChange = {(event, newValue) => this.setState({password: newValue})} />
+
+                            //this did not work for scd
+                            // onChange = {(event, newValue) => this.setState({password: newValue})} 
+
+                            //updated to
+                            onChange = {(event) => this.setState({password: event.target.value})}/>
 
                         <br/>
 
