@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button'
 import Login from '../components/Login';
 import Register from '../components/Register';
 
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 // const margin = {
 //     margin: 15
@@ -78,27 +80,30 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <div className="loginPage">
+            <Grid container alignContent="center" className="loginPage">
 
-                {this.state.loginPage}
+                <Paper elevation={3}> 
 
-                <div>
-                    {this.state.loginMessage}
-                        <div>
-                            <Button label={this.state.buttonLabel} primary={true} 
-                            // style={margin} 
-                            onClick={(event) => this.handleClick(event)}>{this.state.buttonLabel}</Button>
-                        </div>
+                    {this.state.loginPage}
 
-                    {/* <MuiThemeProvider>
-                        <div>
-                            <Button label={this.state.buttonLabel} primary={true} 
-                            // style={margin} 
-                            onClick={(event) => this.handleClick(event)} />
-                        </div>
-                    </MuiThemeProvider> */}
-                </div>
-            </div>
+                    <div>
+                        {this.state.loginMessage}
+                            <div>
+                                <Button label={this.state.buttonLabel} primary={true} 
+                                // style={margin} 
+                                onClick={(event) => this.handleClick(event)}>{this.state.buttonLabel}</Button>
+                            </div>
+
+                        {/* <MuiThemeProvider>
+                            <div>
+                                <Button label={this.state.buttonLabel} primary={true} 
+                                // style={margin} 
+                                onClick={(event) => this.handleClick(event)} />
+                            </div>
+                        </MuiThemeProvider> */}
+                    </div>
+                </Paper>
+            </Grid>
         );
     }
 }
