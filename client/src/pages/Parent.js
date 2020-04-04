@@ -1,13 +1,13 @@
 import { Component } from "react";
-// import MuiThemeProvider from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Header from "../components/Header";
-
-
+import Schedule from "../components/Schedule";
+import ScheduleForm from "../components/ScheduleForm";
+import HelpButton from "../components/HelpButton";
 
 class Parent extends Component {
     constructor(props) {
-        super(props);
+        super(props):
         this.state = {
             subect: " ",
             time: " ",
@@ -29,7 +29,14 @@ class Parent extends Component {
 
     render() {
         return (
-
-        )
+            <div>
+                <Typography>Parent</Typography>
+                <Schedule />
+                <ScheduleForm />
+                <HelpButton />
+            </div>   
+        );
     }
 }
+
+export default Parent;
