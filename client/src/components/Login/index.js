@@ -77,32 +77,8 @@ class Login extends Component {
                         <Button varient="contained" color="primary" label="Submit" 
                         // style={margin} 
                         onClick={(event) => this.handleClick(event)}>Submit</Button>
+                    
                     </div>
-
-                {/* <MuiThemeProvider>
-                    <div>
-                        <Typography>Login</Typography>
-
-                        <TextField
-                            helperText="Enter your Email"
-                            floatingLabelText="Email"
-                            onChange = {(event, newValue) => this.setState({email: newValue})}/>
-
-                        <br/>
-
-                        <TextField
-                            type="password"
-                            helperText="Enter your Password"
-                            floatingLabelText="Password"
-                            onChange = {(event, newValue) => this.setState({password: newValue})}/>
-
-                        <br/>
-
-                        <Button varient="contained" color="primary" label="Submit" 
-                        // style={margin} 
-                        onClick={(event) => this.handleClick(event)}/>
-                    </div>
-                </MuiThemeProvider> */}
             </div>
         );
     }
