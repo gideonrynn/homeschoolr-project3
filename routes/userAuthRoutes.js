@@ -1,6 +1,7 @@
 const db = require("../models/");
 const passport = require("../config/passport");
 const router = require("express").Router();
+// const bcrypt = require("bcryptjs");
 // const userController = require("../controllers/userauthController");
 
   // Using the passport.authenticate middleware with our local strategy.
@@ -9,23 +10,34 @@ const router = require("express").Router();
     res.json(req.user);
   })
 
-  // sign up user
-  // if the user is created successfully, proceed to log the user in, otherwise send back an error
+ 
+  // if the user does not already exist, create account
   router.post("/register", function(req, res) {
-    db.User.create(req.body)
-      .then(function() {
-        //if the user object has been created, send back affirmative response
-        //in react, user should be redirected to login, or passed straight through to the app
-        //for now, send back created user object
-        res.json({success: true});
-        
-        //*testing* sends back created object
-        // res.json(data);
-      })
-      .catch(function(err) {
-        res.status(401).json(err);
-      });
-  });
+
+    //search db for email provided by user
+    db.User.findOne({ email: req.body.email })
+
+      .then(user => {
+
+        //if a user is found with this email address
+          if (user) {
+
+              //send back "already exists" response
+              return res.json({ email: "Account with this email already exists" });
+
+            } else {
+
+              //otherwise create the user and save credentials, respond with true if successful
+                db.User.create(req.body)
+                    .then(() => res.json({success: true}))
+                    .catch(err => res.status(401).json(err))
+                }
+  
+          })
+            
+  });  
+ 
+    
 
   // Route for logging user out
   router.get("api/logout", function(req, res) {
