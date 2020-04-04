@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import API from "../../utils/userAuthAPI"
+import AuthAPI from "../../utils/userAuthAPI"
 
 
 // const theme = createMuiTheme();
@@ -36,22 +36,20 @@ class Login extends Component {
         console.log("event", event);
 
         // Backend stuff might look like this to start off?
-        // let user = this;
-        // let userInfo = {
-        //     "email":this.state.email,
-        //     "password":this.state.password
-        // }
+        let userInfo = {
+            "email":this.state.email,
+            "password":this.state.password
+        }
 
-        // console.log(userInfo);
-
-        // API.authUserCred(userInfo)
-        //     .then(res => {
-        //  console.log(res);
-        //         })
-        //     .catch(err => console.log(err));
-
-
-    }
+        // take credentials entered by user and passes to method that authenticates user 
+        AuthAPI.authUserCred(userInfo)
+            .then(res => {
+                    console.log(res);
+                    
+                    //push to teacher or parent page?
+                })
+            .catch(err => console.log(err));
+        }
 
     render() {
         return (
@@ -61,13 +59,14 @@ class Login extends Component {
                         {/* <Typography>Login</Typography> */}
 
                         <TextField
+                            type="email"
                             helperText="Enter your Email"
                             // floatingLabelText="Email"
 
                             // this did not work for scd
                             // onChange = {(event, newValue) => this.setState({email: newValue})}
 
-                            // this does
+                            // updated to
                             onChange = {(event) => this.setState({email: event.target.value})}
                             />
 
@@ -81,7 +80,7 @@ class Login extends Component {
                             // this did not work for scd
                             // onChange = {(event, newValue) => this.setState({password: newValue})}
                             
-                            //this does
+                            //updated to
                             onChange = {(event) => this.setState({password: event.target.value})}
                             />
 

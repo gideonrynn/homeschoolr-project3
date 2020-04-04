@@ -86,10 +86,11 @@ class Register extends Component {
                         <TextField
                             helperText="Enter your Child's Name"
                             // floatingLabelText="Child Name"
-                            //this didn't work for sarah
+
+                            //this did not work for scd
                             // onChange = {(event, newValue) => this.setState({childName: newValue})}
                             
-                            //this does
+                            //updated to
                             onChange = {(event) => this.setState({studentName: event.target.value})}/>
 
                         <br/>
@@ -97,9 +98,11 @@ class Register extends Component {
                         <TextField
                             helperText="Enter your Name"
                             // floatingLabelText="Parent Name"
-                            //this didn't work for sarah
+
+                            //this did not work for scd
                             // onChange = {(event, newValue) => this.setState({parentName: newValue})} 
-                            //this does
+
+                            //updated to
                             onChange = {(event) => this.setState({parentName: event.target.value})}/>
 
                         <br/>
@@ -108,10 +111,11 @@ class Register extends Component {
                             helperText="Enter your Email"
                             type="email"
                             // floatingLabelText="Email"
-                            //this didn't work for sarah
+
+                            //this did not work for scd
                             // onChange = {(event, newValue) => this.setState({email: newValue})} 
 
-                            //this does
+                            //updated to
                             onChange = {(event) => this.setState({email: event.target.value})} 
                             />
 
@@ -121,10 +125,11 @@ class Register extends Component {
                             type = "password"
                             helperText="Enter your Password"
                             // floatingLabelText="Password"
-                            //this didn't work for sarah
+
+                            //this did not work for scd
                             // onChange = {(event, newValue) => this.setState({password: newValue})} 
 
-                            //this does
+                            //updated to
                             onChange = {(event) => this.setState({password: event.target.value})}/>
 
                         <br/>

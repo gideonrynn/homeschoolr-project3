@@ -5,32 +5,47 @@ const db = require("../models");
 
 // indicating type of strategy to be used with passport
 passport.use(new LocalStrategy(
-  //LocalStrategy expects to find credentials in parameters named username and password, but you can change the defaults below (to email)
+
+  //ls expects to find credentials username and password, but you can change the default(s) below
+  //we are using email to check the database for an existing user
   {
     // passReqToCallback : true,
-    usernameField: 'email',
+    usernameField: 'email'
     // passwordField: 'password'
   },
   function(email, password, done) {
+    // console.log(email);
+    // console.log(password);
+
     // When a user tries to sign in, check the database for a record with this email
-    db.User.findOne({
-      where: {
-        email: email
-      }
-    }).then(function(user) {
-      // If no user record exists with that email, return the following message
+    db.User.findOne({ email: email})
+      .then(function(user) {
+
+      // console.log(user);
+
+      // If no user record exists containing that email address, return the following
       if (!user) {
+
+        console.log("No user found");
+
         return done(null, false, {
-          message: "Incorrect email."
+          message: "Account with this email does not exist."
         });
+
       }
-      // If password incorrect, return below message
-      else if (!user.validPassword(password)) {
+      // If password does not equal password provided by user, return the following
+      else if (user.password != password) {
+
+        console.log("Wrong password");
+
         return done(null, false, {
           message: "Incorrect password."
         });
       }
+
       // If none of the above, return the user data
+      console.log("User exists and password correct")
+
       return done(null, user);
     });
   }
@@ -42,9 +57,14 @@ passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
-  //need findById? method?
-  done(null, obj);
+passport.deserializeUser(function(id, done) {
+  
+  //need findById?
+  db.User.findOne({
+    _id: id
+}, '-password -salt', function(err, user) {
+    done(err, user);
+})
 });
 
 module.exports = passport;
