@@ -16,10 +16,6 @@ const theme = createMuiTheme();
     }
 };
 
-const margin = {
-    margin: 15
-};
-
 class ScheduleForm extends Component {
 
   constructor(props) {

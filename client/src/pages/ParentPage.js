@@ -1,13 +1,13 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Schedule from "../components/Schedule";
 import ScheduleForm from "../components/ScheduleForm";
-import HelpButton from "../components/HelpButton";
+// import HelpButton from "../components/HelpButton";
+import 'typeface-roboto';
 
-class Parent extends Component {
+class ParentPage extends Component {
     constructor(props) {
-        super(props):
+        super(props);
         this.state = {
             subect: " ",
             time: " ",
@@ -33,10 +33,9 @@ class Parent extends Component {
                 <Typography>Parent</Typography>
                 <Schedule />
                 <ScheduleForm />
-                <HelpButton />
             </div>   
         );
     }
 }
 
-export default Parent;
+export default ParentPage;

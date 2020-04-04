@@ -8,9 +8,9 @@ import NavBar from "./components/NavBar";
 import Wrapper from "./components/Wrapper";
 
 import NoMatch from "./pages/NoMatch";
-import LoginPage from "./pages/LoginPage"
-import TeacherPage from "./pages/TeacherPage"
-// import Parent from "./pages/Parent"
+import LoginPage from "./pages/LoginPage";
+import TeacherPage from "./pages/TeacherPage";
+import ParentPage from "./pages/ParentPage";
 
 // import logo from './logo.svg';
 import './App.css';
@@ -28,8 +28,8 @@ class App extends Component {
 
             <Route exact path="/teacher" component={TeacherPage}/>
 
+            <Route exact path="/parent" component={ParentPage}/>
 
-            {/* <Route exact path="/parent" component={Parent}/> */}
             <Route exact path="/noMatch" component={NoMatch}/>
           </Wrapper>
         </div>
