@@ -52,28 +52,32 @@ class Register extends Component {
             .then(res => {
                 //  this can include if statement below
                 console.log(res.data);
+
+                if(res.data.code === 200) {
+                    // basically if Registration was 
+                    let loginPage =[];
+                    loginPage.push(
+                        <Login parentContext={this} />
+                    );
+                    let loginMessage = "Account does not exist, Register Account";
+                    this.props.parentContext.setState({
+                        loginPage: loginPage,
+                        loginMessage: loginMessage,
+                        buttonLabel: "Register",
+                        isLogin: true
+                    });
+                } 
+
+
                 })
             .catch(err => console.log(err));
 
-        // here i need something to check if response is 200
-        // if(response.data.code == 200) {
-        //     // basically if Registration was 
-        //     let loginPage =[];
-        //     loginPage.push(
-        //         <Login parentContext={this} />
-        //     );
-        //     let loginMessage = "Account does not exist, Register Account";
-        //     self.props.parentContext.setState({
-        //         loginPage: loginPage,
-        //         loginMessage: loginMessage,
-        //         buttonLabel: "Register",
-        //         isLogin: true
-        //     });
-        // } 
-        let loginPage =[];
-        loginPage.push(
-            <Login parentContext = {this} />
-        )
+
+        
+        // let loginPage =[];
+        // loginPage.push(
+        //     <Login parentContext = {this} />
+        // )
     }
 
     render() {

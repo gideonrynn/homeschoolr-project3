@@ -7,9 +7,17 @@ import Register from '../components/Register';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+import loginPageBackground from '../assets/images/loginBackground.jpg'
 // const margin = {
 //     margin: 15
 // };
+
+const styles = {
+    loginPage: {
+        backgroundImage: `url(${loginPageBackground})`
+    }
+    
+}
 
 class LoginPage extends Component {
 
@@ -80,7 +88,7 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <Grid container alignContent="center" className="loginPage">
+            <Grid container alignContent="center" className="loginPage" style={styles.loginPage.backgroundImage}>
 
                 <Paper elevation={3}> 
 
