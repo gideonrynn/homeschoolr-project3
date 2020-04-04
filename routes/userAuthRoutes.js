@@ -20,20 +20,20 @@ const router = require("express").Router();
       .then(user => {
 
         //if a user is found with this email address
-          if (user) {
+        if (user) {
 
-              //send back "already exists" response
-              return res.json({ email: "Account with this email already exists" });
+          //send back "already exists" response
+          return res.json({ email: "Account with this email already exists" });
 
-            } else {
+        } else {
 
-              //otherwise create the user and save credentials, respond with true if successful
-                db.User.create(req.body)
-                    .then(() => res.json({success: true}))
-                    .catch(err => res.status(401).json(err))
-                }
+          //otherwise create the user and save credentials, respond with true if successful
+          db.User.create(req.body)
+            .then(() => res.json({success: true, message: "Account created!"}))
+            .catch(err => res.status(401).json(err))
+          }
   
-          })
+      })
             
   });  
  
