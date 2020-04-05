@@ -1,10 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
-//for encryption of passwords
 const bcrypt = require("bcryptjs");
-//10 is the default
-// const BCRYPT_SALT_ROUNDS = 10;
 
 // indicating type of strategy to be used with passport
 passport.use(new LocalStrategy(
@@ -37,28 +34,32 @@ passport.use(new LocalStrategy(
 
       }
       // If password does not equal password provided by user, return the following
-      else {
-        bcrypt.compare(password, user.password).then(response => {
+        else if (password) {
           
-          if (response !== true) {
-
-            console.log("Wrong password");
-
-            return done(null, false, {
-              message: "Incorrect password."
-            });
-           
-          }
-
-        })
+          bcrypt.compare(password, user.password).then(response => {
             
-      }
+            if (response !== true) {
 
-      // If none of the above, return the user data
-      console.log("User exists, password correct, authenticated");
+              console.log("Wrong password");
 
-      return done(null, user);
+              return done(null, false, {
+                message: "Incorrect password."
+              });
+            
+            } else {
+
+                // If none of the above, return the user data
+                console.log("User exists, password correct, authenticated");
+
+                return done(null, user);
       
+            }
+
+          })
+              
+        }
+        
+           
     });
   }
 ));
