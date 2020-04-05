@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import AuthAPI from '../../utils/userAuthAPI'
+
+import AuthAPI from "../../utils/userAuthAPI";
+
+
 
 
 // const theme = createMuiTheme();
@@ -59,6 +62,14 @@ class Login extends Component {
                     
                 })
             .catch(err => console.log(err));
+        
+        // if(response.data.code == 200) {
+        //     let parentPage =[];
+        //     parentPage.push(
+        //         <ParentPage parentContext={this} />
+
+        //     );
+        // }
         }
 
     render() {
