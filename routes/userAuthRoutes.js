@@ -41,8 +41,7 @@ const BCRYPT_SALT_ROUNDS = 10;
               token,
                 id: user.id,
                 name: user.name,
-                email: user.email,
-                type: "parent"
+                email: user.email
             })
 
          });
