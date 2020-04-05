@@ -1,13 +1,42 @@
-const db = require("../models/");
-const passport = require("../config/passport");
+const db = require("../models");
+const passport = require("../config/passport-local");
 const router = require("express").Router();
+const jwt = require('jsonwebtoken');
 // const bcrypt = require("bcryptjs");
 // const userController = require("../controllers/userauthController");
 
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the app
-  router.post("/login", passport.authenticate("local"), function(req, res) {
-    res.json(req.user);
+  router.post("/login", function(req, res) {
+    // pass {session: false} in passport options, so that it wont save the user in the req.login session as we will be using jwt
+    passport.authenticate('local', {session: false}, (err, user) => {
+
+      if (err || !user) {
+          return res.status(400).json({
+              message: 'Something is not right',
+              user: user
+          });
+        }
+
+      // generating a session for a user. This session represents how long a login is good for without having to re-authenticate
+     req.login(user, {session: false}, (err) => {
+         if (err) {
+             res.send({message: "Error at req.login"});
+         } else {
+
+          // generate a signed son web token with the contents of user object and return it in the response
+        //  console.log("passed req.login");
+         const token = jwt.sign(user.toJSON(), 'your_jwt_secret');
+        //  console.log("token const set")
+        //  console.log(`this is the token ` + token)
+         return res.json({user, token});
+
+         }
+         
+      });
+
+  })(req, res);
+
   })
 
  
