@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import AuthAPI from "../../utils/userAuthAPI"
+import AuthAPI from '../../utils/userAuthAPI'
 
 
 // const theme = createMuiTheme();
@@ -32,6 +32,7 @@ class Login extends Component {
         }
     }
 
+
     handleClick(event){
         console.log("event", event);
 
@@ -39,14 +40,22 @@ class Login extends Component {
         let userInfo = {
             "email":this.state.email,
             "password":this.state.password
-        }
+        }    
 
-        // take credentials entered by user and passes to method that authenticates user 
+        // takes credentials entered by user and passes to method that authenticates user 
         AuthAPI.authUserCred(userInfo)
             .then(res => {
-                    console.log(res);
+                    // response will be object that contains jwt token, user id, email, type (parent or teacher) **when this is set up in model
+                    console.log(res.data);
+
+                    //testing only for receipt of data. tested with hardcoding parent type in to route, successfully added to test object
+                    //comment out if not needed
+                    // if (res.data.type === "teacher") {
+                    //     console.log("send me to the teacher view");
+                    // } else {
+                    //     console.log("send me to the parent view")
+                    // }
                     
-                    //push to teacher or parent page?
                 })
             .catch(err => console.log(err));
         }

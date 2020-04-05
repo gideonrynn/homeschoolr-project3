@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const routes = require("./routes");
-const passport = require("./config/passport");
+const passport = require("./config/passport-local");
 const bcrypt = require("bcryptjs");
 
 //required dotenv to enable environmental variables such as MONGO_URI
