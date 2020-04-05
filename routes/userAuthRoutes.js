@@ -31,7 +31,7 @@ const BCRYPT_SALT_ROUNDS = 10;
 
          } else {
 
-          // generate a signed json web token with the specified contents of user object and return it in the response
+          // generate a signed json web token with the specified contents of user object and return it in the response to the client
          jwt.sign(
            { id: user.id},
            'your_jwt_secret',
@@ -41,8 +41,7 @@ const BCRYPT_SALT_ROUNDS = 10;
               token,
                 id: user.id,
                 name: user.name,
-                email: user.email,
-                type: "parent"
+                email: user.email
             })
 
          });
