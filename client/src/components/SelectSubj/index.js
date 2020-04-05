@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -34,6 +33,7 @@ function SelectSubj() {
               value={subject}
               onChange={handleChange}
             >
+              <MenuItem value={"Default"}>Choose a subject.</MenuItem>
               <MenuItem value={"Math"}>Math</MenuItem>
               <MenuItem value={"Science"}>Science</MenuItem>
               <MenuItem value={"History"}>History</MenuItem>

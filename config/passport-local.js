@@ -1,12 +1,12 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-
 const db = require("../models");
+const bcrypt = require("bcryptjs");
 
 // indicating type of strategy to be used with passport
 passport.use(new LocalStrategy(
 
-  //ls expects to find credentials username and password, but you can change the default(s) below
+  //passport ls expects to find credentials username and password, but you can change the default(s) below
   //we are using email to check the database for an existing user
   {
     // passReqToCallback : true,
@@ -34,37 +34,50 @@ passport.use(new LocalStrategy(
 
       }
       // If password does not equal password provided by user, return the following
-      else if (user.password != password) {
+        else if (password) {
+          
+          bcrypt.compare(password, user.password).then(response => {
+            
+            if (response !== true) {
 
-        console.log("Wrong password");
+              console.log("Wrong password");
 
-        return done(null, false, {
-          message: "Incorrect password."
-        });
-      }
+              return done(null, false, {
+                message: "Incorrect password."
+              });
+            
+            } else {
 
-      // If none of the above, return the user data
-      console.log("User exists and password correct")
+                // If none of the above, return the user data
+                console.log("User exists, password correct, authenticated");
 
-      return done(null, user);
+                return done(null, user);
+      
+            }
+
+          })
+              
+        }
+        
+           
     });
   }
 ));
 
 //Once user logins in, every other request will use a cookie that identifies the session
 //passport will serialize and deserialize user instances to and from the session to support login sessions
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+// passport.serializeUser(function(user, done) {
+//   done(null, user);
+// });
 
-passport.deserializeUser(function(id, done) {
+// passport.deserializeUser(function(id, done) {
   
-  //need findById?
-  db.User.findOne({
-    _id: id
-}, '-password -salt', function(err, user) {
-    done(err, user);
-})
-});
+//   //need findById?
+//   db.User.findOne({
+//     _id: id
+// }, '-password -salt', function(err, user) {
+//     done(err, user);
+// })
+// });
 
 module.exports = passport;
