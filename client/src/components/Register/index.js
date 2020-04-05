@@ -48,6 +48,8 @@ class Register extends Component {
             "password":this.state.password
         }
         
+        // takes info entered by user and passes to method that posts to the database
+        // if 
         AuthAPI.regUserCred(userInfo)
             .then(res => {
                 //  this can include if statement below

@@ -41,10 +41,17 @@ class Login extends Component {
             "password":this.state.password
         }
 
-        // take credentials entered by user and passes to method that authenticates user 
+        // takes credentials entered by user and passes to method that authenticates user 
         AuthAPI.authUserCred(userInfo)
             .then(res => {
-                    console.log(res);
+                    console.log(res.data);
+
+                    //testing only for receipt of token
+                    if (res.data.type === "teacher") {
+                        console.log("send me to the teacher view");
+                    } else {
+                        console.log("send me to the parent view")
+                    }
                     
                     //push to teacher or parent page?
                 })
