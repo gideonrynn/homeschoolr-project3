@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 
 import AuthAPI from "../../utils/userAuthAPI";
 
-
-
-
-// const theme = createMuiTheme();
-//     theme.typography.h3 = {
-//         fontSize: '1.2rem',
-//         '@media (min-width:600px)': {
-//         fontSize: '1.5rem',
-//     },
-//     [theme.breakpoints.up('md')]: {
-//       fontSize: '2.4rem',
-//     }
-// };
-
-// const margin = {
-//     margin: 15
-// };
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+}));
 
 class Login extends Component {
     
@@ -74,14 +78,26 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={useStyles.paper}>
+                    <Avatar className={useStyles.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
 
-                    <div>
-                        {/* <Typography>Login</Typography> */}
-
+                    <form className={useStyles.form} noValidate>
                         <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
                             type="email"
-                            helperText="Enter your Email"
+                            autoFocus
                             // floatingLabelText="Email"
 
                             // this did not work for scd
@@ -94,8 +110,13 @@ class Login extends Component {
                         <br/>
 
                         <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="password"
+                            label="Password"
                             type="password"
-                            helperText="Enter your Password"
                             // floatingLabelText="Password"
 
                             // this did not work for scd
@@ -107,12 +128,19 @@ class Login extends Component {
 
                         <br/>
 
-                        <Button varient="contained" color="primary" label="Submit" 
-                        // style={margin} 
-                        onClick={(event) => this.handleClick(event)}>Submit</Button>
-                    
-                    </div>
-            </div>
+                        <Button 
+                            type="submit"
+                            fullWidth
+                            varient="contained"
+                            color="primary"
+                            label="Submit" 
+                            onClick={(event) => this.handleClick(event)}
+                        >
+                            Sign In
+                        </Button>
+                    </form>
+                </div>
+            </Container>
         );
     }
 }
