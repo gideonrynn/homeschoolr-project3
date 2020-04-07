@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AuthAPI from "../../utils/userAuthAPI";
 import AuthContext from "../../utils/context"
 
+import {Link } from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -53,13 +55,10 @@ class Login extends Component {
     }
 
     // pass info to globalstate so that other components and pages can see this user is logged in
-                        // "parent" added for testing only - remove when model is updated
+    // "parent" added for testing only - remove when model is updated with parent/teacher type
     updateState = (res) => {
 
-        console.log("update state run")
-        console.log(res);
         //set state that shows user is logged in
-
         this.context.updatedState(
             this.state.isLoggedIn, 
             res.data.id, 
@@ -171,7 +170,7 @@ class Login extends Component {
                             />
 
                         <br/>
-
+                       
                         <Button 
                             type="submit"
                             fullWidth

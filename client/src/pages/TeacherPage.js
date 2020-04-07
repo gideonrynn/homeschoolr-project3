@@ -13,6 +13,7 @@ import 'typeface-roboto';
 
 import Table from "../components/Table";
 import AuthContext from "../utils/context"
+import AuthAPI from "../utils/userAuthAPI"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -52,21 +53,49 @@ class TeacherPage extends Component {
             subject:'',
             text:'',
             nodemailerMessage:'',
-            isLoggedIn:''
+            isLoggedIn:'',
+            id:''
         }
 
     }
 
     componentWillMount(){
 
+        // console.log(this.context);
+        let isLoggedIn = this.context.isLoggedIn;
+        let email = this.context.email;
+        let id = this.context.id;
+
+        //when page loads, check state to see if user is logged in to redirect to login or render page
+        if (!isLoggedIn) {
+            
+            console.log("user not logged in");
+
+            //redirect to login page??
+            
+        } else {
+            
+            console.log("user logged in");
+
+            //set logged in user variable for searching the database
+            let loggedInUser = {
+                email: email,
+                id: id
+            }
+
+            console.log(loggedInUser)
+
+            // add api call to database to return user/student/schedule info using the email address or id
+
+        }
+
         let nodemailerMessage = "Send Email to Students here!"
 
         this.setState({
-            nodemailerMessage: nodemailerMessage
+            nodemailerMessage: nodemailerMessage,
+            isLoggedIn: this.context.isLoggedIn
         })
-
-        // console.log("this is the current context");
-        // console.log(this.context);
+        
     }
 
     handleClick(event) {
