@@ -27,7 +27,7 @@ import AuthContext from "../../utils/context"
 
 class Login extends Component {
 
-    //bring in globalstate
+    //bring in context for passing down globalstate
     static contextType = AuthContext;
     
     constructor(props){
@@ -44,22 +44,21 @@ class Login extends Component {
     handleClick(event){
         console.log("event", event);
 
-        // Backend stuff might look like this to start off?
         let userInfo = {
             "email":this.state.email,
             "password":this.state.password
         }    
 
-        // takes credentials entered by user and sends for authentication
+        // take credentials entered by user and send for authentication
         AuthAPI.authUserCred(userInfo)
 
             .then(res => {
                     // response will contain jwt token, user id, email
-                    //will contain type (parent or teacher) **when this is set up in model** 
+                    // will contain type (parent or teacher) **when this is set up in model** 
                     // represents info of user authorized to access certain pages on the site
                     console.log(res.data);
 
-                    // if response contains token (which reps passport authentication from server side)
+                    // if response contains token (which is provided when a user has been authenticated)
                     if (res.data.token) {
                     
                         //set state that shows user is logged in
@@ -67,7 +66,7 @@ class Login extends Component {
                             isLoggedIn: true
                         })
                         
-                        // pass info to globalstate so that other components and pages can 
+                        // pass info to globalstate so that other components and pages can see this user is logged in
                         // **Testing Only** remove "parent"
                         this.context.updatedState(
                             this.state.isLoggedIn, 
