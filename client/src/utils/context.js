@@ -1,20 +1,10 @@
-import React, { useState } from 'react';
+import React from "react";
 
-const initialUserState = {
-    isLoggedin: false,
+export default React.createContext({
+    isLoggedIn: false,
     id: "",
     email: "",
-}
-
-export const Context = React.createContext();
-
-const Store = ({ children }) => {
-    const [state, setState] = useState(initialUserState);
-
-    return (
-        <Context.Provider value={[state, setState]}>{children}</Context.Provider>
-    );
+    type: "",
+    updatedState: () => {}
     
-};
-
-export default Store;
+})
