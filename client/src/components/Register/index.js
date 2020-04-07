@@ -20,9 +20,16 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center',
     },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        alignItems: 'center',
+      },
     form: {
       width: '100%',
       marginTop: theme.spacing(1),
+      alignItems: 'center',
+
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
@@ -193,7 +200,16 @@ class Register extends Component {
 
                         <br/>
 
-                        <Button label="Submit" primary={true} onClick={(event) => this.handleClick(event)}>Submit</Button>
+                        <Button 
+                            type="submit"
+                            fullWidth
+                            varient="contained"
+                            color="primary"
+                            label="Submit" 
+                            onClick={(event) => this.handleClick(event)}
+                        >
+                            Submit
+                        </Button>
 
 
                     </form>
