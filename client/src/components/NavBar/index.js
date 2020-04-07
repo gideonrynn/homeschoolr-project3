@@ -38,6 +38,8 @@ function NavBar() {
                         Homeschoolr
                     </Typography>
                     <Button color="inherit" href="/">Login</Button>
+                    <Button color="inherit" href="/logout">Logout</Button>
+
                 </Toolbar>
             </AppBar>
         </div>
