@@ -13,8 +13,6 @@ import AuthAPI from "../../utils/userAuthAPI";
 import AuthContext from "../../utils/context"
 
 
-import AuthAPI from "../../utils/userAuthAPI";
-
 const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -54,9 +52,27 @@ class Login extends Component {
         }
     }
 
+    // pass info to globalstate so that other components and pages can see this user is logged in
+                        // "parent" added for testing only - remove when model is updated
+    updateState = (res) => {
+
+        console.log("update state run")
+        console.log(res);
+        //set state that shows user is logged in
+
+        this.context.updatedState(
+            this.state.isLoggedIn, 
+            res.data.id, 
+            res.data.email, 
+            "parent")
+
+        console.log(this.context)
+        
+     }
 
     handleClick(event){
         console.log("event", event);
+        event.preventDefault();
 
         let userInfo = {
             "email":this.state.email,
@@ -74,21 +90,17 @@ class Login extends Component {
 
                     // if response contains token (which is provided when a user has been authenticated)
                     if (res.data.token) {
-                    
-                        //set state that shows user is logged in
+
+                        console.log("authenticated user")
+
                         this.setState({
                             isLoggedIn: true
                         })
-                        
-                        // pass info to globalstate so that other components and pages can see this user is logged in
-                        // **Testing Only** remove "parent"
-                        this.context.updatedState(
-                            this.state.isLoggedIn, 
-                            res.data.id, 
-                            res.data.email, 
-                            "parent")
+
+                        this.updateState(res);
                         
                     }
+
                     // add routing logic below or above?
                     // if (res.data.type === "teacher") {
                     //     push to teacher view

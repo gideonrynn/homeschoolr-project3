@@ -12,6 +12,7 @@ import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import 'typeface-roboto';
 
 import Table from "../components/Table";
+import AuthContext from "../utils/context"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,7 +37,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 class TeacherPage extends Component {
+
+    //bring in context for passing down globalstate
+    static contextType = AuthContext;
 
     constructor(props) {
         console.log("props", props);
@@ -45,7 +51,8 @@ class TeacherPage extends Component {
         this.state={
             subject:'',
             text:'',
-            nodemailerMessage:''
+            nodemailerMessage:'',
+            isLoggedIn:''
         }
 
     }
@@ -57,6 +64,9 @@ class TeacherPage extends Component {
         this.setState({
             nodemailerMessage: nodemailerMessage
         })
+
+        // console.log("this is the current context");
+        // console.log(this.context);
     }
 
     handleClick(event) {
