@@ -11,7 +11,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Typography from '@material-ui/core/Typography';
 
-
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,10 +23,14 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
       margin: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
+      alignItems: 'center',
+
     },
     form: {
       width: '100%',
       marginTop: theme.spacing(1),
+      alignItems: 'center',
+
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
@@ -118,7 +121,7 @@ class LoginPage extends Component {
                                     {this.state.loginMessage}
                                 </Typography>
                             </Grid>
-                            
+                            <br />
                             <Grid item>
                                 <Button 
                                     // type="register"
