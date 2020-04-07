@@ -8,10 +8,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
 
 import 'typeface-roboto';
 
 import Table from "../components/Table";
+import ScheduleForm from "../components/ScheduleForm";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -82,7 +84,7 @@ class TeacherPage extends Component {
                 <div className={useStyles.paper}>
                     <br />
                     <br />
-                    <Typography variant="h6" color="inherit" noWrap>
+                    <Typography variant="h3" color="inherit" noWrap>
                         Instructor
                     </Typography>
                     <br />
@@ -130,6 +132,20 @@ class TeacherPage extends Component {
                         >
                             Send Email
                         </Button>
+
+                        {/* Recommened schedule here */}
+                        <div>
+                            <Avatar className={useStyles.avatar}>
+                                <ScheduleOutlinedIcon />
+                            </Avatar>
+                            <Typography variant="h6" gutterBottom>Create Recommened Schedule</Typography>
+                            <br />
+                            
+                            <ScheduleForm />
+                            <br />
+                            <br />
+
+                        </div>
 
                     </form>
 
