@@ -9,8 +9,11 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-
 import AuthAPI from "../../utils/userAuthAPI";
+import AuthContext from "../../utils/context"
+
+import {Link } from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,39 +40,71 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 class Login extends Component {
+
+    //bring in context for passing down globalstate
+    static contextType = AuthContext;
     
     constructor(props){
         console.log("props", props);
         super(props);
         this.state={
             email:'',
-            password:''
+            password:'',
+            isLoggedIn:''
         }
     }
 
+    // pass info to globalstate so that other components and pages can see this user is logged in
+    // "parent" added for testing only - remove when model is updated with parent/teacher type
+    updateState = (res) => {
+
+        //set state that shows user is logged in
+        this.context.updatedState(
+            this.state.isLoggedIn, 
+            res.data.id, 
+            res.data.email, 
+            "parent")
+
+        console.log(this.context)
+        
+     }
 
     handleClick(event){
         console.log("event", event);
+        event.preventDefault();
 
-        // Backend stuff might look like this to start off?
         let userInfo = {
             "email":this.state.email,
             "password":this.state.password
         }    
 
-        // takes credentials entered by user and passes to method that runs authentication on user credentials
+        // take credentials entered by user and send for authentication
         AuthAPI.authUserCred(userInfo)
+
             .then(res => {
-                    // response will contain jwt token, user id, email, type (parent or teacher) **when this is set up in model
+                    // response will contain jwt token, user id, email
+                    // will contain type (parent or teacher) **when this is set up in model** 
                     // represents info of user authorized to access certain pages on the site
                     console.log(res.data);
 
-                    //testing only for receipt of data. originally tested with hardcoding parent type in to route, successfully added to test object
-                    // delete if not needed
+                    // if response contains token (which is provided when a user has been authenticated)
+                    if (res.data.token) {
+
+                        console.log("authenticated user")
+
+                        this.setState({
+                            isLoggedIn: true
+                        })
+
+                        this.updateState(res);
+                        
+                    }
+
+                    // add routing logic below or above?
                     // if (res.data.type === "teacher") {
-                    //     console.log("send me to the teacher view");
+                    //     push to teacher view
                     // } else {
-                    //     console.log("send me to the parent view")
+                    //     push to parent view
                     // }
                     
                 })
@@ -135,7 +170,7 @@ class Login extends Component {
                             />
 
                         <br/>
-
+                       
                         <Button 
                             type="submit"
                             fullWidth

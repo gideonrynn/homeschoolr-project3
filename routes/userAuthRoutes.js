@@ -103,18 +103,19 @@ const BCRYPT_SALT_ROUNDS = 10;
 
     //req user is created once the user logs in and creates a session 
     //if this has not been created (because it does not exist)
-    
-    if (!req.user) {
-      // send back an empty object/no data
-      res.json({});
-    } else {
+    console.log(req.body)
+    db.User.findOne({email: req.body.email})
 
+      .then(user => {
+        if (user) {
+          console.log("found")
+        }
+        console.log(user.data)
       // otherwise, send back the email and id
       res.json({
-        email: req.user.email,
-        id: req.user.id
+        user
       });
-    }
+    })
   });
 
 module.exports = router; 

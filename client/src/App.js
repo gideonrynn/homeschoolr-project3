@@ -12,6 +12,8 @@ import LoginPage from "./pages/LoginPage";
 import TeacherPage from "./pages/TeacherPage";
 import ParentPage from "./pages/ParentPage";
 
+import GlobalState from './utils/globalState'
+
 // import logo from './logo.svg';
 import './App.css';
 
@@ -19,21 +21,32 @@ class App extends Component {
 
   render () {
     return (
+<<<<<<< HEAD
       <Router>
         <div className="mainPage">
           {/* <NavBar /> */}
           {/* <Header /> */}
           <Wrapper>
             <Route exact path="/" component={LoginPage}/>
+=======
+      <GlobalState>
+        <Router>
+          <div className="mainPage">
+            <NavBar />
+            {/* <Header /> */}
+            <Wrapper>
+              <Route exact path="/" component={LoginPage}/>
+>>>>>>> 7a3ee814716301eccbee22d8cedee6cd8c6468f6
 
-            <Route exact path="/teacher" component={TeacherPage}/>
+              <Route exact path="/teacher" component={TeacherPage}/>
 
-            <Route exact path="/parent" component={ParentPage}/>
+              <Route exact path="/parent" component={ParentPage}/>
 
-            <Route exact path="/noMatch" component={NoMatch}/>
-          </Wrapper>
-        </div>
-      </Router>
+              <Route exact path="/noMatch" component={NoMatch}/>
+            </Wrapper>
+          </div>
+        </Router>
+      </GlobalState>
     )
   }
 }
