@@ -4,20 +4,37 @@ import Button from '@material-ui/core/Button'
 import Login from '../components/Login';
 import Register from '../components/Register';
 
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import loginPageBackground from '../assets/images/loginBackground.jpg'
-// const margin = {
-//     margin: 15
-// };
+import Typography from '@material-ui/core/Typography';
 
-const styles = {
-    loginPage: {
-        backgroundImage: `url(${loginPageBackground})`
-    }
-    
-}
+
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+// const classes = useStyles();
 
 class LoginPage extends Component {
 
@@ -87,31 +104,37 @@ class LoginPage extends Component {
     }
 
     render() {
+
         return (
-            <Grid container alignContent="center" className="loginPage" style={styles.loginPage.backgroundImage}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={useStyles.paper}>
+                    <form className={useStyles.form} noValidate>
+                        {this.state.loginPage}
 
-                <Paper elevation={3}> 
-
-                    {this.state.loginPage}
-
-                    <div>
-                        {this.state.loginMessage}
-                            <div>
-                                <Button label={this.state.buttonLabel} primary={true} 
-                                // style={margin} 
-                                onClick={(event) => this.handleClick(event)}>{this.state.buttonLabel}</Button>
-                            </div>
-
-                        {/* <MuiThemeProvider>
-                            <div>
-                                <Button label={this.state.buttonLabel} primary={true} 
-                                // style={margin} 
-                                onClick={(event) => this.handleClick(event)} />
-                            </div>
-                        </MuiThemeProvider> */}
-                    </div>
-                </Paper>
-            </Grid>
+                        <Grid container>
+                            <Grid item>
+                                <Typography>
+                                    {this.state.loginMessage}
+                                </Typography>
+                            </Grid>
+                            
+                            <Grid item>
+                                <Button 
+                                    // type="register"
+                                    fullWidth
+                                    varient="contained"
+                                    color="primary"
+                                    label={this.state.buttonLabel}
+                                    onClick={(event) => this.handleClick(event)}
+                                >
+                                    {this.state.buttonLabel}
+                                </Button>
+                            </Grid>                                   
+                        </Grid>
+                    </form>
+                </div>
+            </Container>
         );
     }
 }
