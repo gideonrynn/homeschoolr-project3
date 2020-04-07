@@ -1,66 +1,146 @@
 import React, { Component } from 'react';
-// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import AuthAPI from "../../utils/userAuthAPI"
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+import AuthAPI from "../../utils/userAuthAPI";
+import AuthContext from "../../utils/context"
+
+import {Link } from 'react-router-dom'
 
 
-// const theme = createMuiTheme();
-//     theme.typography.h3 = {
-//         fontSize: '1.2rem',
-//         '@media (min-width:600px)': {
-//         fontSize: '1.5rem',
-//     },
-//     [theme.breakpoints.up('md')]: {
-//       fontSize: '2.4rem',
-//     }
-// };
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        alignItems: 'center',
 
-// const margin = {
-//     margin: 15
-// };
+      },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+      alignItems: 'center',
+
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+}));
 
 class Login extends Component {
+
+    //bring in context for passing down globalstate
+    static contextType = AuthContext;
     
     constructor(props){
         console.log("props", props);
         super(props);
         this.state={
             email:'',
-            password:''
+            password:'',
+            isLoggedIn:''
         }
     }
 
+    // pass info to globalstate so that other components and pages can see this user is logged in
+    // "parent" added for testing only - remove when model is updated with parent/teacher type
+    updateState = (res) => {
+
+        //set state that shows user is logged in
+        this.context.updatedState(
+            this.state.isLoggedIn, 
+            res.data.id, 
+            res.data.email, 
+            "parent")
+
+        console.log(this.context)
+        
+     }
+
     handleClick(event){
         console.log("event", event);
+        event.preventDefault();
 
-        // Backend stuff might look like this to start off?
         let userInfo = {
             "email":this.state.email,
             "password":this.state.password
-        }
+        }    
 
-        // take credentials entered by user and passes to method that authenticates user 
+        // take credentials entered by user and send for authentication
         AuthAPI.authUserCred(userInfo)
+
             .then(res => {
-                    console.log(res);
+                    // response will contain jwt token, user id, email
+                    // will contain type (parent or teacher) **when this is set up in model** 
+                    // represents info of user authorized to access certain pages on the site
+                    console.log(res.data);
+
+                    // if response contains token (which is provided when a user has been authenticated)
+                    if (res.data.token) {
+
+                        console.log("authenticated user")
+
+                        this.setState({
+                            isLoggedIn: true
+                        })
+
+                        this.updateState(res);
+                        
+                    }
+
+                    // add routing logic below or above?
+                    // if (res.data.type === "teacher") {
+                    //     push to teacher view
+                    // } else {
+                    //     push to parent view
+                    // }
                     
-                    //push to teacher or parent page?
                 })
             .catch(err => console.log(err));
+        
+        // if(response.data.code == 200) {
+        //     let parentPage =[];
+        //     parentPage.push(
+        //         <ParentPage parentContext={this} />
+
+        //     );
+        // }
         }
 
     render() {
         return (
-            <div>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={useStyles.paper}>
+                    <Avatar className={useStyles.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
 
-                    <div>
-                        {/* <Typography>Login</Typography> */}
-
+                    <form className={useStyles.form} noValidate>
                         <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
                             type="email"
-                            helperText="Enter your Email"
+                            autoFocus
                             // floatingLabelText="Email"
 
                             // this did not work for scd
@@ -73,8 +153,13 @@ class Login extends Component {
                         <br/>
 
                         <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="password"
+                            label="Password"
                             type="password"
-                            helperText="Enter your Password"
                             // floatingLabelText="Password"
 
                             // this did not work for scd
@@ -85,13 +170,20 @@ class Login extends Component {
                             />
 
                         <br/>
-
-                        <Button varient="contained" color="primary" label="Submit" 
-                        // style={margin} 
-                        onClick={(event) => this.handleClick(event)}>Submit</Button>
-                    
-                    </div>
-            </div>
+                       
+                        <Button 
+                            type="submit"
+                            fullWidth
+                            varient="contained"
+                            color="primary"
+                            label="Submit" 
+                            onClick={(event) => this.handleClick(event)}
+                        >
+                            Sign In
+                        </Button>
+                    </form>
+                </div>
+            </Container>
         );
     }
 }
