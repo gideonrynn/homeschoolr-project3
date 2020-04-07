@@ -17,6 +17,10 @@ export default {
         return axios.post("/api/login", userInfo);
     },
 
+    getLoggedInUser: function(authEmail) {
+        return axios.get("/api/userinfo", authEmail)
+    }
+
     
 };
   

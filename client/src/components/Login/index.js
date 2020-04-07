@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import AuthAPI from "../../utils/userAuthAPI";
+import AuthContext from "../../utils/context"
 
 
 
@@ -25,13 +26,17 @@ import AuthAPI from "../../utils/userAuthAPI";
 // };
 
 class Login extends Component {
+
+    //bring in globalstate
+    static contextType = AuthContext;
     
     constructor(props){
         console.log("props", props);
         super(props);
         this.state={
             email:'',
-            password:''
+            password:'',
+            isLoggedIn:''
         }
     }
 
@@ -45,19 +50,37 @@ class Login extends Component {
             "password":this.state.password
         }    
 
-        // takes credentials entered by user and passes to method that runs authentication on user credentials
+        // takes credentials entered by user and sends for authentication
         AuthAPI.authUserCred(userInfo)
+
             .then(res => {
-                    // response will contain jwt token, user id, email, type (parent or teacher) **when this is set up in model
+                    // response will contain jwt token, user id, email
+                    //will contain type (parent or teacher) **when this is set up in model** 
                     // represents info of user authorized to access certain pages on the site
                     console.log(res.data);
 
-                    //testing only for receipt of data. originally tested with hardcoding parent type in to route, successfully added to test object
-                    // delete if not needed
+                    // if response contains token (which reps passport authentication from server side)
+                    if (res.data.token) {
+                    
+                        //set state that shows user is logged in
+                        this.setState({
+                            isLoggedIn: true
+                        })
+                        
+                        // pass info to globalstate so that other components and pages can 
+                        // **Testing Only** remove "parent"
+                        this.context.updatedState(
+                            this.state.isLoggedIn, 
+                            res.data.id, 
+                            res.data.email, 
+                            "parent")
+                        
+                    }
+                    // add routing logic below or above?
                     // if (res.data.type === "teacher") {
-                    //     console.log("send me to the teacher view");
+                    //     push to teacher view
                     // } else {
-                    //     console.log("send me to the parent view")
+                    //     push to parent view
                     // }
                     
                 })
