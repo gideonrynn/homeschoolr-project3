@@ -64,20 +64,4 @@ passport.use(new LocalStrategy(
   }
 ));
 
-//Once user logins in, every other request will use a cookie that identifies the session
-//passport will serialize and deserialize user instances to and from the session to support login sessions
-// passport.serializeUser(function(user, done) {
-//   done(null, user);
-// });
-
-// passport.deserializeUser(function(id, done) {
-  
-//   //need findById?
-//   db.User.findOne({
-//     _id: id
-// }, '-password -salt', function(err, user) {
-//     done(err, user);
-// })
-// });
-
 module.exports = passport;
