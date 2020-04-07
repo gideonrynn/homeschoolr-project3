@@ -80,10 +80,12 @@ class TeacherPage extends Component {
                 <CssBaseline />
 
                 <div className={useStyles.paper}>
+                    <br />
+                    <br />
                     <Typography variant="h6" color="inherit" noWrap>
                         Instructor
                     </Typography>
-
+                    <br />
                     <form className={useStyles.form} noValidate>
                         <Avatar className={useStyles.avatar}>
                             <EmailOutlinedIcon />
