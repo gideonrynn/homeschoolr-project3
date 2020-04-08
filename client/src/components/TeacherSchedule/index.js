@@ -18,14 +18,19 @@ import {
 
 } from '@devexpress/dx-react-scheduler-material-ui';
 
+import moment from  "moment"
+import API from '../../utils/API';
+
 // import { appointments } from '../../../demo-data/month-appointments';
 
 // stuff that needs something to tell time
-const currentDate = '2018-11-01';
-const schedulerData = [
-    { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
-    { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
-];
+const currentDate = moment();
+
+// Sample Data 
+// const schedulerData = [
+//     { startDate: '2020-04-08T09:45', endDate: '2020-04-08T11:00', title: 'Meeting' },
+//     { startDate: '2020-04-08T12:00', endDate: '2020-04-08T13:30', title: 'Go to a gym' },
+// ];
 
 
 // sample data structure
@@ -104,7 +109,8 @@ export default class Demo extends React.PureComponent {
         super(props);
 
         this.state = {
-            data: schedulerData,
+            // data: schedulerData,
+            data: [],
             currentDate: currentDate,
 
             addedAppointment: {},
@@ -117,6 +123,13 @@ export default class Demo extends React.PureComponent {
         this.changeAppointmentChanges = this.changeAppointmentChanges.bind(this);
         this.changeEditingAppointmentId = this.changeEditingAppointmentId.bind(this);
 
+    }
+    //Pull the list of events from the database and add it to this.state.data, which holds the events for the schedule
+    componentDidMount() {
+        API.getSchedule().then(res => {
+            this.setState({...this.state, data: res.data})
+            console.log(this.state)
+        })
     }
     changeAddedAppointment(addedAppointment) {
         this.setState({ addedAppointment });
@@ -144,6 +157,55 @@ export default class Demo extends React.PureComponent {
             if (deleted !== undefined) {
                 data = data.filter(appointment => appointment.id !== deleted);
             }
+
+            //Make a data object that the database can understand
+            const DBdata = data.map(event => {
+                console.log(event)
+
+                function timeConverter(scheduleTime, modify) {
+                    const timeString = JSON.stringify(scheduleTime)
+                    const timeArray = timeString.split(":")
+                    let hour = timeArray[0][timeArray[0].length - 2] + timeArray[0][timeArray[0].length - 1]
+                    if (modify) {
+                        hour = (parseInt(hour) - 5).toString()
+                        if (hour.length === 1) {
+                            hour = "0" + hour
+                        }
+                    }
+                    return hour + ":" + timeArray[1][0] + timeArray[1][1]
+                }
+
+                const today = moment().format().substr(0, 10)
+
+                console.log(event.id)
+
+                let data
+
+                if (event.hasOwnProperty("allDay")) {
+                    console.log("modify")
+                    data = {
+                        title: event.title,
+                        startDate: today + "T" + timeConverter(event.startDate, true),
+                        endDate: today + "T" + timeConverter(event.endDate, true)
+                    }
+                }
+                else {
+                    data = {
+                        title: event.title,
+                        startDate: today + "T" + timeConverter(event.startDate, false),
+                        endDate: today + "T" + timeConverter(event.endDate, false)
+                    }
+                }
+                return data
+            })
+
+            console.log(DBdata)
+
+            API.reupload(DBdata).then(res => this.setState({...this.state, data: res.data}))
+
+            //Send the new data object to the database
+            
+
             return { data };
         });
       }

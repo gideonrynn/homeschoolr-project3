@@ -205,7 +205,7 @@ class TeacherPage extends Component {
                             <Avatar className={useStyles.avatar}>
                                 <ScheduleOutlinedIcon />
                             </Avatar>
-                            <Typography variant="h6" gutterBottom>Create Recommened Schedule</Typography>
+                            <Typography variant="h6" gutterBottom>Create Recommended Schedule</Typography>
                             <br />
                             
                             <TeacherSchedule />
