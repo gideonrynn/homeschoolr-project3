@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AuthAPI from "../../utils/userAuthAPI";
 import AuthContext from "../../utils/context"
 
-import {Link } from 'react-router-dom'
+import {Redirect } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -120,6 +120,9 @@ class Login extends Component {
         }
 
     render() {
+        if (this.state.isLoggedIn === true) {
+            return <Redirect to='/teacher' />
+          }
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
