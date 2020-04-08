@@ -7,11 +7,11 @@ class GlobalState extends Component {
     isLoggedIn: false,
     id: "",
     email: "",
-    type: ""
+    userType: ""
   }
 
-  updatedState = (isLoggedIn, id, email, type) => {
-    this.setState({isLoggedIn: isLoggedIn, id: id, email: email, type: type})
+  updatedState = (isLoggedIn, id, email, userType) => {
+    this.setState({isLoggedIn: isLoggedIn, id: id, email: email, userType: userType})
     console.log(this.state)
   };
 
@@ -20,7 +20,7 @@ class GlobalState extends Component {
             isLoggedIn: this.state.isLoggedIn,
             id: this.state.id,
             email: this.state.email,
-            type: this.state.type,
+            userType: this.state.userType,
             updatedState: this.updatedState
             }}>{this.props.children}</AuthContext.Provider>
     }

@@ -50,7 +50,8 @@ class Login extends Component {
         this.state={
             email:'',
             password:'',
-            isLoggedIn:''
+            isLoggedIn:'',
+            userType:''
         }
     }
 
@@ -63,7 +64,7 @@ class Login extends Component {
             this.state.isLoggedIn, 
             res.data.id, 
             res.data.email, 
-            "parent")
+            res.data.userType)
 
         console.log(this.context)
         
