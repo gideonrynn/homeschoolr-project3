@@ -18,6 +18,8 @@ import {
 // URL from backend API
 const URL = ' ';
 
+const todayDate = moment();
+
 const makeQueryString = (currentDate, currentViewName) => {
   const format = 'YYYY-MM-DDTHH:mm:ss';
   const start = moment(currentDate).startOf(currentViewName.toLowerCase());
@@ -50,9 +52,9 @@ class Schedule extends Component {
     };
   }
 
-  /* componentDidMount() {
+   componentDidMount() {
     this.loadData();
-  } */
+  } 
 
   componentDidUpdate() {
     this.loadData();
@@ -61,10 +63,10 @@ class Schedule extends Component {
   loadData() {
     const { currentDate, currentViewName } = this.state;
     const queryString = makeQueryString(currentDate, currentViewName);
-    if (queryString === this.lastQuery) {
+    /* if (queryString === this.lastQuery) {
       this.setState({ loading: false });
-      return;
-    }
+      return; 
+    } */
     fetch(queryString)
       .then(response => response.json())
       .then(({ data }) => {
