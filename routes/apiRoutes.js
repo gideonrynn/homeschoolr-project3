@@ -16,26 +16,33 @@ router.get("/schedule", (req, res) => {
     .catch(err => res.status(422).end());
 })
 
-//Post a model schedule using an array of event objects, remember to give this one an array
+//Can either take an array of events, or a single event object
 router.post("/schedule", (req, res) => {
+  console.log(req.body)
     db.Schedule.create(req.body)
       .then(schedule => res.json(schedule))
       .catch(err => res.status(422).end());
   });
 
-//Add an event to the schedule 
-router.post("/addevent", (req, res) => {
-  db.Schedule.update({$push: {event: req.body}})
+//Delete an event from the schedule
+router.delete("/schedule/:id", (req, res) => {
+  db.Schedule.deleteOne({__id: req.params.id})
     .then(schedule => res.json(schedule))
     .catch(err => res.status(422).end());
 });
 
-//Delete an event from the schedule
-router.delete("/deleteevent/:id", (req, res) => {
-  db.Schedule.update({$pull: {id: req.params.id}})
-    .then(schedule => res.json(schedule))
+//Recreate the schedule by deleting all and posting
+router.post("/schedule/reupload", (req, res) => {
+  console.log("reuploading")
+  db.Schedule.deleteMany({})
+    .then(
+      db.Schedule.create(req.body)
+        .then(schedule => {res.json(schedule)})
+    )
     .catch(err => res.status(422).end());
 });
+
+/////////////DELETE STUDENT COLLECTION
 
 //Retreive a list of students
 router.get("/roster", (req, res) => {
