@@ -67,7 +67,7 @@ class Register extends Component {
             parentName:'',
             email:'',
             password:'',
-            accountType:''
+            userType:''
 
         }
 
@@ -84,7 +84,7 @@ class Register extends Component {
             "parentName":this.state.parentName,
             "email":this.state.email,
             "password":this.state.password,
-            "accountType":this.state.accountType
+            "userType":this.state.userType
         }
         
         // takes info entered by user and passes to method that posts to the database
@@ -213,7 +213,7 @@ class Register extends Component {
 
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Account Type</FormLabel>
-                            <RadioGroup aria-label="accountType" name="accoutType" row onChange={(event) => this.setState({accountType: event.target.value})}>
+                            <RadioGroup aria-label="userType" name="userType" row onChange={(event) => this.setState({userType: event.target.value})}>
                                 <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
                                 <FormControlLabel value="parent" control={<Radio />} label="Parent" />
                             </RadioGroup>

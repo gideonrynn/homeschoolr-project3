@@ -41,7 +41,8 @@ const BCRYPT_SALT_ROUNDS = 10;
               token,
                 id: user.id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                userType: user.userType
             })
 
          });
@@ -59,6 +60,7 @@ const BCRYPT_SALT_ROUNDS = 10;
   // if the user does not already exist, create account
   router.post("/register", function(req, res) {
 
+    console.log(req.body);
     let userInfo = req.body;
     //search db for email provided by user
     db.User.findOne({ email: req.body.email })
@@ -75,11 +77,14 @@ const BCRYPT_SALT_ROUNDS = 10;
           //otherwise create the user and save credentials, respond with true if successful
           bcrypt.hash(userInfo.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
          
+
             db.User.create({ 
               email: userInfo.email, 
               password: hashedPassword, 
               parentName: userInfo.parentName, 
-              studentName: userInfo.studentName })
+              studentName: userInfo.studentName,
+              userType: userInfo.userType
+             })
               
               .then(() => res.json({success: true, message: "Account created!"}))
             .catch(err => res.status(401).json(err))
