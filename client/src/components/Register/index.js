@@ -200,7 +200,9 @@ class Register extends Component {
 
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Account Type</FormLabel>
+
                             <RadioGroup aria-label="userType" name="userType" row onChange={(event) => this.setState({userType: event.target.value})}>
+
                                 <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
                                 <FormControlLabel value="parent" control={<Radio />} label="Parent" />
                             </RadioGroup>
