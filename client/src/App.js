@@ -21,22 +21,14 @@ class App extends Component {
 
   render () {
     return (
-<<<<<<< HEAD
-      <Router>
-        <div className="mainPage">
-          {/* <NavBar /> */}
-          {/* <Header /> */}
-          <Wrapper>
-            <Route exact path="/" component={LoginPage}/>
-=======
+
       <GlobalState>
         <Router>
           <div className="mainPage">
-            <NavBar />
+            {/* <NavBar /> */}
             {/* <Header /> */}
             <Wrapper>
               <Route exact path="/" component={LoginPage}/>
->>>>>>> 7a3ee814716301eccbee22d8cedee6cd8c6468f6
 
               <Route exact path="/teacher" component={TeacherPage}/>
 
