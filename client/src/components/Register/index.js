@@ -9,6 +9,12 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 import Login from '../Login';
 import AuthAPI from "../../utils/userAuthAPI";
 
@@ -60,7 +66,9 @@ class Register extends Component {
             studentName:'',
             parentName:'',
             email:'',
-            password:''
+            password:'',
+            userType:''
+
         }
 
     }
@@ -75,7 +83,8 @@ class Register extends Component {
             "studentName": this.state.studentName,
             "parentName":this.state.parentName,
             "email":this.state.email,
-            "password":this.state.password
+            "password":this.state.password,
+            "userType":this.state.userType
         }
         
         // takes info entered by user and passes to method that posts to the database
@@ -111,6 +120,8 @@ class Register extends Component {
         //     <Login parentContext = {this} />
         // )
     }
+
+
 
     render() {
         return (
@@ -200,6 +211,17 @@ class Register extends Component {
 
                         <br/>
 
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Account Type</FormLabel>
+                            <RadioGroup aria-label="userType" name="userType" row onChange={(event) => this.setState({userType: event.target.value})}>
+                                <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
+                                <FormControlLabel value="parent" control={<Radio />} label="Parent" />
+                            </RadioGroup>
+                        </FormControl>
+
+
+                        <br/>
+
                         <Button 
                             type="submit"
                             fullWidth
@@ -210,6 +232,7 @@ class Register extends Component {
                         >
                             Submit
                         </Button>
+
 
 
                     </form>
