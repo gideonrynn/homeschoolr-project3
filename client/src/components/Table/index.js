@@ -2,6 +2,9 @@ import React, {useState, useEffect} from "react";
 import MaterialTable from "material-table";
 import Typography from '@material-ui/core/Typography';
 
+// this needs to be changed to parent schedule. only here for sample
+import TeacherSchedule from '../TeacherSchedule';
+
 function Table() {
     const [state, setState] = useState({
         columns: [
@@ -9,7 +12,7 @@ function Table() {
             {title:"Student Name", field:"childName"},
             {title:"Parent Name", field:"parentName"},
             {title:"Email", field:"email"},
-        ],data:[],studentSchedule:[]
+        ],data:[]
     });
     
     useEffect(() => {
@@ -39,14 +42,14 @@ function Table() {
             title="Dashboard"
             columns={state.columns}
             data={state.data}
-            detailPanel={studentSchedule => {
+            detailPanel={rowData => {
                 return (
                     <div className="studentDetail">
                         <Typography variant="h4" gutterBottom>Student Schedule</Typography>
                         <div className="studentSchedule">
 
                             {/* parent selected schedule here */}
-                            {studentSchedule}
+                            <TeacherSchedule />
 
                         </div>
 

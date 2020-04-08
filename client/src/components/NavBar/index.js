@@ -37,8 +37,8 @@ function NavBar() {
                     <Typography variant="h6" className={classes.title}>
                         Homeschoolr
                     </Typography>
-                    <Button color="inherit" href="/">Login</Button>
-                    <Button color="inherit" href="/logout">Logout</Button>
+                    {/* <Button color="inherit" href="/">Login</Button> */}
+                    <Button color="inherit" href="/">Logout</Button>
 
                 </Toolbar>
             </AppBar>

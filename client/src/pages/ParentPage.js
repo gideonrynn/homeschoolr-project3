@@ -3,6 +3,8 @@ import Typography from '@material-ui/core/Typography';
 import Schedule from "../components/Schedule";
 import ScheduleForm from "../components/ScheduleForm";
 // import HelpButton from "../components/HelpButton";
+import NavBar from "../components/NavBar";
+
 import 'typeface-roboto';
 
 import AuthContext from "../utils/context"
@@ -26,7 +28,7 @@ class ParentPage extends Component {
 
     componentWillMount() {
 
-        // console.log(this.context);
+        console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
         let email = this.context.email;
         let id = this.context.id;
@@ -72,6 +74,7 @@ class ParentPage extends Component {
     render() {
         return (
             <div>
+                <NavBar />
                 <Typography>Parent</Typography>
                 <Schedule />
                 <ScheduleForm />

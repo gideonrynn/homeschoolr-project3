@@ -4,7 +4,7 @@ export default React.createContext({
     isLoggedIn: false,
     id: "",
     email: "",
-    type: "",
+    userType: "",
     updatedState: () => {}
     
 })

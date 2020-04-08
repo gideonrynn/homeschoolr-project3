@@ -14,10 +14,14 @@ import 'typeface-roboto';
 
 import Table from "../components/Table";
 
-import ScheduleForm from "../components/ScheduleForm";
+// import ScheduleForm from "../components/ScheduleForm";
+import NavBar from "../components/NavBar";
 
 import AuthContext from "../utils/context"
 
+// import teacherSchedule from "../components/TeacherSchedule";
+import TeacherSchedule from '../components/TeacherSchedule';
+// import { AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -66,7 +70,7 @@ class TeacherPage extends Component {
 
     componentWillMount(){
 
-        // console.log(this.context);
+        console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
         let email = this.context.email;
         let id = this.context.id;
@@ -122,6 +126,7 @@ class TeacherPage extends Component {
     render() {
         return (
             <Container component="main" maxWidth="lg">
+                <NavBar />
                 <CssBaseline />
 
                 <div className={useStyles.paper}>
@@ -177,6 +182,7 @@ class TeacherPage extends Component {
                         </Button>
 
                         {/* Recommened schedule here */}
+                        
                         <div>
                             <Avatar className={useStyles.avatar}>
                                 <ScheduleOutlinedIcon />
@@ -184,7 +190,7 @@ class TeacherPage extends Component {
                             <Typography variant="h6" gutterBottom>Create Recommened Schedule</Typography>
                             <br />
                             
-                            <ScheduleForm />
+                            <TeacherSchedule />
                             <br />
                             <br />
 
