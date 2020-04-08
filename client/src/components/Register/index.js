@@ -9,6 +9,9 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+
 import Login from '../Login';
 import AuthAPI from "../../utils/userAuthAPI";
 
@@ -60,7 +63,8 @@ class Register extends Component {
             studentName:'',
             parentName:'',
             email:'',
-            password:''
+            password:'',
+            accountType:''
         }
 
     }
@@ -110,6 +114,10 @@ class Register extends Component {
         // loginPage.push(
         //     <Login parentContext = {this} />
         // )
+    }
+
+    handleChange(event){
+        setState(event.target.value);
     }
 
     render() {
@@ -200,6 +208,17 @@ class Register extends Component {
 
                         <br/>
 
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Account Type</FormLabel>
+                            <RadioGroup aria-label="accountType" name="accoutType" value={value} onChange={handleChange}>
+                                <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
+                                <FormControlLabel value="parent" control={<Radio />} label="Parent" />
+                            </RadioGroup>
+                        </FormControl>
+
+
+                        <br/>
+
                         <Button 
                             type="submit"
                             fullWidth
@@ -210,6 +229,7 @@ class Register extends Component {
                         >
                             Submit
                         </Button>
+
 
 
                     </form>
