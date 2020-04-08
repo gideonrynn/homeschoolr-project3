@@ -41,20 +41,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3, 0, 2),
     },
 }));
-// const theme = createMuiTheme();
-//     theme.typography.h3 = {
-//         fontSize: '1.2rem',
-//         '@media (min-width:600px)': {
-//         fontSize: '1.5rem',
-//     },
-//     [theme.breakpoints.up('md')]: {
-//         fontSize: '2.4rem',
-//     }
-// };
 
-// const margin = {
-//     margin: 15,
-// };
 
 class Register extends Component {
 
@@ -95,30 +82,30 @@ class Register extends Component {
                 console.log(res.data);
 
                 if(res.data.code === 200) {
-                    // basically if Registration was 
-                    let loginPage =[];
-                    loginPage.push(
-                        <Login parentContext={this} />
-                    );
-                    let loginMessage = "Account does not exist, Register Account";
-                    this.props.parentContext.setState({
-                        loginPage: loginPage,
-                        loginMessage: loginMessage,
-                        buttonLabel: "Register",
-                        isLogin: true
-                    });
+                    // basically if Registration was success
+                    return(
+                        <Login />
+                    )
+                    // let loginPage =[];
+                    // loginPage.push(
+                    //     <Login parentContext={this} />
+                    // );
+                    // let loginMessage = "Account does not exist, Register Account";
+                    // this.props.parentContext.setState({
+                    //     loginPage: loginPage,
+                    //     loginMessage: loginMessage,
+                    //     buttonLabel: "Register",
+                    //     isLogin: true
+                    // });
                 } 
-
-
-                })
+                // else {
+                //     let loginMessage = "Account creation failed, Please try again."
+                //     this.props.setState({
+                //         loginMessage: loginMessage
+                // })}
+            })
             .catch(err => console.log(err));
 
-
-        
-        // let loginPage =[];
-        // loginPage.push(
-        //     <Login parentContext = {this} />
-        // )
     }
 
 
