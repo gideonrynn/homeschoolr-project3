@@ -65,6 +65,9 @@ class Login extends Component {
             res.data.id, 
             res.data.email, 
             res.data.userType)
+            // .setState({
+            //     userType: res.data.userType
+            // })
 
         console.log(this.context)
         
@@ -92,13 +95,12 @@ class Login extends Component {
                     if (res.data.token) {
 
                         console.log("authenticated user")
-
                         this.setState({
-                            isLoggedIn: true
+                            isLoggedIn: true,
+                            userType: res.data.userType
                         })
-
                         this.updateState(res);
-                        
+
                     }
 
                     // add routing logic below or above?
@@ -108,6 +110,15 @@ class Login extends Component {
                     //     push to parent view
                     // }
                     
+                    // if (res.data.userType === "teacher") {
+                    //     return <Redirect to='/teacher' />
+                    // } else if (res.data.userType === "parent") {
+                    //     return <Redirect to="/parent" />
+                    // } else {
+                    //     return <Login />
+                    // }
+
+
                 })
             .catch(err => console.log(err));
         
@@ -121,9 +132,17 @@ class Login extends Component {
         }
 
     render() {
-        if (this.state.isLoggedIn === true) {
+        // if (this.state.isLoggedIn === true) {
+        //     return <Redirect to='/teacher' />
+        // } 
+
+        if (this.state.isLoggedIn === true && this.state.userType == "teacher") {
             return <Redirect to='/teacher' />
-          }
+        } else if (this.state.isLoggedIn === true && this.state.userType == "parent") {
+            return <Redirect to='/parent' />
+        }
+
+
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -188,8 +207,12 @@ class Login extends Component {
                         </Button>
                 </div>
             </Container>
-        );
-    }
+        )
+            
+
+        }
+
+        
 }
 
 export default Login;

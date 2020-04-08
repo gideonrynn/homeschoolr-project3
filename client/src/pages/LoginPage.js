@@ -52,8 +52,8 @@ class LoginPage extends Component {
             username:'',
             password:'',
             // loginPage:[],
-            loginMessage:'',
-            buttonLabel: 'Register',
+            // loginMessage:'',
+            buttonLabel: '',
             isLogin: true
         }
     }
@@ -117,29 +117,29 @@ class LoginPage extends Component {
     renderLoginState() {
         if (this.state.isLogin) {
             return(
-                <Login />
+                <Register />
             )
         } else {
             return(
-                <Register />
+                <Login />
             )
         }
     }
 
     handleClick2(){
-        let loginMessage ='';
+        // let loginMessage ='';
         let label = "";
         if(this.state.isLogin){
-            loginMessage = "Cannot use this email";
-            label = "Login"
+            // loginMessage = "Register Account";
+            label = "Register Account"
         }
         else{
-            loginMessage = "Account does not exist, Register Account";
-            label= "Register";
+            // loginMessage = "Login Account";
+            label= "Login Account";
         }
 
         this.setState({
-            loginMessage: loginMessage,
+            // loginMessage: loginMessage,
             buttonLabel: label,
             isLogin: !this.state.isLogin
         })
@@ -156,25 +156,21 @@ class LoginPage extends Component {
                        { this.renderLoginState()}
 
                         <Grid container>
-                            <Grid item>
-                                <Typography>
-                                    {this.state.loginMessage}
-                                </Typography>
-                            </Grid>
+                            <Typography>
+                                {this.state.loginMessage}
+                            </Typography>
                             <br />
-                            <Grid item>
-                                <Button 
-                                    // type="register"
-                                    fullWidth
-                                    varient="contained"
-                                    color="primary"
-                                    label={this.state.buttonLabel}
-                                    // onClick={(event) => this.handleClick(event)
-                                    onClick={() => this.handleClick2()}
-                                >
-                                    {this.state.buttonLabel}
-                                </Button>
-                            </Grid>                                   
+                            <Button 
+                                // type="register"
+                                fullWidth
+                                varient="contained"
+                                color="primary"
+                                label={this.state.buttonLabel}
+                                // onClick={(event) => this.handleClick(event)
+                                onClick={() => this.handleClick2()}
+                            >
+                                {this.state.buttonLabel}
+                            </Button>
                         </Grid>
                     </form>
                 </div>
