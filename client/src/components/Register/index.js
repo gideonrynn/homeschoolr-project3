@@ -135,8 +135,8 @@ class Register extends Component {
                         Register
                     </Typography>
 
-                    <form className={useStyles.form} noValidate>
                         <TextField
+                            classes={useStyles.form}
                             variant="outlined"
                             margin="normal"
                             required
@@ -155,13 +155,13 @@ class Register extends Component {
                         <br/>
 
                         <TextField
+                            classes={useStyles.form}
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
                             id="parentName"
                             label="Parent's Name"
-                            autoFocus
                             // floatingLabelText="Parent Name"
 
                             //this did not work for scd
@@ -173,6 +173,7 @@ class Register extends Component {
                         <br/>
 
                         <TextField
+                            classes={useStyles.form}
                             variant="outlined"
                             margin="normal"
                             required
@@ -180,7 +181,6 @@ class Register extends Component {
                             id="email"
                             label="Email Address"
                             type="email"
-                            autoFocus
                             // floatingLabelText="Email"
 
                             //this did not work for scd
@@ -193,6 +193,7 @@ class Register extends Component {
                         <br/>
 
                         <TextField
+                            classes={useStyles.form}
                             variant="outlined"
                             margin="normal"
                             required
@@ -200,7 +201,6 @@ class Register extends Component {
                             id="password"
                             label="Password"
                             type="password"
-                            autoFocus
                             // floatingLabelText="Password"
 
                             //this did not work for scd
@@ -235,7 +235,6 @@ class Register extends Component {
 
 
 
-                    </form>
                     
                 </div>
             </Container>
