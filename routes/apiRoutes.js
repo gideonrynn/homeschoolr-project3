@@ -2,6 +2,13 @@ const router = require("express").Router();
 const db = require("../models");
 const nodemailer = require("nodemailer");
 
+//Retrieve all user information
+router.get("/users", (req, res) => {
+  db.User.find({})
+  .then(schedule => res.json(schedule))
+  .catch(err => res.status(422).end());
+})
+
 //Retreive the model schedule posted by the teacher
 router.get("/schedule", (req, res) => {
     db.Schedule.find({})
