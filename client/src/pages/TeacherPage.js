@@ -15,6 +15,7 @@ import 'typeface-roboto';
 import Table from "../components/Table";
 
 import ScheduleForm from "../components/ScheduleForm";
+import NavBar from "../components/NavBar";
 
 import AuthContext from "../utils/context"
 
@@ -122,6 +123,7 @@ class TeacherPage extends Component {
     render() {
         return (
             <Container component="main" maxWidth="lg">
+                <NavBar />
                 <CssBaseline />
 
                 <div className={useStyles.paper}>
