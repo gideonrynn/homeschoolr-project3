@@ -9,8 +9,11 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 import Login from '../Login';
 import AuthAPI from "../../utils/userAuthAPI";
@@ -65,6 +68,7 @@ class Register extends Component {
             email:'',
             password:'',
             accountType:''
+
         }
 
     }
@@ -79,7 +83,8 @@ class Register extends Component {
             "studentName": this.state.studentName,
             "parentName":this.state.parentName,
             "email":this.state.email,
-            "password":this.state.password
+            "password":this.state.password,
+            "accountType":this.state.accountType
         }
         
         // takes info entered by user and passes to method that posts to the database
@@ -116,9 +121,7 @@ class Register extends Component {
         // )
     }
 
-    handleChange(event){
-        setState(event.target.value);
-    }
+
 
     render() {
         return (
@@ -210,7 +213,7 @@ class Register extends Component {
 
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Account Type</FormLabel>
-                            <RadioGroup aria-label="accountType" name="accoutType" value={value} onChange={handleChange}>
+                            <RadioGroup aria-label="accountType" name="accoutType" row onChange={(event) => this.setState({accountType: event.target.value})}>
                                 <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
                                 <FormControlLabel value="parent" control={<Radio />} label="Parent" />
                             </RadioGroup>
