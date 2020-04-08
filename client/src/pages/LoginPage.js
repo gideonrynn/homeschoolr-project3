@@ -51,7 +51,7 @@ class LoginPage extends Component {
         this.state={
             username:'',
             password:'',
-            loginPage:[],
+            // loginPage:[],
             loginMessage:'',
             buttonLabel: 'Register',
             isLogin: true
@@ -59,56 +59,92 @@ class LoginPage extends Component {
     }
 
     componentWillMount(){
-        let loginPage=[];
-        loginPage.push(
-            <Login parentContext={this} appContext={this.props.parentContext} key={loginPage.length}/>
-        );
+        // let loginPage=[];
+        // loginPage.push(
+        //     <Login
+        //     //  parentContext={this} appContext={this.props.parentContext} key={loginPage.length}
+        //     />
+        // );
 
-        let loginMessage = "Account does not exist, Register Account";
+        // let loginMessage = "Account does not exist, Register Account";
 
-        this.setState({
-            loginPage: loginPage,
-            loginMessage: loginMessage
-        })
+        // this.setState({
+        //     loginPage: loginPage,
+        //     loginMessage: loginMessage
+        // })
+
+        this.handleClick2();
+
     }
 
-    handleClick(event){
+    // handleClick(event){
 
-        console.log("event" + event);
+    //     console.log("event" + event);
 
-        let loginMessage ='';
+    //     let loginMessage ='';
 
-        if(this.state.isLogin){
-            let loginPage=[];
-            loginPage.push(
-                <Register parentContext={this}/>
-            );
+    //     if(this.state.isLogin){
+    //         let loginPage=[];
+    //         loginPage.push(
+    //             <Register parentContext={this} key={1}/>
+    //         );
 
-            loginMessage = "Cannot use this email";
+    //         loginMessage = "Cannot use this email";
             
-            this.setState({
-                loginPage: loginPage,
-                loginMessage: loginMessage,
-                buttonLabel: "Login",
-                isLogin: false
-            })
+    //         this.setState({
+    //             loginPage: loginPage,
+    //             loginMessage: loginMessage,
+    //             buttonLabel: "Login",
+    //             isLogin: false
+    //         })
+    //     } else {
+    //         let loginPage=[];
+    //         loginPage.push(
+    //             <Login parentContext={this} key={0}/>
+    //         );
+
+    //         loginMessage = "Account does not exist, Register Account";
+
+    //         this.setState({
+    //             loginPage: loginPage,
+    //             loginMessage: loginMessage,
+    //             buttonLabel: "Register",
+    //             isLogin: true
+    //         })
+    //     }
+    // }
+
+    renderLoginState() {
+        if (this.state.isLogin) {
+            return(
+                <Login />
+            )
         } else {
-            let loginPage=[];
-            loginPage.push(
-                <Login parentContext={this}/>
-            );
-
-            loginMessage = "Account does not exist, Register Account";
-
-            this.setState({
-                loginPage: loginPage,
-                loginMessage: loginMessage,
-                buttonLabel: "Register",
-                isLogin: true
-            })
+            return(
+                <Register />
+            )
         }
     }
 
+    handleClick2(){
+        let loginMessage ='';
+        let label = "";
+        if(this.state.isLogin){
+            loginMessage = "Cannot use this email";
+            label = "Login"
+        }
+        else{
+            loginMessage = "Account does not exist, Register Account";
+            label= "Register";
+        }
+
+        this.setState({
+            loginMessage: loginMessage,
+            buttonLabel: label,
+            isLogin: !this.state.isLogin
+        })
+
+    }
     render() {
 
         return (
@@ -116,7 +152,8 @@ class LoginPage extends Component {
                 <CssBaseline />
                 <div className={useStyles.paper}>
                     <form className={useStyles.form} noValidate>
-                        {this.state.loginPage}
+                        {/* {this.state.loginPage} */}
+                       { this.renderLoginState()}
 
                         <Grid container>
                             <Grid item>
@@ -132,7 +169,8 @@ class LoginPage extends Component {
                                     varient="contained"
                                     color="primary"
                                     label={this.state.buttonLabel}
-                                    onClick={(event) => this.handleClick(event)}
+                                    // onClick={(event) => this.handleClick(event)
+                                    onClick={() => this.handleClick2()}
                                 >
                                     {this.state.buttonLabel}
                                 </Button>

@@ -135,8 +135,8 @@ class Login extends Component {
                         Sign in
                     </Typography>
 
-                    <form className={useStyles.form} noValidate>
                         <TextField
+                            classes={useStyles.form}
                             variant="outlined"
                             margin="normal"
                             required
@@ -157,6 +157,7 @@ class Login extends Component {
                         <br/>
 
                         <TextField
+                            classes={useStyles.form}
                             variant="outlined"
                             margin="normal"
                             required
@@ -185,7 +186,6 @@ class Login extends Component {
                         >
                             Sign In
                         </Button>
-                    </form>
                 </div>
             </Container>
         );
