@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
+import API from "../utils/API";
 
 import 'typeface-roboto';
 
@@ -109,6 +110,7 @@ class TeacherPage extends Component {
     }
 
     handleClick(event) {
+        event.preventDefault()
         console.log("nodemailer event", event);
 
         let nodemailerMessage = "Email sent to Students!"
@@ -117,8 +119,24 @@ class TeacherPage extends Component {
             nodemailerMessage: nodemailerMessage
         })
 
-
         // Backend stuff here~ for nodeMailer
+
+        API.getUsers()
+        .then((res) => {
+            for (let user of res.data) {
+                if (user.userType === "parent") {
+                    console.log(user)
+                    console.log(this.state.subject)
+                    API.email(
+                        {
+                            recipient : user.email,
+                            title : this.state.subject,
+                            message: this.state.text
+                        }
+                    )
+                }
+            }
+        })
 
 
     }
@@ -152,7 +170,7 @@ class TeacherPage extends Component {
                             fullWidth
                             id="subject"
                             label="Enter the Subject"
-                            onChange = {(event, newValue) => this.setState({subject: newValue})}
+                            onChange = {event => this.setState({subject: event.target.value})}
                             // labelWidth={100}
                             />
                         <br />
@@ -164,7 +182,7 @@ class TeacherPage extends Component {
                             fullWidth
                             type="text"
                             label="Enter email Text"
-                            onChange = {(event, newValue) => this.setState({text: newValue})} 
+                            onChange = {event => this.setState({text: event.target.value})} 
                             // labelWidth={100} 
                             multiline/>
                         <br />
