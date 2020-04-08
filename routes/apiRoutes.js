@@ -2,13 +2,6 @@ const router = require("express").Router();
 const db = require("../models");
 const nodemailer = require("nodemailer");
 
-//EXAMPLE REQ.BODY:
-// {
-// 	"recipient" : "kevinsuh2018@u.northwestern.edu",
-// 	"title" : "Test",
-// 	"message": "Message"
-// }
-
 //Retreive the model schedule posted by the teacher
 router.get("/schedule", (req, res) => {
     db.Schedule.find({})
@@ -16,14 +9,58 @@ router.get("/schedule", (req, res) => {
     .catch(err => res.status(422).end());
 })
 
-//Post a schedule using an array of event objects
+//Post a model schedule using an array of event objects, remember to give this one an array
 router.post("/schedule", (req, res) => {
     db.Schedule.create(req.body)
       .then(schedule => res.json(schedule))
       .catch(err => res.status(422).end());
   });
 
+//Add an event to the schedule 
+router.post("/addevent", (req, res) => {
+  db.Schedule.update({$push: {event: req.body}})
+    .then(schedule => res.json(schedule))
+    .catch(err => res.status(422).end());
+});
+
+//Delete an event from the schedule
+router.delete("/deleteevent/:id", (req, res) => {
+  db.Schedule.update({$pull: {id: req.params.id}})
+    .then(schedule => res.json(schedule))
+    .catch(err => res.status(422).end());
+});
+
+//Retreive a list of students
+router.get("/roster", (req, res) => {
+  db.Student.find({})
+  .then(schedule => res.json(schedule))
+  .catch(err => res.status(422).end());
+})
+
+//Add a student, remember that this needs to include their schedules
+router.post("/roster", (req, res) => {
+  db.Student.create(req.body)
+  .then(student => res.json(student))
+  .catch(err => res.status(422).end());
+})
+
+//Add an event to the student's schedule
+router.post("/updatestudentschedule/:id", (req, res) => {
+  db.Student.update({ _id: req.params.id },
+    { $push: { schedule: req.body } })
+  .then(student => res.json(student))
+  .catch(err => res.status(422).end());
+})
+
 //Send an email with nodemailer
+
+//EXAMPLE REQ.BODY:
+// {
+// 	"recipient" : "kevinsuh2018@u.northwestern.edu",
+// 	"title" : "Test",
+// 	"message": "Message"
+// }
+
 router.post("/email", (req, res) => {
     console.log("/email post")
     //Unpack the req.body object
