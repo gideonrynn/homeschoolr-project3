@@ -70,7 +70,7 @@ class TeacherPage extends Component {
 
     componentWillMount(){
 
-        // console.log(this.context);
+        console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
         let email = this.context.email;
         let id = this.context.id;

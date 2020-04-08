@@ -10,9 +10,12 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import AuthAPI from "../../utils/userAuthAPI";
-import AuthContext from "../../utils/context"
+import AuthContext from "../../utils/context";
 
-import {Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+
+// import {Redirect } from 'react-router-dom'
+// import {Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +59,6 @@ class Login extends Component {
     }
 
     // pass info to globalstate so that other components and pages can see this user is logged in
-    // "parent" added for testing only - remove when model is updated with parent/teacher type
     updateState = (res) => {
 
         //set state that shows user is logged in
@@ -73,6 +75,25 @@ class Login extends Component {
         
      }
 
+     
+     sendUserToPage () {
+     
+        const { history } = this.props;
+
+        if (history && this.state.isLoggedIn === true && this.state.userType == "teacher") {
+            
+            history.push("/teacher")
+            
+        } else if (history && this.state.isLoggedIn === true && this.state.userType == "parent") {
+            
+            history.push("/parent")
+            
+        }
+
+    }
+
+
+
     handleClick(event){
         console.log("event", event);
         event.preventDefault();
@@ -87,48 +108,31 @@ class Login extends Component {
 
             .then(res => {
                     // response will contain jwt token, user id, email
-                    // will contain type (parent or teacher) **when this is set up in model** 
                     // represents info of user authorized to access certain pages on the site
                     console.log(res.data);
 
                     // if response contains token (which is provided when a user has been authenticated)
                     if (res.data.token) {
 
-                        console.log("authenticated user")
+                        console.log("is authenticated user, update isLoggedIn to true")
+
+                        //update the local state and user type
                         this.setState({
                             isLoggedIn: true,
                             userType: res.data.userType
                         })
+
+                        //update global state
                         this.updateState(res);
 
+                        //direct to appropriate page
+                        this.sendUserToPage()
                     }
 
-                    // add routing logic below or above?
-                    // if (res.data.type === "teacher") {
-                    //     push to teacher view
-                    // } else {
-                    //     push to parent view
-                    // }
-                    
-                    // if (res.data.userType === "teacher") {
-                    //     return <Redirect to='/teacher' />
-                    // } else if (res.data.userType === "parent") {
-                    //     return <Redirect to="/parent" />
-                    // } else {
-                    //     return <Login />
-                    // }
-
-
                 })
+
             .catch(err => console.log(err));
         
-        // if(response.data.code == 200) {
-        //     let parentPage =[];
-        //     parentPage.push(
-        //         <ParentPage parentContext={this} />
-
-        //     );
-        // }
         }
 
     render() {
@@ -136,11 +140,11 @@ class Login extends Component {
         //     return <Redirect to='/teacher' />
         // } 
 
-        if (this.state.isLoggedIn === true && this.state.userType == "teacher") {
-            return <Redirect to='/teacher' />
-        } else if (this.state.isLoggedIn === true && this.state.userType == "parent") {
-            return <Redirect to='/parent' />
-        }
+        // if (this.state.isLoggedIn === true && this.state.userType == "teacher") {
+        //     return <Redirect to='/teacher' />
+        // } else if (this.state.isLoggedIn === true && this.state.userType == "parent") {
+        //     return <Redirect to='/parent' />
+        // }
 
 
         return (
@@ -194,7 +198,7 @@ class Login extends Component {
                             />
 
                         <br/>
-                       
+                    
                         <Button 
                             type="submit"
                             fullWidth
@@ -215,4 +219,4 @@ class Login extends Component {
         
 }
 
-export default Login;
+export default withRouter(Login);
