@@ -72,19 +72,19 @@ const BCRYPT_SALT_ROUNDS = 10;
           return res.json({ email: "Account with this email already exists" });
 
         }
+        else {
           //otherwise create the user and save credentials, respond with true if successful
           bcrypt.hash(userInfo.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-         
             db.User.create({ 
               email: userInfo.email, 
               password: hashedPassword, 
               parentName: userInfo.parentName, 
               studentName: userInfo.studentName })
-              
               .then(() => res.json({success: true, message: "Account created!"}))
             .catch(err => res.status(401).json(err))
               
             });
+        }
 
     })
 
