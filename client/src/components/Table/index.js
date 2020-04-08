@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import MaterialTable from "material-table";
 import Typography from '@material-ui/core/Typography';
+import API from "../../utils/API"
 
 // this needs to be changed to parent schedule. only here for sample
 import TeacherSchedule from '../TeacherSchedule';
@@ -8,7 +9,7 @@ import TeacherSchedule from '../TeacherSchedule';
 function Table() {
     const [state, setState] = useState({
         columns: [
-            {title:"Details", field:"studentSchedule"},
+            // {title:"Details", field:"studentSchedule"},
             {title:"Student Name", field:"childName"},
             {title:"Parent Name", field:"parentName"},
             {title:"Email", field:"email"},
@@ -19,16 +20,20 @@ function Table() {
         async function getData() {
 
             // backend to get json data for table
+            const {data} = await API.getUsers()
 
-            const url="https://randomuser.me/api/?results=200&nat=us";
-            const response = await fetch(url);
-            const data = await response.json();
-            console.log(data.results);
 
-            const users = data.results.map(user => {
+            // const url="https://randomuser.me/api/?results=200&nat=us";
+            // const response = await fetch(url);
+            // const data = await response.json();
+            console.log(data);
+
+            const filteredData = data.filter(user => user.userType === "parent")
+
+            const users = filteredData.map(user => {
                 return {
-                    childName: user.name.childName,
-                    parentName: user.name.parentName,
+                    childName: user.studentName,
+                    parentName: user.parentName,
                     email: user.email
                 }
             })
