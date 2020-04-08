@@ -27,11 +27,11 @@ const makeQueryString = (currentDate, currentViewName) => {
   return encodeURI(`${URL}?filter=[["EndDate", ">", "${start.format(format)}"],["StartDate", "<", "${end.format(format)}"]]`);
 };
 
-const mapAppointmentData = appointment => ({
-  ...appointment,
-  startDate: appointment.StartDate,
-  endDate: appointment.EndDate,
-  title: appointment.Text,
+const mapScheduleData = Schedule => ({
+  ...Schedule,
+  startDate: Schedule.StartDate,
+  endDate: Schedule.EndDate,
+  title: Schedule.Text,
 });
 
 class Schedule extends Component {
@@ -40,7 +40,7 @@ class Schedule extends Component {
 
     this.state = {
       // loading: true,
-      currentDate: '2017-05-23',
+      currentDate: todayDate,
       currentViewName: 'Day',
     };
     this.loadData = this.loadData.bind(this);
@@ -88,7 +88,7 @@ class Schedule extends Component {
     } = this.state;
 
     const formattedData = data
-      ? data.map(mapAppointmentData) : [];
+      ? data.map(mapScheduleData) : [];
 
     return (
       <Paper>
