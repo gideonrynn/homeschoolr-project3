@@ -1,9 +1,21 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+// import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import API from "../../utils/API"
-
-
 import "typeface-roboto";
+import { Typography } from "@material-ui/core";
+
+/* const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }));
+
+const classes = useStyles(); */
 
 class HelpBtn extends Component {
     /* state = {
@@ -22,6 +34,7 @@ class HelpBtn extends Component {
             message: ""
         })
     } */
+    
 
     handleClick(event) {
         event.preventDefault()
@@ -38,7 +51,7 @@ class HelpBtn extends Component {
             for (let user of res.data) {
                 if (user.userType === "teacher") {
                     console.log(user)
-                    console.log(this.state.subject)
+                    console.log(this.state.text)
                     API.email(
                         {
                             recipient : user.email,
@@ -52,13 +65,27 @@ class HelpBtn extends Component {
     }
 
     render() {
-
         return (
             <div>
-               <Button
-                type="submit"
-                variant="contained"
-                onClick={(event) => this.handleClick(event)}>Contact Instructor</Button> 
+                <form /* className={classes.root} */ noValidate autoComplete="off">
+                    <Typography>Having trouble with creating a schedule or explaining content to your child? Use this form to email questions to your classroom teacher.</Typography>
+                    <TextField
+                        id="outlined-basic"
+                        label="Any issues?"
+                        variant="outlined"
+                        type="text"
+                        multiline
+                        fullWidth
+                        onChange={event => this.setState({text: event.target.value})} />
+                        <br />
+                    <Button
+                        type="submit"
+                        variant="outlined"
+                        onClick={(event) => this.handleClick(event)}>Contact Instructor
+                    </Button>
+                </form>
+
+                 
             </div>   
         )
     }

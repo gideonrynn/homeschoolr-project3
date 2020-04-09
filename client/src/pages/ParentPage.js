@@ -75,8 +75,14 @@ class ParentPage extends Component {
         return (
             <div>
                 <NavBar />
-                <Typography>Parent</Typography>
+                <Typography
+                    variant="h3"
+                    color="inherit"
+                    noWrap>
+                        Parent
+                </Typography>
                 <Schedule />
+                <br />
                 <HelpButton />
             </div>   
         );
