@@ -27,11 +27,11 @@ const makeQueryString = (currentDate, currentViewName) => {
   return encodeURI(`${URL}?filter=[["EndDate", ">", "${start.format(format)}"],["StartDate", "<", "${end.format(format)}"]]`);
 };
 
-const mapAppointmentData = appointment => ({
-  ...appointment,
-  startDate: appointment.StartDate,
-  endDate: appointment.EndDate,
-  title: appointment.Text,
+const mapScheduleData = Schedule => ({
+  ...Schedule,
+  startDate: Schedule.StartDate,
+  endDate: Schedule.EndDate,
+  title: Schedule.Text,
 });
 
 class Schedule extends Component {
@@ -39,14 +39,14 @@ class Schedule extends Component {
     super(props);
 
     this.state = {
-      // loading: true,
-      currentDate: '2017-05-23',
+      loading: true,
+      currentDate: todayDate,
       currentViewName: 'Day',
     };
     this.loadData = this.loadData.bind(this);
-    this.currentViewNameChange = (currentViewName) => {
+    /* this.currentViewNameChange = (currentViewName) => {
       this.setState({ currentViewName, loading: true });
-    };
+    }; */
     this.currentDateChange = (currentDate) => {
       this.setState({ currentDate, loading: true });
     };
@@ -63,10 +63,10 @@ class Schedule extends Component {
   loadData() {
     const { currentDate, currentViewName } = this.state;
     const queryString = makeQueryString(currentDate, currentViewName);
-    /* if (queryString === this.lastQuery) {
+    if (queryString === this.lastQuery) {
       this.setState({ loading: false });
-      return; 
-    } */
+      return;  
+    }
     fetch(queryString)
       .then(response => response.json())
       .then(({ data }) => {
@@ -88,7 +88,7 @@ class Schedule extends Component {
     } = this.state;
 
     const formattedData = data
-      ? data.map(mapAppointmentData) : [];
+      ? data.map(mapScheduleData) : [];
 
     return (
       <Paper>
@@ -114,7 +114,7 @@ class Schedule extends Component {
             showOpenButton
             showCloseButton
           />
-          <AppointmentForm readOnly />
+          <AppointmentForm />
         </Scheduler>
       </Paper>
     );

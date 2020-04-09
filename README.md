@@ -31,12 +31,15 @@ Also see: [Cloning a repository](https://help.github.com/en/github/creating-clon
 
 This project was built using:
 
-- Node
+  - Node
   - [Axios ^0.19.2](https://www.npmjs.com/package/axios)
-  - [Concurrently^4.1.0](https://www.npmjs.com/package/concurrently)
+  - [Bcrypt ^4.1.0](https://www.npmjs.com/package/concurrently)
+  - [Concurrently ^4.1.0](https://www.npmjs.com/package/concurrently)
   - [Nodemon ^1.18.7](https://www.npmjs.com/package/nodemon)
   - [Express ^4.16.3](https://www.npmjs.com/package/express)
+  - [Express Validator ^6.4.0](https://www.npmjs.com/package/express)
   - [If-Env ^1.0.4](https://www.npmjs.com/package/if-env)
+  - [Jsonwebtoken ^8.5.1](https://www.npmjs.com/package/if-env)
   - [Mongoose ^5.9.6](https://www.npmjs.com/package/mongoose)
   - [Passport ^0.4.1](https://www.npmjs.com/package/passport)
   - [Passport Local ^1.0.0](https://www.npmjs.com/package/passport-local)
@@ -52,6 +55,9 @@ FrontEnd
 Backend
 - Sarah Dillard
 - Kevin Suh
+
+# BootCamp Presentation
+https://docs.google.com/presentation/d/1R3yQzjOilgEpxGTVjhrB7lXMDipUpCn870MuC-BW8Wc/edit?usp=sharing
 
 # License
 

@@ -9,7 +9,6 @@ const userSchema = new Schema({
   },
   studentName: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -23,6 +22,20 @@ const userSchema = new Schema({
   userType: {
     type: String,
   },
+  schedule: [{
+    title: {
+        type: String,
+        required: true,
+      },
+    startDate: {
+        type: String,
+        required: true,
+      },
+    endDate: {
+        type: String,
+        required: true,
+      }
+  }]
 });
 
 const User = mongoose.model("User", userSchema);

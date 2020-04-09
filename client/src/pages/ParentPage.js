@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
 import Schedule from "../components/Schedule";
-import ScheduleForm from "../components/ScheduleForm";
-// import HelpButton from "../components/HelpButton";
+// import ScheduleForm from "../components/ScheduleForm";
+import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
 
 import 'typeface-roboto';
@@ -75,9 +75,15 @@ class ParentPage extends Component {
         return (
             <div>
                 <NavBar />
-                <Typography>Parent</Typography>
+                <Typography
+                    variant="h3"
+                    color="inherit"
+                    noWrap>
+                        Parent
+                </Typography>
                 <Schedule />
-                <ScheduleForm />
+                <br />
+                <HelpButton />
             </div>   
         );
     }
