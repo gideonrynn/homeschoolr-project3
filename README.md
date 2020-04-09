@@ -56,6 +56,9 @@ Backend
 - Sarah Dillard
 - Kevin Suh
 
+# BootCamp Presentation
+https://docs.google.com/presentation/d/1R3yQzjOilgEpxGTVjhrB7lXMDipUpCn870MuC-BW8Wc/edit?usp=sharing
+
 # License
 
 This project uses the MIT License. See the full details here: https://choosealicense.com/licenses/mit/ 
