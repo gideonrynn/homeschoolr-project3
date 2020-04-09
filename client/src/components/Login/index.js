@@ -54,8 +54,14 @@ class Login extends Component {
             email:'',
             password:'',
             isLoggedIn:'',
-            userType:''
+            userType:'',
+            message:''
         }
+    }
+
+     //only for testing to confirm user not logged in
+     componentDidMount() {
+        console.log(this.context)
     }
 
     // pass info to globalstate so that other components and pages can see this user is logged in
@@ -70,14 +76,13 @@ class Login extends Component {
             // .setState({
             //     userType: res.data.userType
             // })
-
-        console.log(this.context)
         
      }
 
      
      sendUserToPage () {
      
+        console.log(this.props)
         const { history } = this.props;
 
         if (history && this.state.isLoggedIn === true && this.state.userType == "teacher") {
@@ -107,10 +112,13 @@ class Login extends Component {
         AuthAPI.authUserCred(userInfo)
 
             .then(res => {
-                    // response will contain jwt token, user id, email
                     // represents info of user authorized to access certain pages on the site
                     console.log(res.data);
 
+                    if (res.data.message) {
+                        this.setState({message: res.data.message})
+                    }
+                    
                     // if response contains token (which is provided when a user has been authenticated)
                     if (res.data.token) {
 
@@ -122,7 +130,7 @@ class Login extends Component {
                             userType: res.data.userType
                         })
 
-                        //update global state
+                        //update context and global state
                         this.updateState(res);
 
                         //direct to appropriate page
@@ -130,8 +138,7 @@ class Login extends Component {
                     }
 
                 })
-
-            .catch(err => console.log(err));
+                .catch(err => this.setState({message: err.data}));
         
         }
 
@@ -177,7 +184,7 @@ class Login extends Component {
                             onChange = {(event) => this.setState({email: event.target.value})}
                             />
 
-                        <br/>
+                        <br/> 
 
                         <TextField
                             classes={useStyles.form}
@@ -197,6 +204,8 @@ class Login extends Component {
                             onChange = {(event) => this.setState({password: event.target.value})}
                             />
 
+                       
+                    <div>  {this.state.message} </div>
                         <br/>
                     
                         <Button 
@@ -209,7 +218,11 @@ class Login extends Component {
                         >
                             Sign In
                         </Button>
-                </div>
+
+                        
+
+                </div><br/>
+                
             </Container>
         )
             

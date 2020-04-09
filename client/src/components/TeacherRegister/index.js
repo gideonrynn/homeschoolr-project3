@@ -54,14 +54,15 @@ class TeacherRegister extends Component {
             parentName:'',
             email:'',
             password:'',
-            userType:''
-
+            userType:'',
+            message:'',
         }
 
     }
 
     handleClick(event){
         console.log("event", event);
+        event.preventDefault();
         
 
         // more backend stuff
@@ -78,8 +79,13 @@ class TeacherRegister extends Component {
         // if 
         AuthAPI.regUserCred(userInfo)
             .then(res => {
-                //  this can include if statement below
-                console.log(res.data);
+
+                if (res.data.message) {
+                    return this.setState({message: res.data.message})
+                }
+                if (res.data.errors[0].msg) {
+                    return this.setState({message: res.data.errors[0].msg})
+                }
 
                 if(res.data.code === 200) {
                     // basically if Registration was success
@@ -90,7 +96,7 @@ class TeacherRegister extends Component {
                 } 
 
             })
-            .catch(err => console.log(err));
+            .catch(err => this.setState({message: err.data}));
 
     }
 
@@ -165,7 +171,7 @@ class TeacherRegister extends Component {
                             onChange = {(event) => this.setState({password: event.target.value})}/>
 
                         <br/>
-
+                        <div> {this.state.message} </div>
 
                         <br/>
 
