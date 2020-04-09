@@ -39,14 +39,14 @@ class Schedule extends Component {
     super(props);
 
     this.state = {
-      // loading: true,
+      loading: true,
       currentDate: todayDate,
       currentViewName: 'Day',
     };
     this.loadData = this.loadData.bind(this);
-    this.currentViewNameChange = (currentViewName) => {
+    /* this.currentViewNameChange = (currentViewName) => {
       this.setState({ currentViewName, loading: true });
-    };
+    }; */
     this.currentDateChange = (currentDate) => {
       this.setState({ currentDate, loading: true });
     };
@@ -63,10 +63,10 @@ class Schedule extends Component {
   loadData() {
     const { currentDate, currentViewName } = this.state;
     const queryString = makeQueryString(currentDate, currentViewName);
-    /* if (queryString === this.lastQuery) {
+    if (queryString === this.lastQuery) {
       this.setState({ loading: false });
-      return; 
-    } */
+      return;  
+    }
     fetch(queryString)
       .then(response => response.json())
       .then(({ data }) => {
@@ -114,7 +114,7 @@ class Schedule extends Component {
             showOpenButton
             showCloseButton
           />
-          <AppointmentForm readOnly />
+          <AppointmentForm />
         </Scheduler>
       </Paper>
     );
