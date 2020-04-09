@@ -1,66 +1,180 @@
 import React, { Component } from 'react';
-// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import AuthAPI from "../../utils/userAuthAPI"
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+import AuthAPI from "../../utils/userAuthAPI";
+import AuthContext from "../../utils/context";
+
+import { withRouter } from 'react-router-dom'
+
+// import {Redirect } from 'react-router-dom'
+// import {Link } from 'react-router-dom'
 
 
-// const theme = createMuiTheme();
-//     theme.typography.h3 = {
-//         fontSize: '1.2rem',
-//         '@media (min-width:600px)': {
-//         fontSize: '1.5rem',
-//     },
-//     [theme.breakpoints.up('md')]: {
-//       fontSize: '2.4rem',
-//     }
-// };
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        alignItems: 'center',
 
-// const margin = {
-//     margin: 15
-// };
+      },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+      alignItems: 'center',
+
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+}));
 
 class Login extends Component {
+
+    //bring in context for passing down globalstate
+    static contextType = AuthContext;
     
     constructor(props){
         console.log("props", props);
         super(props);
         this.state={
             email:'',
-            password:''
+            password:'',
+            isLoggedIn:'',
+            userType:'',
+            message:''
         }
     }
 
+     //only for testing to confirm user not logged in
+     componentDidMount() {
+        console.log(this.context)
+    }
+
+    // pass info to globalstate so that other components and pages can see this user is logged in
+    updateState = (res) => {
+
+        //set state that shows user is logged in
+        this.context.updatedState(
+            this.state.isLoggedIn, 
+            res.data.id, 
+            res.data.email, 
+            res.data.userType)
+            // .setState({
+            //     userType: res.data.userType
+            // })
+        
+     }
+
+     
+     sendUserToPage () {
+     
+        console.log(this.props)
+        const { history } = this.props;
+
+        if (history && this.state.isLoggedIn === true && this.state.userType == "teacher") {
+            
+            history.push("/teacher")
+            
+        } else if (history && this.state.isLoggedIn === true && this.state.userType == "parent") {
+            
+            history.push("/parent")
+            
+        }
+
+    }
+
+
+
     handleClick(event){
         console.log("event", event);
+        event.preventDefault();
 
-        // Backend stuff might look like this to start off?
         let userInfo = {
             "email":this.state.email,
             "password":this.state.password
-        }
+        }    
 
-        // take credentials entered by user and passes to method that authenticates user 
+        // take credentials entered by user and send for authentication
         AuthAPI.authUserCred(userInfo)
+
             .then(res => {
-                    console.log(res);
+                    // represents info of user authorized to access certain pages on the site
+                    console.log(res.data);
+
+                    if (res.data.message) {
+                        this.setState({message: res.data.message})
+                    }
                     
-                    //push to teacher or parent page?
+                    // if response contains token (which is provided when a user has been authenticated)
+                    if (res.data.token) {
+
+                        console.log("is authenticated user, update isLoggedIn to true")
+
+                        //update the local state and user type
+                        this.setState({
+                            isLoggedIn: true,
+                            userType: res.data.userType
+                        })
+
+                        //update context and global state
+                        this.updateState(res);
+
+                        //direct to appropriate page
+                        this.sendUserToPage()
+                    }
+
                 })
-            .catch(err => console.log(err));
+                .catch(err => this.setState({message: err.data}));
+        
         }
 
     render() {
-        return (
-            <div>
+        // if (this.state.isLoggedIn === true) {
+        //     return <Redirect to='/teacher' />
+        // } 
 
-                    <div>
-                        {/* <Typography>Login</Typography> */}
+        // if (this.state.isLoggedIn === true && this.state.userType == "teacher") {
+        //     return <Redirect to='/teacher' />
+        // } else if (this.state.isLoggedIn === true && this.state.userType == "parent") {
+        //     return <Redirect to='/parent' />
+        // }
+
+
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={useStyles.paper}>
+                    <Avatar className={useStyles.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
 
                         <TextField
+                            classes={useStyles.form}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
                             type="email"
-                            helperText="Enter your Email"
+                            autoFocus
                             // floatingLabelText="Email"
 
                             // this did not work for scd
@@ -70,11 +184,17 @@ class Login extends Component {
                             onChange = {(event) => this.setState({email: event.target.value})}
                             />
 
-                        <br/>
+                        <br/> 
 
                         <TextField
+                            classes={useStyles.form}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="password"
+                            label="Password"
                             type="password"
-                            helperText="Enter your Password"
                             // floatingLabelText="Password"
 
                             // this did not work for scd
@@ -84,16 +204,32 @@ class Login extends Component {
                             onChange = {(event) => this.setState({password: event.target.value})}
                             />
 
+                       
+                    <div>  {this.state.message} </div>
                         <br/>
-
-                        <Button varient="contained" color="primary" label="Submit" 
-                        // style={margin} 
-                        onClick={(event) => this.handleClick(event)}>Submit</Button>
                     
-                    </div>
-            </div>
-        );
-    }
+                        <Button 
+                            type="submit"
+                            fullWidth
+                            varient="contained"
+                            color="primary"
+                            label="Submit" 
+                            onClick={(event) => this.handleClick(event)}
+                        >
+                            Sign In
+                        </Button>
+
+                        
+
+                </div><br/>
+                
+            </Container>
+        )
+            
+
+        }
+
+        
 }
 
-export default Login;
+export default withRouter(Login);

@@ -2,12 +2,12 @@ const router = require("express").Router();
 const db = require("../models");
 const nodemailer = require("nodemailer");
 
-//EXAMPLE REQ.BODY:
-// {
-// 	"recipient" : "kevinsuh2018@u.northwestern.edu",
-// 	"title" : "Test",
-// 	"message": "Message"
-// }
+//Retrieve all user information
+router.get("/users", (req, res) => {
+  db.User.find({})
+  .then(schedule => res.json(schedule))
+  .catch(err => res.status(422).end());
+})
 
 //Retreive the model schedule posted by the teacher
 router.get("/schedule", (req, res) => {
@@ -16,14 +16,65 @@ router.get("/schedule", (req, res) => {
     .catch(err => res.status(422).end());
 })
 
-//Post a schedule using an array of event objects
+//Can either take an array of events, or a single event object
 router.post("/schedule", (req, res) => {
+  console.log(req.body)
     db.Schedule.create(req.body)
       .then(schedule => res.json(schedule))
       .catch(err => res.status(422).end());
   });
 
+//Delete an event from the schedule
+router.delete("/schedule/:id", (req, res) => {
+  db.Schedule.deleteOne({__id: req.params.id})
+    .then(schedule => res.json(schedule))
+    .catch(err => res.status(422).end());
+});
+
+//Recreate the schedule by deleting all and posting
+router.post("/schedule/reupload", (req, res) => {
+  console.log("reuploading")
+  db.Schedule.deleteMany({})
+    .then(
+      db.Schedule.create(req.body)
+        .then(schedule => {res.json(schedule)})
+    )
+    .catch(err => res.status(422).end());
+});
+
+/////////////DELETE STUDENT COLLECTION
+
+//Retreive a list of students
+router.get("/roster", (req, res) => {
+  db.Student.find({})
+  .then(schedule => res.json(schedule))
+  .catch(err => res.status(422).end());
+})
+
+//Add a student, remember that this needs to include their schedules
+router.post("/roster", (req, res) => {
+  db.Student.create(req.body)
+  .then(student => res.json(student))
+  .catch(err => res.status(422).end());
+})
+
+//Add an event to the student's schedule
+router.post("/updatestudentschedule/:id", (req, res) => {
+  db.Student.update({ _id: req.params.id },
+    { $push: { schedule: req.body } })
+  .then(student => res.json(student))
+  .catch(err => res.status(422).end());
+})
+
 //Send an email with nodemailer
+
+//EXAMPLE REQ.BODY:
+// {
+// 	"recipient" : "kevinsuh2018@u.northwestern.edu",
+// 	"title" : "Test",
+// 	"message": "Message"
+// }
+
 router.post("/email", (req, res) => {
     console.log("/email post")
     //Unpack the req.body object
