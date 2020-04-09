@@ -4,6 +4,7 @@ const router = require("express").Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcryptjs");
 const BCRYPT_SALT_ROUNDS = 10;
+const { check, validationResult } = require('express-validator');
 // const userController = require("../controllers/userauthController");
 
   // Using the passport.authenticate middleware with our local strategy.
@@ -14,11 +15,8 @@ const BCRYPT_SALT_ROUNDS = 10;
     passport.authenticate('local', {session: false}, (err, user) => {
 
       if (err || !user ) {
-        res.statusMessage = "Wrong password or email doesn't exist"
-        return res.status(401).json({
-          message: "There was an error",
-          user: user
-        });
+        // res.statusMessage = "Wrong password or email doesn't exist"
+        return res.json({ message: "Wrong password or email doesn't exist" });
           
       }
 
@@ -57,43 +55,57 @@ const BCRYPT_SALT_ROUNDS = 10;
   })
 
 
-  // if the user does not already exist, create account
-  router.post("/register", function(req, res) {
+  // if the user does not already exist, and validation on email successful, create account
+  router.post("/register", [
+  
+    check('email').not().isEmpty().withMessage('Please enter valid email address. (ex/ geordi@laf.com)')
+          .isEmail().withMessage('Please enter valid email address. (ex/ geordi@laf.com)')
+          .normalizeEmail().withMessage('Please enter valid email address. (ex/ geordi@laf.com)'),
+    check('password').not().isEmpty().withMessage('Please enter a password.')], 
 
-    console.log(req.body);
-    let userInfo = req.body;
-    //search db for email provided by user
-    db.User.findOne({ email: req.body.email })
-
-      .then(user => {
+      function(req, res) {
+      // Finds the validation errors in this request and wraps them in an object with handy functions
+      const errors = validationResult(req);
+        if (!errors.isEmpty()) {
       
-        //if a user is found with this email address
-        if (user) {
+          return res.json({ errors: errors.array() });
+        } else {
 
-          //send back "already exists" response
-          return res.json({ email: "Account with this email already exists" });
+          console.log(req.body);
+          let userInfo = req.body;
+          //search db for email provided by user
+          db.User.findOne({ email: req.body.email })
 
+            .then(user => {
+            
+              //if a user is found with this email address
+              if (user) {
+
+                //send back "already exists" response
+                return res.json({ message: "Account with this email already exists" });
+
+              }
+              else {
+                //otherwise create the user and save credentials, respond with true if successful
+                bcrypt.hash(userInfo.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+
+                  db.User.create({ 
+                    email: userInfo.email, 
+                    password: hashedPassword, 
+                    parentName: userInfo.parentName, 
+                    studentName: userInfo.studentName,
+                    userType: userInfo.userType
+                  })
+                    
+                    .then(() => res.status(200).json({success: true, message: "Account created! Please login below."}))
+                    .catch(() => res.json({message: "Account was not created. Please try again."}))
+                    
+                  });
+              }
+
+            })
+      
         }
-        else {
-          //otherwise create the user and save credentials, respond with true if successful
-          bcrypt.hash(userInfo.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-
-            db.User.create({ 
-              email: userInfo.email, 
-              password: hashedPassword, 
-              parentName: userInfo.parentName, 
-
-              studentName: userInfo.studentName,
-              userType: userInfo.userType
-             })
-              
-              .then(() => res.json({success: true, message: "Account created!"}))
-            .catch(err => res.status(401).json(err))
-              
-            });
-        }
-
-    })
 
   });  
  

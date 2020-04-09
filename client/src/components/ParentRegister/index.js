@@ -54,7 +54,8 @@ class ParentRegister extends Component {
             parentName:'',
             email:'',
             password:'',
-            userType:''
+            userType:'',
+            message:''
 
         }
 
@@ -62,7 +63,7 @@ class ParentRegister extends Component {
 
     handleClick(event){
         console.log("event", event);
-        
+        event.preventDefault();
 
         // more backend stuff
         // let user = this;
@@ -75,11 +76,16 @@ class ParentRegister extends Component {
         }
         
         // takes info entered by user and passes to method that posts to the database
-        // if 
         AuthAPI.regUserCred(userInfo)
             .then(res => {
-                //  this can include if statement below
-                console.log(res.data);
+  
+                if (res.data.message) {
+                    return this.setState({message: res.data.message})
+                }
+                if (res.data.errors[0].msg) {
+                    return this.setState({message: res.data.errors[0].msg})
+                }
+
 
                 if(res.data.code === 200) {
                     // basically if Registration was success
@@ -104,7 +110,8 @@ class ParentRegister extends Component {
                 //         loginMessage: loginMessage
                 // })}
             })
-            .catch(err => console.log(err));
+            //if email already exists, or if account was not able to be created, will console.log in err.data
+            .catch(err => this.setState({message: err.data}));
 
     }
 
@@ -199,7 +206,7 @@ class ParentRegister extends Component {
                         <br/>
 
 
-
+                        <div> {this.state.message} </div>
 
                         <br/>
 
