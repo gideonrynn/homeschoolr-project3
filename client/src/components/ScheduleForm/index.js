@@ -48,6 +48,10 @@ class ScheduleForm extends Component {
             <Typography>Schedule A Subject</Typography>
               <SelectSubj
                 onChange = {(event, newValue) => this.setState({subject: newValue})} />
+                <Typography>Start Time</Typography>
+              <SelectTime 
+                onChange = {(event, newValue) => this.setState({time: newValue})} />
+              <Typography>End Time</Typography>
               <SelectTime 
                 onChange = {(event, newValue) => this.setState({time: newValue})} />
               <Button 
