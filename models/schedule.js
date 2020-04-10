@@ -14,7 +14,10 @@ const scheduleSchema = new Schema({
   endDate: {
       type: String,
       required: true,
-    }
+    },
+  id: {
+    type: Number,
+  }
 });
 
 const Schedule = mongoose.model("Schedule", scheduleSchema);

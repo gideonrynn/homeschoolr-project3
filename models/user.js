@@ -34,7 +34,10 @@ const userSchema = new Schema({
     endDate: {
         type: String,
         required: true,
-      }
+      },
+    id: {
+      type: Number,
+    }
   }]
 });
 
