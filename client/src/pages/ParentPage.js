@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
-<<<<<<< HEAD
-=======
-
 import { Redirect } from 'react-router-dom';
->>>>>>> 9d034771beacae24ddc0fb0e1c45a19a2d800cd8
 import TeacherSchedule from '../components/TeacherSchedule';
 import Footer from "../components/Footer";
 import Paper from '@material-ui/core/Paper';
