@@ -255,7 +255,7 @@ export default class Demo extends React.PureComponent {
 
         return (
             <Paper>
-                <Scheduler data={data}>
+                <Scheduler data={data} height={600}>
 
                     <ViewState currentDate={currentDate}/>
 
@@ -275,8 +275,8 @@ export default class Demo extends React.PureComponent {
 
                     <IntegratedEditing />
 
-                    <DayView startDayHour={9} endDayHour={14}/>
-                    <WeekView startDayHour={9} endDayHour={14}/>
+                    <DayView startDayHour={7} endDayHour={16}/>
+                    <WeekView startDayHour={7} endDayHour={16}/>
                     <AllDayPanel />
                     <EditRecurrenceMenu />
 
