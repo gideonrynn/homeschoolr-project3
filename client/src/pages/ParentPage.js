@@ -4,7 +4,8 @@ import Schedule from "../components/Schedule";
 // import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
-import {Redirect } from 'react-router-dom'
+import {Redirect } from 'react-router-dom';
+import TeacherSchedule from '../components/TeacherSchedule';
 
 
 import 'typeface-roboto';
@@ -28,7 +29,7 @@ class ParentPage extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
@@ -80,9 +81,9 @@ class ParentPage extends Component {
 
 
     render() {
-        if (!this.state.isLoggedIn) {
-            return <Redirect to='/' />
-        }
+        // if (!this.state.isLoggedIn) {
+        //     return <Redirect to='/' />
+        // }
 
         return (
             <div>
@@ -93,7 +94,9 @@ class ParentPage extends Component {
                     noWrap>
                         Parent
                 </Typography>
-                <Schedule />
+                <TeacherSchedule dataType="Teacher" editPermission="DENIED"/>
+                {console.log(this.context.id)}
+                <TeacherSchedule dataType="Student" id={this.context.id} editPermission="ok"/>
                 <br />
                 <HelpButton />
             </div>   

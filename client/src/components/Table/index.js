@@ -55,7 +55,7 @@ function Table() {
                         <div className="studentSchedule">
                             {/* parent selected schedule here */}
                             {console.log(rowData.id)}
-                            <TeacherSchedule dataType="Student" id={rowData.id}/>
+                            <TeacherSchedule dataType="Student" id={rowData.id} editPermission="DENIED"/>
                         </div>
 
                     </div>

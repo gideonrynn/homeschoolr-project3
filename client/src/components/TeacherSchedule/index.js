@@ -154,6 +154,10 @@ export default class Demo extends React.PureComponent {
     }
 
     commitChanges({ added, changed, deleted }) {
+        //This conditional ends at line 245
+        console.log(this.props.editPermission)
+        if (this.props.editPermission === "ok") {
+
         this.setState((state) => {
             let { data } = state;
             if (added) {
@@ -240,6 +244,7 @@ export default class Demo extends React.PureComponent {
 
             return { data };
         });
+        }
       }
 
 
