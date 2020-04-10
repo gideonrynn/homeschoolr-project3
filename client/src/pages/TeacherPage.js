@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -78,12 +79,13 @@ class TeacherPage extends Component {
 
         // when page loads, check state to see if user is logged in
         // redirect to login page or intiate call to database and render parent page content
-        if (!isLoggedIn) {
+        if (!this.context.isLoggedIn) {
             
             console.log("user not logged in");
-
+            this.setState({
+                isLoggedIn: false
+            })
             //redirect to login page??
-            return <Redirect to='/' />
 
         } 
         
@@ -145,7 +147,13 @@ class TeacherPage extends Component {
     }
 
     render() {
+
+        if (!this.state.isLoggedIn) {
+            return <Redirect to='/' />
+        }
+
         return (
+
             <Container component="main" maxWidth="lg">
                 <NavBar />
                 <CssBaseline />
