@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
-import Schedule from "../components/Schedule";
+// import Schedule from "../components/Schedule";
 // import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
-import {Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 import 'typeface-roboto';
 
 import AuthContext from "../utils/context"
+// import e from "express";
 
 class ParentPage extends Component {
 
@@ -28,7 +29,7 @@ class ParentPage extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
@@ -37,17 +38,34 @@ class ParentPage extends Component {
 
         // when page loads, check state to see if user is logged in
         // redirect to login page or intiate call to database and render parent page content
-        if (!this.context.isLoggedIn) {
-            
-            console.log("user not logged in");
-
-            //redirect to login page??
+        
+        if(this.context.isLoggedIn === true) {
+            this.setState({
+                isLoggedIn: true
+            })
+            console.log("context is true in parent page")
+        } else if(this.context.isLoggedIn === false){
             this.setState({
                 isLoggedIn: false
             })
+            console.log("context is false in parent page")
+        }
+        
+        // this.setState({
+        //     isLoggedIn: true
+        // })
+
+        // if (!this.context.isLoggedIn) {
+            
+        //     console.log("user not logged in");
+
+        //     //redirect to login page??
+        //     this.setState({
+        //         isLoggedIn: false
+        //     })
 
             
-        } 
+        // } 
         
         // else {
             
@@ -59,7 +77,7 @@ class ParentPage extends Component {
         //         id: id
         //     }
 
-        //     console.log(loggedInUser)
+        //     console.log(loggedInUser) 
 
         //     // add api call to database to return user/student/schedule info using the email address or id
         //     // then do other stuff
@@ -80,8 +98,14 @@ class ParentPage extends Component {
 
 
     render() {
-        if (!this.state.isLoggedIn) {
+        if (this.state.isLoggedIn === false) {
+            console.log("redirect to / from parent")
             return <Redirect to='/' />
+            
+            
+            // return(
+            //     <h1>{this.state.isLoggedIn}</h1>
+            // )
         }
 
         return (
@@ -91,9 +115,9 @@ class ParentPage extends Component {
                     variant="h3"
                     color="inherit"
                     noWrap>
-                        Parent
+                        Parent Page
                 </Typography>
-                <Schedule />
+                {/* <Schedule /> */}
                 <br />
                 <HelpButton />
             </div>   
