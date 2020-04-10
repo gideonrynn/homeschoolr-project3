@@ -168,6 +168,8 @@ export default class Demo extends React.PureComponent {
                 data = data.filter(appointment => appointment.id !== deleted);
             }
 
+            let dataID = 0
+
             //Make a data object that the database can understand
             const DBdata = data.map(event => {
                 console.log(event)
@@ -185,7 +187,11 @@ export default class Demo extends React.PureComponent {
                     return hour + ":" + timeArray[1][0] + timeArray[1][1]
                 }
 
+                dataID++
+                console.log(dataID)
+
                 const today = moment().format().substr(0, 10)
+                console.log(today)
 
                 console.log(event.id)
 
@@ -196,14 +202,16 @@ export default class Demo extends React.PureComponent {
                     data = {
                         title: event.title,
                         startDate: today + "T" + timeConverter(event.startDate, true),
-                        endDate: today + "T" + timeConverter(event.endDate, true)
+                        endDate: today + "T" + timeConverter(event.endDate, true),
+                        id: dataID
                     }
                 }
                 else {
                     data = {
                         title: event.title,
                         startDate: today + "T" + timeConverter(event.startDate, false),
-                        endDate: today + "T" + timeConverter(event.endDate, false)
+                        endDate: today + "T" + timeConverter(event.endDate, false),
+                        id: dataID
                     }
                 }
                 return data
