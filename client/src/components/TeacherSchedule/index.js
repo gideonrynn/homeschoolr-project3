@@ -14,6 +14,7 @@ import {
     EditRecurrenceMenu,
     AllDayPanel,
     DragDropProvider,
+    TodayButton,
 
 
 } from '@devexpress/dx-react-scheduler-material-ui';
@@ -292,6 +293,8 @@ export default class Demo extends React.PureComponent {
                     <DragDropProvider
                         allowDrag={allowDrag}
                     />
+                    
+                    <TodayButton />
 
                     <AppointmentTooltip
                         showCloseButton
