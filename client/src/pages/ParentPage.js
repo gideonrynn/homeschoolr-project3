@@ -4,6 +4,8 @@ import Schedule from "../components/Schedule";
 // import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
+import {Redirect } from 'react-router-dom'
+
 
 import 'typeface-roboto';
 
@@ -35,27 +37,33 @@ class ParentPage extends Component {
 
         // when page loads, check state to see if user is logged in
         // redirect to login page or intiate call to database and render parent page content
-        if (!isLoggedIn) {
+        if (!this.context.isLoggedIn) {
             
             console.log("user not logged in");
 
             //redirect to login page??
+            this.setState({
+                isLoggedIn: false
+            })
+
             
-        } else {
+        } 
+        
+        // else {
             
-            console.log("user logged in");
+        //     console.log("user logged in");
 
-            //set logged in user variable for searching the database
-            let loggedInUser = {
-                email: email,
-                id: id
-            }
+        //     //set logged in user variable for searching the database
+        //     let loggedInUser = {
+        //         email: email,
+        //         id: id
+        //     }
 
-            console.log(loggedInUser)
+        //     console.log(loggedInUser)
 
-            // add api call to database to return user/student/schedule info using the email address or id
-            // then do other stuff
-        }
+        //     // add api call to database to return user/student/schedule info using the email address or id
+        //     // then do other stuff
+        // }
 
        
         let defaultSubject = "";
@@ -72,6 +80,10 @@ class ParentPage extends Component {
 
 
     render() {
+        if (!this.state.isLoggedIn) {
+            return <Redirect to='/' />
+        }
+
         return (
             <div>
                 <NavBar />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -78,27 +79,31 @@ class TeacherPage extends Component {
 
         // when page loads, check state to see if user is logged in
         // redirect to login page or intiate call to database and render parent page content
-        if (!isLoggedIn) {
+        if (!this.context.isLoggedIn) {
             
             console.log("user not logged in");
-
+            this.setState({
+                isLoggedIn: false
+            })
             //redirect to login page??
+
+        } 
+        
+        // else {
             
-        } else {
-            
-            console.log("user logged in");
+        //     console.log("user logged in");
 
-            //set logged in user variable for searching the database
-            let loggedInUser = {
-                email: email,
-                id: id
-            }
+        //     //set logged in user variable for searching the database
+        //     let loggedInUser = {
+        //         email: email,
+        //         id: id
+        //     }
 
-            console.log(loggedInUser)
+        //     console.log(loggedInUser)
 
-            // add api call to database to return user/student/schedule info using the email address or id
-            // then do other stuff
-        }
+        //     // add api call to database to return user/student/schedule info using the email address or id
+        //     // then do other stuff
+        // }
 
         let nodemailerMessage = "Send Email to Students here!"
 
@@ -142,7 +147,13 @@ class TeacherPage extends Component {
     }
 
     render() {
+
+        if (!this.state.isLoggedIn) {
+            return <Redirect to='/' />
+        }
+
         return (
+
             <Container component="main" maxWidth="lg">
                 <NavBar />
                 <CssBaseline />
