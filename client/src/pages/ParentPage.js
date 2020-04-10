@@ -1,19 +1,30 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
-import Schedule from "../components/Schedule";
+// import Schedule from "../components/Schedule";
 // import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
-import {Redirect } from 'react-router-dom';
+// import {Redirect } from 'react-router-dom';
 import TeacherSchedule from '../components/TeacherSchedule';
-
-
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
-
 import AuthContext from "../utils/context"
 
-class ParentPage extends Component {
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }));
 
+class ParentPage extends Component {
+    
     //bring in context for passing down globalstate
     static contextType = AuthContext;
 
@@ -46,27 +57,18 @@ class ParentPage extends Component {
             this.setState({
                 isLoggedIn: false
             })
-
             
         } 
-        
-        // else {
-            
-        //     console.log("user logged in");
+        /* else {
+            console.log("user logged in");
+            set logged in user variable for searching the database
+            let loggedInUser = {
+                email: email,
+                id: id
+            }
+            console.log(loggedInUser)
+        } */
 
-        //     //set logged in user variable for searching the database
-        //     let loggedInUser = {
-        //         email: email,
-        //         id: id
-        //     }
-
-        //     console.log(loggedInUser)
-
-        //     // add api call to database to return user/student/schedule info using the email address or id
-        //     // then do other stuff
-        // }
-
-       
         let defaultSubject = "";
         let defaultTime = "";
         let defaultData = [];
@@ -78,29 +80,35 @@ class ParentPage extends Component {
         })
     }
 
-
-
     render() {
-        // if (!this.state.isLoggedIn) {
-        //     return <Redirect to='/' />
-        // }
-
+        /* if (!this.state.isLoggedIn) {
+            return <Redirect to='/' />
+        } */
+        
         return (
-            <div>
+            <div >
                 <NavBar />
-                <Typography
-                    variant="h3"
-                    color="inherit"
-                    noWrap>
-                        Parent
-                </Typography>
-                <TeacherSchedule dataType="Teacher" editPermission="DENIED"/>
-                {console.log(this.context.id)}
-                <TeacherSchedule dataType="Student" id={this.context.id} editPermission="ok"/>
                 <br />
-                <HelpButton />
-            </div>   
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <Typography variant="h2">Suggested Plan</Typography>
+                        <Paper >
+                            <TeacherSchedule dataType="Teacher" editPermission="DENIED"/>
+                            {console.log(this.context.id)}
+                        </Paper> 
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Typography variant="h2">Your Plan</Typography>
+                        <Paper >
+                          <TeacherSchedule dataType="Student" id={this.context.id} editPermission="ok"/>  
+                        </Paper> 
+                    </Grid> 
+                </Grid>
+                <HelpButton />   
+            </div>
         );
+
+        
     }
 }
 
