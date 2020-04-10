@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
 import AuthContext from "../utils/context"
+import Container from '@material-ui/core/Container';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -89,7 +91,8 @@ class ParentPage extends Component {
             <div >
                 <NavBar />
                 <br />
-                <Grid container spacing={3}>
+                <Container>
+                <Grid container spacing={1}>
                     <Grid item xs={6}>
                         <Typography variant="h2">Suggested Plan</Typography>
                         <Paper >
@@ -104,7 +107,8 @@ class ParentPage extends Component {
                         </Paper> 
                     </Grid> 
                 </Grid>
-                <HelpButton />   
+                <HelpButton />
+                </Container>   
             </div>
         );
 
