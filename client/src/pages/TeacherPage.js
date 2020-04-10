@@ -70,7 +70,7 @@ class TeacherPage extends Component {
 
     }
 
-    componentWillMount(){
+    componentDidMount(){
 
         console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
@@ -79,7 +79,7 @@ class TeacherPage extends Component {
 
         // when page loads, check state to see if user is logged in
         // redirect to login page or intiate call to database and render parent page content
-        if (!this.context.isLoggedIn) {
+        if (this.context.isLoggedIn === false) {
             
             console.log("user not logged in");
             this.setState({
@@ -148,7 +148,8 @@ class TeacherPage extends Component {
 
     render() {
 
-        if (!this.state.isLoggedIn) {
+        if (this.state.isLoggedIn === false) {
+            console.log("redicrect to / from teacher")
             return <Redirect to='/' />
         }
 
