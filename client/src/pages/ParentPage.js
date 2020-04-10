@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
-// import Schedule from "../components/Schedule";
-// import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
+<<<<<<< HEAD
+=======
 
 import { Redirect } from 'react-router-dom';
+>>>>>>> 9d034771beacae24ddc0fb0e1c45a19a2d800cd8
 import TeacherSchedule from '../components/TeacherSchedule';
-import { makeStyles } from '@material-ui/core/styles';
+import Footer from "../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
@@ -16,16 +17,6 @@ import Container from '@material-ui/core/Container';
 // import e from "express";
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
 
 class ParentPage extends Component {
     
@@ -153,8 +144,8 @@ class ParentPage extends Component {
                 <Grid item xs={12}>
                     <HelpButton />
                 </Grid>
-                
-                </Container>   
+                </Container> 
+                <Footer />  
             </div>
         );
 
