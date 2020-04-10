@@ -208,7 +208,7 @@ class TeacherPage extends Component {
                             <Typography variant="h6" gutterBottom>Create Recommended Schedule</Typography>
                             <br />
                             
-                            <TeacherSchedule />
+                            <TeacherSchedule dataType="Teacher"/>
                             <br />
                             <br />
 

@@ -126,10 +126,20 @@ export default class Demo extends React.PureComponent {
     }
     //Pull the list of events from the database and add it to this.state.data, which holds the events for the schedule
     componentDidMount() {
-        API.getSchedule().then(res => {
-            this.setState({...this.state, data: res.data})
-            console.log(this.state)
-        })
+        if (this.props.dataType === "Teacher"){
+            API.getSchedule().then(res => {
+                this.setState({...this.state, data: res.data})
+                console.log(res.data)
+                console.log(this.state)
+            })
+        }
+        if (this.props.dataType === "Student"){
+            API.getOneUser(this.props.id).then(res => {
+                this.setState({...this.state, data: res.data[0].schedule})
+                console.log(res.data[0].schedule)
+                console.log(this.state)
+            })
+        }
     }
     changeAddedAppointment(addedAppointment) {
         this.setState({ addedAppointment });
@@ -201,7 +211,21 @@ export default class Demo extends React.PureComponent {
 
             console.log(DBdata)
 
-            API.reupload(DBdata).then(res => this.setState({...this.state, data: res.data}))
+            if (this.props.dataType === "Teacher"){
+                API.reupload(DBdata).then(res => {
+                    console.log(res.data)
+                    this.setState({...this.state, data: res.data})
+                })
+            }
+            else if (this.props.dataType === "Student"){
+                API.reuploadStudentEvent(this.props.id, DBdata)
+                .then(response => API.getOneUser(this.props.id))
+                .then(res => {
+                    console.log(res.data[0].schedule)
+                    this.setState({...this.state, data: res.data[0].schedule})
+                })
+            }
+
 
             //Send the new data object to the database
             

@@ -31,6 +31,21 @@ export default {
     //Reupload a schedule i.e. delete everything and put a new one up
     reupload: function(data) {
         return axios.post("api/schedule/reupload", data)
+    },
+
+    //Get a user's information
+    getOneUser: function(id) {
+        return axios.get("/api/users/" + id)
+    },
+
+    //Push an event to a student's schedule
+    postStudentEvent: function(id, data) {
+        return axios.post("/api/updatestudentschedule/" + id, data)
+    },
+
+    //Push an event to a student's schedule
+    reuploadStudentEvent: function(id, data) {
+        return axios.post("/api/reuploadstudentschedule/" + id, data)
     }
     
 };

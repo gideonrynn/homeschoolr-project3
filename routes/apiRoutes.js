@@ -9,6 +9,13 @@ router.get("/users", (req, res) => {
   .catch(err => res.status(422).end());
 })
 
+//Retrieve a user's information
+router.get("/users/:id", (req, res) => {
+  db.User.find({_id: req.params.id})
+  .then(schedule => res.json(schedule))
+  .catch(err => res.status(422).end());
+})
+
 //Retreive the model schedule posted by the teacher
 router.get("/schedule", (req, res) => {
     db.Schedule.find({})
@@ -42,27 +49,17 @@ router.post("/schedule/reupload", (req, res) => {
     .catch(err => res.status(422).end());
 });
 
-/////////////DELETE STUDENT COLLECTION
-
-//Retreive a list of students
-router.get("/roster", (req, res) => {
-  db.Student.find({})
-  .then(schedule => res.json(schedule))
-  .catch(err => res.status(422).end());
-})
-
-//Add a student, remember that this needs to include their schedules
-router.post("/roster", (req, res) => {
-  db.Student.create(req.body)
-  .then(student => res.json(student))
-  .catch(err => res.status(422).end());
-})
-
-//Add an event to the student's schedule
+//Add an event to a user's schedule
 router.post("/updatestudentschedule/:id", (req, res) => {
-  db.Student.update({ _id: req.params.id },
+  db.User.update({ _id: req.params.id },
     { $push: { schedule: req.body } })
   .then(student => res.json(student))
+  .catch(err => res.status(422).end());
+})
+
+router.post("/reuploadstudentschedule/:id", (req, res) => {
+  db.User.update({ _id: req.params.id}, {$set: {schedule: req.body}})
+  .then(schedule => res.json(schedule))
   .catch(err => res.status(422).end());
 })
 

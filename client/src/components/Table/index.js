@@ -34,7 +34,8 @@ function Table() {
                 return {
                     childName: user.studentName,
                     parentName: user.parentName,
-                    email: user.email
+                    email: user.email,
+                    id: user._id
                 }
             })
             setState({...state, data: users})
@@ -52,10 +53,9 @@ function Table() {
                     <div className="studentDetail">
                         <Typography variant="h4" gutterBottom>Student Schedule</Typography>
                         <div className="studentSchedule">
-
                             {/* parent selected schedule here */}
-                            <TeacherSchedule />
-
+                            {console.log(rowData.id)}
+                            <TeacherSchedule dataType="Student" id={rowData.id}/>
                         </div>
 
                     </div>
