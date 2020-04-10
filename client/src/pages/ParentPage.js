@@ -4,16 +4,30 @@ import Typography from '@material-ui/core/Typography';
 // import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
-import { Redirect } from 'react-router-dom'
 
+import { Redirect } from 'react-router-dom';
+import TeacherSchedule from '../components/TeacherSchedule';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import 'typeface-roboto';
-
 import AuthContext from "../utils/context"
 // import e from "express";
 
-class ParentPage extends Component {
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }));
 
+class ParentPage extends Component {
+    
     //bring in context for passing down globalstate
     static contextType = AuthContext;
 
@@ -48,6 +62,7 @@ class ParentPage extends Component {
             this.setState({
                 isLoggedIn: false
             })
+
             console.log("context is false in parent page")
         }
         
@@ -84,6 +99,7 @@ class ParentPage extends Component {
         // }
 
        
+
         let defaultSubject = "";
         let defaultTime = "";
         let defaultData = [];
@@ -95,9 +111,8 @@ class ParentPage extends Component {
         })
     }
 
-
-
     render() {
+
         if (this.state.isLoggedIn === false) {
             console.log("redirect to / from parent")
             return <Redirect to='/' />
@@ -108,20 +123,32 @@ class ParentPage extends Component {
             // )
         }
 
+
         return (
-            <div>
+            <div >
                 <NavBar />
-                <Typography
-                    variant="h3"
-                    color="inherit"
-                    noWrap>
-                        Parent Page
-                </Typography>
-                {/* <Schedule /> */}
+
                 <br />
-                <HelpButton />
-            </div>   
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <Typography variant="h2">Suggested Plan</Typography>
+                        <Paper >
+                            <TeacherSchedule dataType="Teacher" editPermission="DENIED"/>
+                            {console.log(this.context.id)}
+                        </Paper> 
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Typography variant="h2">Your Plan</Typography>
+                        <Paper >
+                          <TeacherSchedule dataType="Student" id={this.context.id} editPermission="ok"/>  
+                        </Paper> 
+                    </Grid> 
+                </Grid>
+                <HelpButton />   
+            </div>
         );
+
+        
     }
 }
 

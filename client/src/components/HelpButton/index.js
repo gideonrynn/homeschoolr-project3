@@ -35,7 +35,6 @@ class HelpBtn extends Component {
         })
     } */
     
-
     handleClick(event) {
         event.preventDefault()
         console.log("nodemailer event", event);
@@ -84,8 +83,6 @@ class HelpBtn extends Component {
                         onClick={(event) => this.handleClick(event)}>Contact Instructor
                     </Button>
                 </form>
-
-                 
             </div>   
         )
     }

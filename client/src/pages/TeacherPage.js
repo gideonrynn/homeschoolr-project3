@@ -220,7 +220,7 @@ class TeacherPage extends Component {
                             <Typography variant="h6" gutterBottom>Create Recommended Schedule</Typography>
                             <br />
                             
-                            <TeacherSchedule dataType="Teacher"/>
+                            <TeacherSchedule dataType="Teacher" editPermission="ok"/>
                             <br />
                             <br />
 

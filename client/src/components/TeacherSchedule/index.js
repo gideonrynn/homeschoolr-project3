@@ -155,6 +155,10 @@ export default class Demo extends React.PureComponent {
     }
 
     commitChanges({ added, changed, deleted }) {
+        //This conditional ends at line 245
+        console.log(this.props.editPermission)
+        if (this.props.editPermission === "ok") {
+
         this.setState((state) => {
             let { data } = state;
             if (added) {
@@ -168,6 +172,8 @@ export default class Demo extends React.PureComponent {
             if (deleted !== undefined) {
                 data = data.filter(appointment => appointment.id !== deleted);
             }
+
+            let dataID = 0
 
             //Make a data object that the database can understand
             const DBdata = data.map(event => {
@@ -186,7 +192,11 @@ export default class Demo extends React.PureComponent {
                     return hour + ":" + timeArray[1][0] + timeArray[1][1]
                 }
 
+                dataID++
+                console.log(dataID)
+
                 const today = moment().format().substr(0, 10)
+                console.log(today)
 
                 console.log(event.id)
 
@@ -197,14 +207,16 @@ export default class Demo extends React.PureComponent {
                     data = {
                         title: event.title,
                         startDate: today + "T" + timeConverter(event.startDate, true),
-                        endDate: today + "T" + timeConverter(event.endDate, true)
+                        endDate: today + "T" + timeConverter(event.endDate, true),
+                        id: dataID
                     }
                 }
                 else {
                     data = {
                         title: event.title,
                         startDate: today + "T" + timeConverter(event.startDate, false),
-                        endDate: today + "T" + timeConverter(event.endDate, false)
+                        endDate: today + "T" + timeConverter(event.endDate, false),
+                        id: dataID
                     }
                 }
                 return data
@@ -233,6 +245,7 @@ export default class Demo extends React.PureComponent {
 
             return { data };
         });
+        }
       }
 
 
@@ -243,7 +256,7 @@ export default class Demo extends React.PureComponent {
 
         return (
             <Paper>
-                <Scheduler data={data}>
+                <Scheduler data={data} height={600}>
 
                     <ViewState currentDate={currentDate}/>
 
@@ -263,8 +276,8 @@ export default class Demo extends React.PureComponent {
 
                     <IntegratedEditing />
 
-                    <DayView startDayHour={9} endDayHour={14}/>
-                    <WeekView startDayHour={9} endDayHour={14}/>
+                    <DayView startDayHour={7} endDayHour={16}/>
+                    <WeekView startDayHour={7} endDayHour={16}/>
                     <AllDayPanel />
                     <EditRecurrenceMenu />
 
