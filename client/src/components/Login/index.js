@@ -85,11 +85,11 @@ class Login extends Component {
         console.log(this.props)
         const { history } = this.props;
 
-        if (history && this.state.isLoggedIn === true && this.state.userType == "teacher") {
+        if (history && this.state.isLoggedIn === true && this.state.userType === "teacher") {
             
             history.push("/teacher")
             
-        } else if (history && this.state.isLoggedIn === true && this.state.userType == "parent") {
+        } else if (history && this.state.isLoggedIn === true && this.state.userType === "parent") {
             
             history.push("/parent")
             
