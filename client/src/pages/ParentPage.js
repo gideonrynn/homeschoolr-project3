@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
-import Schedule from "../components/Schedule";
+import TeacherSchedule from "../components/TeacherSchedule";
 // import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
@@ -81,7 +81,7 @@ class ParentPage extends Component {
                     noWrap>
                         Parent
                 </Typography>
-                <Schedule />
+                <TeacherSchedule />
                 <br />
                 <HelpButton />
             </div>   
