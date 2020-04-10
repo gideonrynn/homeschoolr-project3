@@ -83,22 +83,25 @@ class TeacherPage extends Component {
             console.log("user not logged in");
 
             //redirect to login page??
+            return <Redirect to='/' />
+
+        } 
+        
+        // else {
             
-        } else {
-            
-            console.log("user logged in");
+        //     console.log("user logged in");
 
-            //set logged in user variable for searching the database
-            let loggedInUser = {
-                email: email,
-                id: id
-            }
+        //     //set logged in user variable for searching the database
+        //     let loggedInUser = {
+        //         email: email,
+        //         id: id
+        //     }
 
-            console.log(loggedInUser)
+        //     console.log(loggedInUser)
 
-            // add api call to database to return user/student/schedule info using the email address or id
-            // then do other stuff
-        }
+        //     // add api call to database to return user/student/schedule info using the email address or id
+        //     // then do other stuff
+        // }
 
         let nodemailerMessage = "Send Email to Students here!"
 
