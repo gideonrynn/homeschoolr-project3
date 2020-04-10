@@ -1,39 +1,11 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-// import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import API from "../../utils/API"
 import "typeface-roboto";
 import { Typography } from "@material-ui/core";
 
-/* const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-  }));
-
-const classes = useStyles(); */
-
 class HelpBtn extends Component {
-    /* state = {
-        nodemailerMessage: "Send a help email!"
-    }; 
-    handleChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]:value
-        });
-    }; 
-    postEmail = () => {
-        API.postEmail({
-            recipient: "", // teacher email
-            title: "Help Needed!",
-            message: ""
-        })
-    } */
     
     handleClick(event) {
         event.preventDefault()
@@ -66,17 +38,16 @@ class HelpBtn extends Component {
     render() {
         return (
             <div>
-                <form /* className={classes.root} */ noValidate autoComplete="off">
-                    <Typography>Having trouble with creating a schedule or explaining content to your child? Use this form to email questions to your classroom teacher.</Typography>
+                <form noValidate autoComplete="off">
+                    <Typography variant="h6">Need Help?</Typography>
                     <TextField
                         id="outlined-basic"
-                        label="Any issues?"
+                        label="Trouble creating a schedule or explaining class content to your child? Email questions to your classroom teacher."
                         variant="outlined"
                         type="text"
                         multiline
                         fullWidth
                         onChange={event => this.setState({text: event.target.value})} />
-                        <br />
                     <Button
                         type="submit"
                         variant="outlined"
