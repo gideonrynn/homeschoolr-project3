@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import Container from '@material-ui/core/Container';
 
 // import NavBar from "./components/NavBar";
 // import Header from "./components/Header";
@@ -24,19 +25,21 @@ class App extends Component {
 
       <GlobalState>
         <Router>
-          <div className="mainPage">
-            {/* <NavBar /> */}
-            {/* <Header /> */}
-            <Wrapper>
-              <Route exact path="/" component={LoginPage}/>
+          <Container component="main" maxWidth="lg">
+            <div className="mainPage">
+              {/* <NavBar /> */}
+              {/* <Header /> */}
+              <Wrapper>
+                <Route exact path="/" component={LoginPage}/>
 
-              <Route exact path="/teacher" component={TeacherPage}/>
+                <Route exact path="/teacher" component={TeacherPage}/>
 
-              <Route exact path="/parent" component={ParentPage}/>
+                <Route exact path="/parent" component={ParentPage}/>
 
-              <Route exact path="/noMatch" component={NoMatch}/>
-            </Wrapper>
-          </div>
+                <Route exact path="/noMatch" component={NoMatch}/>
+              </Wrapper>
+            </div>
+          </Container>
         </Router>
       </GlobalState>
     )
