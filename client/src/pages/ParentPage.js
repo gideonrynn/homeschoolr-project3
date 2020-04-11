@@ -1,30 +1,18 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
-// import Schedule from "../components/Schedule";
-// import ScheduleForm from "../components/ScheduleForm";
 import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
-
 import { Redirect } from 'react-router-dom';
 import TeacherSchedule from '../components/TeacherSchedule';
-import { makeStyles } from '@material-ui/core/styles';
+import Footer from "../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
 import 'typeface-roboto';
 import AuthContext from "../utils/context"
+import Container from '@material-ui/core/Container';
 // import e from "express";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
+
 
 class ParentPage extends Component {
     
@@ -129,22 +117,31 @@ class ParentPage extends Component {
                 <NavBar />
 
                 <br />
-                <Grid container spacing={3}>
+                <Container>
+                <Grid container spacing={4}>
                     <Grid item xs={6}>
-                        <Typography variant="h2">Suggested Plan</Typography>
+                        <Typography variant="h3">Suggested Plan</Typography>
+                        <br />
                         <Paper >
                             <TeacherSchedule dataType="Teacher" editPermission="DENIED"/>
                             {console.log(this.context.id)}
                         </Paper> 
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant="h2">Your Plan</Typography>
+                        <Typography variant="h3">Your Plan</Typography>
+                        <br />
                         <Paper >
                           <TeacherSchedule dataType="Student" id={this.context.id} editPermission="ok"/>  
                         </Paper> 
                     </Grid> 
                 </Grid>
-                <HelpButton />   
+                <br />
+                <br />
+                <Grid item xs={12}>
+                    <HelpButton />
+                </Grid>
+                </Container> 
+                <Footer />  
             </div>
         );
 
