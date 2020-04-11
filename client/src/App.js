@@ -12,6 +12,7 @@ import NoMatch from "./pages/NoMatch";
 import LoginPage from "./pages/LoginPage";
 import TeacherPage from "./pages/TeacherPage";
 import ParentPage from "./pages/ParentPage";
+import Footer from "./components/Footer";
 
 import GlobalState from './utils/globalState'
 
@@ -38,6 +39,7 @@ class App extends Component {
 
                 <Route exact path="/noMatch" component={NoMatch}/>
               </Wrapper>
+              <Footer />
             </div>
           </Container>
         </Router>
