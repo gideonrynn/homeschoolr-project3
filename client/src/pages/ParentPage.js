@@ -81,7 +81,7 @@ class ParentPage extends Component {
                 </Grid>
                 <br />
 
-                <Grid container spacing={4}>
+                <Grid container spacing={6}>
                     <Grid item xs={6}>
                         <Typography variant="h4" align="center">Suggested Plan</Typography>
                         <br />
