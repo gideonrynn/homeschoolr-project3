@@ -5,11 +5,12 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
-import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
+// import { withStyles } from '@material-ui/core/styles';
+
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+
 import API from "../utils/API";
 
 import 'typeface-roboto';
@@ -24,30 +25,6 @@ import AuthContext from "../utils/context"
 // import teacherSchedule from "../components/TeacherSchedule";
 import TeacherSchedule from '../components/TeacherSchedule';
 // import { AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
-
-const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-        alignItems: 'center',
-      },
-    form: {
-      width: '100%',
-      marginTop: theme.spacing(1),
-      alignItems: 'center',
-
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-}));
-
 
 
 class TeacherPage extends Component {
@@ -70,7 +47,7 @@ class TeacherPage extends Component {
 
     }
 
-    componentDidMount(){
+    componentWillMount(){
 
         console.log(this.context);
         let isLoggedIn = this.context.isLoggedIn;
@@ -89,23 +66,8 @@ class TeacherPage extends Component {
 
         } 
         
-        // else {
-            
-        //     console.log("user logged in");
 
-        //     //set logged in user variable for searching the database
-        //     let loggedInUser = {
-        //         email: email,
-        //         id: id
-        //     }
-
-        //     console.log(loggedInUser)
-
-        //     // add api call to database to return user/student/schedule info using the email address or id
-        //     // then do other stuff
-        // }
-
-        let nodemailerMessage = "Send Email to Students here!"
+        let nodemailerMessage = "Email Parents"
 
         this.setState({
             nodemailerMessage: nodemailerMessage,
@@ -118,7 +80,7 @@ class TeacherPage extends Component {
         event.preventDefault()
         console.log("nodemailer event", event);
 
-        let nodemailerMessage = "Email sent to Students!"
+        let nodemailerMessage = "Emails Sent"
 
         this.setState({
             nodemailerMessage: nodemailerMessage
@@ -155,86 +117,95 @@ class TeacherPage extends Component {
 
         return (
 
-            <Container component="main" maxWidth="lg">
+            <div component="main">
                 <NavBar />
                 <CssBaseline />
+                <br />
 
-                <div className={useStyles.paper}>
-                    <br />
-                    <br />
-                    <Typography variant="h3" color="inherit" noWrap>
-                        Instructor
+                <Paper>
+                    <br /><br />
+                    <Typography variant="h4" noWrap align="center">
+                        Class Roster
                     </Typography>
                     <br />
-                    <form className={useStyles.form} noValidate>
-                        <Avatar className={useStyles.avatar}>
-                            <EmailOutlinedIcon />
-                        </Avatar>
-                        {/* <Typography variant="h4" gutterBottom>nodeMailer here</Typography>
-                        <br /> */}
-                        <Typography variant="h6" gutterBottom>{this.state.nodemailerMessage}</Typography>
-                        <br />
 
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="subject"
-                            label="Enter the Subject"
-                            onChange = {event => this.setState({subject: event.target.value})}
-                            // labelWidth={100}
-                            />
-                        <br />
+                    <Table />
+                    <br />
 
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            type="text"
-                            label="Enter email Text"
-                            onChange = {event => this.setState({text: event.target.value})} 
-                            // labelWidth={100} 
-                            multiline/>
-                        <br />
-                        <br />
+                </Paper>
+                <br />
 
-                        <Button 
-                            type="submit"
-                            fullWidth
-                            varient="contained"
-                            color="primary"
-                            label="Send Email" 
-                            onClick={(event) => this.handleClick(event)}
-                        >
-                            Send Email
-                        </Button>
 
-                        {/* Recommened schedule here */}
-                        
-                        <div>
-                            <Avatar className={useStyles.avatar}>
-                                <ScheduleOutlinedIcon />
-                            </Avatar>
-                            <Typography variant="h6" gutterBottom>Create Recommended Schedule</Typography>
-                            <br />
+
+                <Grid container spacing={3}>
+                    <Grid item xs={7}>
+                        <Paper>
+                            <div>
+                                <br />
+                                <Typography variant="h6" gutterBottom align="center">Post A Schedule</Typography>
+                                <br />
+                                
+                                <TeacherSchedule dataType="Teacher" editPermission="ok"/>
+                                <br />
+                                <br />
+                            </div>
+
+                        </Paper>
+
+                    </Grid>
+
+                    <Grid item xs={5}> 
+                        <Paper>
+                            <div>
+                                <br />
+                                <Typography variant="h6" gutterBottom align="center">{this.state.nodemailerMessage}</Typography>
+                                <br />
+
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="subject"
+                                    label="Enter the Subject"
+                                    onChange = {event => this.setState({subject: event.target.value})}
+                                    // labelWidth={100}
+                                    />
+                                <br />
+
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    type="text"
+                                    label="Enter email Text"
+                                    onChange = {event => this.setState({text: event.target.value})} 
+                                    // labelWidth={100} 
+                                    multiline/>
+                                <br />
+                                <br />
+
+                                <Button 
+                                    type="submit"
+                                    fullWidth
+                                    varient="contained"
+                                    color="primary"
+                                    label="Send Email" 
+                                    onClick={(event) => this.handleClick(event)}
+                                >
+                                    Send Email
+                                </Button>
+                            </div>
                             
-                            <TeacherSchedule dataType="Teacher" editPermission="ok"/>
-                            <br />
-                            <br />
-
-                        </div>
-
-                    </form>
-
-                </div>
+                        </Paper>
+                    </Grid>
+                </Grid>
 
                 <br />
 
-                <Table />
 
-            </Container>
+            </div>
         );
     }
 }
