@@ -75,10 +75,15 @@ class ParentPage extends Component {
                 <NavBar />
 
                 <br />
-                <Container>
-                <Grid container spacing={4}>
+                <br />
+                <Grid item xs={12}>
+                    <HelpButton />
+                </Grid>
+                <br />
+
+                <Grid container spacing={6}>
                     <Grid item xs={6}>
-                        <Typography variant="h3">Suggested Plan</Typography>
+                        <Typography variant="h4" align="center">Suggested Plan</Typography>
                         <br />
                         <Paper >
                             <TeacherSchedule dataType="Teacher" editPermission="DENIED"/>
@@ -86,7 +91,7 @@ class ParentPage extends Component {
                         </Paper> 
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant="h3">Your Plan</Typography>
+                        <Typography variant="h4" align="center">Your Plan</Typography>
                         <br />
                         <Paper >
                           <TeacherSchedule dataType="Student" id={this.context.id} editPermission="ok"/>  
@@ -94,11 +99,6 @@ class ParentPage extends Component {
                     </Grid> 
                 </Grid>
                 <br />
-                <br />
-                <Grid item xs={12}>
-                    <HelpButton />
-                </Grid>
-                </Container> 
             </div>
         );
 
