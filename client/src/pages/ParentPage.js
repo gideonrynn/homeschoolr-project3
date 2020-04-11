@@ -33,13 +33,8 @@ class ParentPage extends Component {
     componentDidMount() {
 
         console.log(this.context);
-        let isLoggedIn = this.context.isLoggedIn;
-        let email = this.context.email;
-        let id = this.context.id;
 
         // when page loads, check state to see if user is logged in
-        // redirect to login page or intiate call to database and render parent page content
-        
         if(this.context.isLoggedIn === true) {
             this.setState({
                 isLoggedIn: true
@@ -52,38 +47,6 @@ class ParentPage extends Component {
 
             console.log("context is false in parent page")
         }
-        
-        // this.setState({
-        //     isLoggedIn: true
-        // })
-
-        // if (!this.context.isLoggedIn) {
-            
-        //     console.log("user not logged in");
-
-        //     //redirect to login page??
-        //     this.setState({
-        //         isLoggedIn: false
-        //     })
-
-            
-        // } 
-        
-        // else {
-            
-        //     console.log("user logged in");
-
-        //     //set logged in user variable for searching the database
-        //     let loggedInUser = {
-        //         email: email,
-        //         id: id
-        //     }
-
-        //     console.log(loggedInUser) 
-
-        //     // add api call to database to return user/student/schedule info using the email address or id
-        //     // then do other stuff
-        // }
 
        
 
@@ -104,10 +67,6 @@ class ParentPage extends Component {
             console.log("redirect to / from parent")
             return <Redirect to='/' />
             
-            
-            // return(
-            //     <h1>{this.state.isLoggedIn}</h1>
-            // )
         }
 
 

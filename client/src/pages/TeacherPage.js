@@ -49,19 +49,14 @@ class TeacherPage extends Component {
     componentWillMount(){
 
         console.log(this.context);
-        let isLoggedIn = this.context.isLoggedIn;
-        let email = this.context.email;
-        let id = this.context.id;
 
         // when page loads, check state to see if user is logged in
-        // redirect to login page or intiate call to database and render parent page content
         if (this.context.isLoggedIn === false) {
             
             console.log("user not logged in");
             this.setState({
                 isLoggedIn: false
             })
-            //redirect to login page??
 
         } 
         
