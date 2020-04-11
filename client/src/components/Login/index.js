@@ -158,12 +158,11 @@ class Login extends Component {
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={useStyles.paper}>
-                    <Avatar className={useStyles.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <br /><br /><br />
+                    <Typography component="h1" variant="h5" align="center">
                         Sign in
                     </Typography>
+                    <br />
 
                         <TextField
                             classes={useStyles.form}

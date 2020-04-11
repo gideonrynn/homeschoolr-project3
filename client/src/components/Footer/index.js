@@ -39,7 +39,7 @@ export default function Footer() {
   return (
       <AppBar position="fixed"  color="primary" className={classes.appBar}>
         <Toolbar>
-          <Typography>We Support Teachers. Copyright 2020</Typography>
+          <Typography align="center">We Support Teachers. Copyright 2020</Typography>
           
         </Toolbar>
       </AppBar>

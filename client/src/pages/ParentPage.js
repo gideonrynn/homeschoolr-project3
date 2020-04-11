@@ -4,7 +4,6 @@ import HelpButton from "../components/HelpButton";
 import NavBar from "../components/NavBar";
 import { Redirect } from 'react-router-dom';
 import TeacherSchedule from '../components/TeacherSchedule';
-import Footer from "../components/Footer";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
@@ -100,7 +99,6 @@ class ParentPage extends Component {
                     <HelpButton />
                 </Grid>
                 </Container> 
-                <Footer />  
             </div>
         );
 

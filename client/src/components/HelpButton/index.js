@@ -39,18 +39,21 @@ class HelpBtn extends Component {
         return (
             <div>
                 <form noValidate autoComplete="off">
-                    <Typography variant="h6">Need Help?</Typography>
+                    <Typography variant="h6" align="center">Need Help?</Typography>
                     <TextField
                         id="outlined-basic"
                         label="Trouble creating a schedule or explaining class content to your child? Email questions to your classroom teacher."
                         variant="outlined"
                         type="text"
+                        margin="normal"
                         multiline
                         fullWidth
                         onChange={event => this.setState({text: event.target.value})} />
                     <Button
                         type="submit"
-                        variant="outlined"
+                        varient="contained"
+                        color="primary"
+                        fullWidth
                         onClick={(event) => this.handleClick(event)}>Contact Instructor
                     </Button>
                 </form>
