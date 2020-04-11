@@ -137,6 +137,7 @@ class TeacherPage extends Component {
                 <Paper>
                     <div>
                         <br />
+                        <br />
                         <Typography variant="h6" gutterBottom align="center">{this.state.nodemailerMessage}</Typography>
                         <br />
 
@@ -145,6 +146,7 @@ class TeacherPage extends Component {
                             margin="normal"
                             required
                             fullWidth
+                            multiline
                             id="subject"
                             label="Enter the Subject"
                             onChange = {event => this.setState({subject: event.target.value})}
@@ -181,12 +183,13 @@ class TeacherPage extends Component {
                 <Paper>
                     <div>
                         <br />
+                        <br />
                         <Typography variant="h6" gutterBottom align="center">Post A Schedule</Typography>
                         <br />
                         
                         <TeacherSchedule dataType="Teacher" editPermission="ok"/>
                         <br />
-                        <br />
+
                     </div>
                 </Paper>
 
