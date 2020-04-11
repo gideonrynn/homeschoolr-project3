@@ -22,10 +22,17 @@ Also see: [Cloning a repository](https://help.github.com/en/github/creating-clon
 
 
 # User Story
---
+As a PARENT
+I want to SCHEDULE blocks of time for my child to complete school work
+and NOTIFY their teacher of any at home work issues
+to help MAINTAIN a regular work schedule in the event that my child is kept home from school for an extended period of time
 
-# Usage
---
+As a TEACHER
+in the event of sudden long-term school closure
+I want to help parents SCHEDULE their student's at-home schoolwork
+and TRACK daily student goals 
+so that I can MONITOR student progress remotely
+
 
 # Technologies
 
@@ -45,8 +52,8 @@ This project was built using:
   - [Passport Local ^1.0.0](https://www.npmjs.com/package/passport-local)
   - [React ^16.13.1](https://www.npmjs.com/package/react)
   - [React-Router-Dom ^5.1.2](https://www.npmjs.com/package/react-router-dom)
-  - [Material-UI ^4.9.9] (https://material-ui.com/)
-  - [React-Scheduler ^2.6.1] (https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/getting-started/)
+  - [Material-UI ^4.9.9](https://material-ui.com/)
+  - [React-Scheduler ^2.6.1](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/getting-started/)
 
 # Collaborators
 
@@ -55,7 +62,7 @@ FrontEnd
 - Yong Lee
 
 Backend
-- Sarah Dillard
+- Sarah Dillard (Passport Authentication, Validation, Context API)
 - Kevin Suh
 
 # BootCamp Presentation
