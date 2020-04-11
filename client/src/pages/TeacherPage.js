@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 // import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 
 
 import API from "../utils/API";
@@ -135,75 +134,65 @@ class TeacherPage extends Component {
                 </Paper>
                 <br />
 
+                <Paper>
+                    <div>
+                        <br />
+                        <Typography variant="h6" gutterBottom align="center">{this.state.nodemailerMessage}</Typography>
+                        <br />
 
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="subject"
+                            label="Enter the Subject"
+                            onChange = {event => this.setState({subject: event.target.value})}
+                            // labelWidth={100}
+                            />
+                        <br />
 
-                <Grid container spacing={3}>
-                    <Grid item xs={7}>
-                        <Paper>
-                            <div>
-                                <br />
-                                <Typography variant="h6" gutterBottom align="center">Post A Schedule</Typography>
-                                <br />
-                                
-                                <TeacherSchedule dataType="Teacher" editPermission="ok"/>
-                                <br />
-                                <br />
-                            </div>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            type="text"
+                            label="Enter email Text"
+                            onChange = {event => this.setState({text: event.target.value})} 
+                            // labelWidth={100} 
+                            multiline/>
+                        <br />
+                        <br />
 
-                        </Paper>
-
-                    </Grid>
-
-                    <Grid item xs={5}> 
-                        <Paper>
-                            <div>
-                                <br />
-                                <Typography variant="h6" gutterBottom align="center">{this.state.nodemailerMessage}</Typography>
-                                <br />
-
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="subject"
-                                    label="Enter the Subject"
-                                    onChange = {event => this.setState({subject: event.target.value})}
-                                    // labelWidth={100}
-                                    />
-                                <br />
-
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    type="text"
-                                    label="Enter email Text"
-                                    onChange = {event => this.setState({text: event.target.value})} 
-                                    // labelWidth={100} 
-                                    multiline/>
-                                <br />
-                                <br />
-
-                                <Button 
-                                    type="submit"
-                                    fullWidth
-                                    varient="contained"
-                                    color="primary"
-                                    label="Send Email" 
-                                    onClick={(event) => this.handleClick(event)}
-                                >
-                                    Send Email
-                                </Button>
-                            </div>
-                            
-                        </Paper>
-                    </Grid>
-                </Grid>
-
+                        <Button 
+                            type="submit"
+                            fullWidth
+                            varient="contained"
+                            color="primary"
+                            label="Send Email" 
+                            onClick={(event) => this.handleClick(event)}
+                        >
+                            Send Email
+                        </Button>
+                    </div>
+                </Paper>
                 <br />
+                <Paper>
+                    <div>
+                        <br />
+                        <Typography variant="h6" gutterBottom align="center">Post A Schedule</Typography>
+                        <br />
+                        
+                        <TeacherSchedule dataType="Teacher" editPermission="ok"/>
+                        <br />
+                        <br />
+                    </div>
+                </Paper>
 
+
+                
+                <br />
 
             </div>
         );
