@@ -73,37 +73,17 @@ class TeacherPage extends Component {
     componentDidMount(){
 
         console.log(this.context);
-        let isLoggedIn = this.context.isLoggedIn;
-        let email = this.context.email;
-        let id = this.context.id;
 
         // when page loads, check state to see if user is logged in
-        // redirect to login page or intiate call to database and render parent page content
         if (this.context.isLoggedIn === false) {
             
             console.log("user not logged in");
             this.setState({
                 isLoggedIn: false
             })
-            //redirect to login page??
 
         } 
-        
-        // else {
-            
-        //     console.log("user logged in");
-
-        //     //set logged in user variable for searching the database
-        //     let loggedInUser = {
-        //         email: email,
-        //         id: id
-        //     }
-
-        //     console.log(loggedInUser)
-
-        //     // add api call to database to return user/student/schedule info using the email address or id
-        //     // then do other stuff
-        // }
+      
 
         let nodemailerMessage = "Send Email to Students here!"
 
