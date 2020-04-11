@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 
 // import NavBar from "./components/NavBar";
-// import Header from "./components/Header";
 
 import Wrapper from "./components/Wrapper";
 
@@ -12,7 +11,7 @@ import NoMatch from "./pages/NoMatch";
 import LoginPage from "./pages/LoginPage";
 import TeacherPage from "./pages/TeacherPage";
 import ParentPage from "./pages/ParentPage";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
 import GlobalState from './utils/globalState'
 
@@ -39,7 +38,7 @@ class App extends Component {
 
                 <Route exact path="/noMatch" component={NoMatch}/>
               </Wrapper>
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </Container>
         </Router>
