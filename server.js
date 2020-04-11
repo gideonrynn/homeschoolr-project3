@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require('mongoose');
 const path = require("path");
 const PORT = process.env.PORT || 3001;
+const routes = require("./routes");
+const passport = require("./config/passport-local");
+
 
 //required dotenv to enable environmental variables such as MONGO_URI
 require('dotenv').config({path:'.env'})
@@ -11,6 +14,12 @@ const app = express();
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//middleware required to initialize passport
+app.use(passport.initialize());
+
+//middleware required for persistent login sessions
+app.use(passport.session());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -42,6 +51,7 @@ console.log(process.env.MONGODB_URI);
 dbConnect();
 
 // API routes here
+app.use(routes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
